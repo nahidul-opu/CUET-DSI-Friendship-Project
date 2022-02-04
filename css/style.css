@@ -1,0 +1,26 @@
+.header-design {
+  background-color: #aefeff;
+}
+.bg-image {
+  background-image: url("../src/bg-2.jpg");
+  background-size: contain;
+}
+.card-test {
+  border-radius: 5px;
+  box-shadow: 5px;
+  height: 250px;
+  width: 200px;
+  border-width: 2px;
+  border: 2px rgb(0, 0, 0);
+  background-color: rgb(93, 190, 255);
+  margin: 30px;
+  box-shadow: 0px 0.5rem 1rem rgba(rgb(0, 0, 0, 0.5));
+  transition: 0.3s;
+  align-items: center;
+  /* flex-direction: column;
+  flex-wrap: wrap; */
+}
+
+/* .card-test:hover {
+  box-shadow: 0px 8px 8px 0px rgba(rgb(0, 0, 0, 0.2));
+} */
