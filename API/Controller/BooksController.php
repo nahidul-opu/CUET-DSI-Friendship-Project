@@ -54,14 +54,14 @@ class BooksController
         if (!$validation['isValid']) {
             return $validation;
         }
-        $success = $this->book->insert($input);
-        if ($success) return $this->Responce('HTTP/1.1 409', 'Duplicate Data', 'ISBN Already Exists');
+        $response = $this->book->insert($input);
+        if (!$response['success']) return $this->Responce('HTTP/1.1 409', 'Duplicate Data', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Inserted 1 Row');
     }
 
     function __call($name_of_function, $arguments)
     {
-        if ($name_of_function == 'readBookData') {
+        if ($name_of_function === 'readBookData') {
 
             switch (count($arguments)) {
 
@@ -90,9 +90,9 @@ class BooksController
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
         }
-        if (strlen($input['ISBN']) != 17) {
+        /*if (strlen($input['isbn']) != 17) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Invalid ISBN Data', 'isValid', false);
-        }
+        }*/
         return $this->Responce('HTTP/1.1 200', 'OK', 'Valid', 'isValid', true);
     }
 

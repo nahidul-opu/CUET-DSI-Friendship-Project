@@ -4,7 +4,7 @@ class Book
 {
     protected $db;
 
-    protected $required = ['ISBN', 'Title', 'AuthorName', 'PubYear', 'TotalCount', 'Publisher', 'CategoryID'];
+    protected $required = ['isbn', 'title', 'author_name', 'pub_year', 'total_count', 'publisher', 'category_id'];
 
     function __construct($dbConnnector)
     {
@@ -18,48 +18,52 @@ class Book
                 return false;
             }
         }
+        return true;
     }
 
     public function insert($input)
     {
         $statement = "
         INSERT INTO book 
-            (ISBN, Title, AuthorName, PubYear, TotalCount,CurrentCount,Publisher,CategoryID)
+            (isbn, title, author_name, pub_year, total_count,current_count,publisher,category_id,created_at,updated_at)
         VALUES
-            (:ISBN, :Title, :AuthorName, :PubYear,:TotalCount,:TotalCount,:Publisher,:CategoryID);
+            (:isbn, :title, :author_name, :pub_year,:total_count,:total_count,:publisher,:category_id,now(),now());
     ";
 
         try {
             $statement = $this->db->prepare($statement);
             $result = $statement->execute(array(
-                'ISBN' => $input['ISBN'],
-                'Title' => $input['Title'],
-                'AuthorName' => $input['AuthorName'],
-                'PubYear' => $input['PubYear'],
-                'TotalCount' => $input['TotalCount'],
-                'Publisher' => $input['Publisher'],
-                'CategoryID' => $input['CategoryID'],
+                'isbn' => $input['isbn'],
+                'title' => $input['title'],
+                'author_name' => $input['author_name'],
+                'pub_year' => $input['pub_year'],
+                'total_count' => $input['total_count'],
+                'publisher' => $input['publisher'],
+                'category_id' => $input['category_id'],
             ));
-
-            if ($statement->rowCount() == 0) return false;
-            else return true;
+            $response['success'] = true;
+            if ($result === false) {
+                $response['success'] = false;
+                $response['error'] = $statement->errorInfo()[2];
+            }
+            return $response;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }
 
-    public function getBook($isbn)
+    public function getBook($book_id)
     {
         $statement = "
         SELECT * 
         FROM book
-        WHERE ISBN=:ISBN
+        WHERE book_id=:book_id
     ";
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'ISBN' => $isbn,
+                'book_id' => $book_id,
             ));
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
