@@ -33,31 +33,31 @@
             <!-------------navbar options--------------->
             <div class="d-flex flex-column align-items-center mt-3">
 
-                <button class="btn btn-secondary m-1 text-start" style="width: 85%;">
+                <button class="btn btn-secondary m-1 text-start" style="width: 85%;" id="inventory">
                     <span class="h5">
                         <i class="bi bi-box-seam"></i>
                         Inventory
                     </span>
                 </button>
-                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;">
+                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;" id="users">
                     <span class="h5">
                         <i class="bi bi-people"></i>
                         Users
                     </span>
                 </button>
-                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;">
+                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;" id="bookissue">
                     <span class="h5">
                         <i class="bi bi-journal-plus"></i>
                         Issue Book
                     </span>
                 </button>
-                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;">
+                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;" id="history">
                     <span class="h5">
                         <i class="bi bi-clock-history"></i>
                         History
                     </span>
                 </button>
-                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;">
+                <button class="btn btn-secondary m-1 text-start" style="width: 85%;text-align: left;" id="dashboard">
                     <span class="h5">
                         <i class="bi bi-bar-chart"></i>
                         Dashboard
@@ -101,10 +101,10 @@
 
             </div>
             <!-------------body after header----------->
-            <div class="container-fluid row b-1" id="grid">
+            <div class="container-fluid row b-1" id="main-body">
                 <!--------------------------------xxxx---------------------------------------->
                 <!--------------------------------card---------------------------------------->
-
+                
 
                 <div class="category-card" style="width: 18rem;">
                     <div class="card-body">
@@ -113,7 +113,7 @@
                         <!--
                         <button id="edit-card" style=""> ? </button>-->
                         <!--   edit category--------------->
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey">edit</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
                     </div>
                 </div>
 
@@ -129,9 +129,7 @@
 
 
                 <!-- The Modal -->
-                <!--
---------------------------------edit category popup
--->
+                <!----------------------------------edit category popup-->
                 <div class="modal" id="edit-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -167,41 +165,11 @@
                                     <input id="edit-category-submit" type="submit" value="Add Category">
                                 </form>
                             </div>
-
-                            <!-- Modal footer -->
-                            <!--     <div class="modal-footer" style="margin:auto">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>-->
-
-
                         </div>
                     </div>
                 </div>
 
-
-
-
-
-                <!-- <script>
-                    var total_cards = 5;
-                    console.log(total_cards);
-
-                    for (var i = 0; i < total_cards; i++) {
-                        /*$(".container-fluid row b-1").append('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');*/
-                        
-                        document.write('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');
-
-                    }
-                </script>-->
-
-
-
-
-
-
-
-
-
+                <!--------------book details page-------------->
 
             </div>
         </div>

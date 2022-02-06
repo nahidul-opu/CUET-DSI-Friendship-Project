@@ -1,6 +1,6 @@
 .header-design {
-    /* background-color: #aefeff; */
-   /* background: url("../src/header-4.jpg");*/
+    background-color: #aefeff;
+    background: url("../src/header-4.jpg");
     background-size: cover;
     background-color: cadetblue;
     background-position-y: center;
@@ -9,7 +9,7 @@
 }
 
 .bg-image {
-   /* background-image: url("../src/bg-4.jpg");*/
+   background-image: url("../src/bg-4.jpg");
     background-size: cover;
 }
 

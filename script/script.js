@@ -1,6 +1,13 @@
 $(document).ready(function () {
+  // $("#main-body").html("../test.html");
+  $("#main-body").append("../test.html");
+
   $("#more").click(function () {
     $("#sidebar").toggle();
+  });
+
+  $("#inventory").click(function () {
+    $("#inventory").css("background-color", "#2f0410");
   });
 });
 
