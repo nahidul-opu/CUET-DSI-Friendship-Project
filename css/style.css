@@ -1,9 +1,14 @@
+body{
+  font-family: 'Arial';
+}
+
 .header-design {
   /* background-color: #aefeff; */
   background: url("../src/header-4.jpg");
   background-size: cover;
   background-position-y: center;
   background-position-x: right;
+  font-family: 'Monospace';
 }
 .bg-image {
   background-image: url("../src/bg-4.jpg");
