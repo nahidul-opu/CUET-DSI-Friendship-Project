@@ -23,7 +23,7 @@
             <div class="card" style="background-color: rgba(255,255,255,0.2);">
                 <img src="./src/library.jpg" class="card-img-top" alt="cuet central library">
                 <div class="card-body">
-                    <h5 class="card-title">CUET-DSI Central Library</h5>
+                    <h5 class="card-title text-white">CUET-DSI Central Library</h5>
 
                 </div>
             </div>
@@ -102,42 +102,7 @@
             </div>
             <!-------------main body after header design----------->
             <div class="container-fluid row b-1">
-                <div class="card-test">
-                    <h3>Category-1</h3>
-                </div>
-                <div class="card-test">
-                    <h3>Category-2</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-3</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-4</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-5</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-6</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-4</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-5</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-6</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-4</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-5</h1>
-                </div>
-                <div class="card-test">
-                    <h3>Category-6</h1>
-                </div>
+                
 
             </div>
         </div>
