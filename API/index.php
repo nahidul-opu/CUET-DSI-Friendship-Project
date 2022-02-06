@@ -10,19 +10,18 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $uri = explode('/', $uri);
-
 
 $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-if ($uri[2] == 'book' || $uri[2] == 'Book') {
-    $book_id = null;
+if ($uri[2] == 'books' || $uri[2] == 'Books') {
+    $bookController = new BooksController($dbConnection, $requestMethod, $queryString);
     if (isset($uri[3])) {
-        $book_id = $uri[3];
+        $bookController->setBookId($uri[3]);
     }
-    $controller = new BooksController($dbConnection, $requestMethod, $book_id);
-    $controller->processRequest();
+    $bookController->processRequest();
 } else {
     header("HTTP/1.1 404 Not Found");
     exit();
