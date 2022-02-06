@@ -106,16 +106,18 @@
                 <!--------------------------------card---------------------------------------->
                 
 
-                <div class="category-card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align:Center">Title</h5>
-                        <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                        <!--
-                        <button id="edit-card" style=""> ? </button>-->
-                        <!--   edit category--------------->
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                    </div>
-                </div>
+                <a href="#" id="card-click" class="category-card" style="width: 18rem;">
+                    
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align:Center">Title</h5>
+                            <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
+                            <!--
+                            <button id="edit-card" style=""> ? </button>-->
+                            <!--   edit category--------------->
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
+                        </div>
+                    
+                </a>
 
                 <!--add category ---------------------------------------------------------------------------->
                 <div class="category-card" style="width: 18rem;">

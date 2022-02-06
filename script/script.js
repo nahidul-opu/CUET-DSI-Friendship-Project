@@ -1,6 +1,5 @@
 $(document).ready(function () {
   // $("#main-body").html("../test.html");
-  $("#main-body").append("../test.html");
 
   $("#more").click(function () {
     $("#sidebar").toggle();
@@ -8,6 +7,12 @@ $(document).ready(function () {
 
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
+  });
+  $("#card-click").click(function (e) {
+    e.preventDefault();
+    // alert("clicked");
+    $("#main-body").hide();
+    // $("#body-div").append("")
   });
 });
 
