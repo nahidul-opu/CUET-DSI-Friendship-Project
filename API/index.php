@@ -17,11 +17,11 @@ $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if ($uri[2] == 'book' || $uri[2] == 'Book') {
-    $isbn = null;
+    $book_id = null;
     if (isset($uri[3])) {
-        $isbn = $uri[3];
+        $book_id = $uri[3];
     }
-    $controller = new BooksController($dbConnection, $requestMethod, $isbn);
+    $controller = new BooksController($dbConnection, $requestMethod, $book_id);
     $controller->processRequest();
 } else {
     header("HTTP/1.1 404 Not Found");

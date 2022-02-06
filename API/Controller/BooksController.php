@@ -6,32 +6,33 @@ class BooksController
 {
     private $db = null;
     private $requestMethod;
-    private $isbn;
+    private $book_id;
     private $book;
-    function __construct($dbConnector, $method, $isbn)
+    function __construct($dbConnector, $method, $book_id)
     {
         $this->db = $dbConnector;
         $this->requestMethod = $method;
-        if ($isbn) $this->isbn = $isbn;
-        $this->book = new Book($this->db, $this->isbn);
+        if ($book_id) $this->book_id = $book_id;
+        $this->book = new Book($this->db, $this->book_id);
     }
 
     function processRequest()
     {
         switch ($this->requestMethod) {
             case 'POST':
+                if ($this->book_id) $this->raiseException();
                 $response = $this->createBook();
                 break;
             case 'GET':
-                if ($this->isbn) $response =  $this->readBookData($this->isbn);
+                if ($this->book_id) $response =  $this->readBookData($this->book_id);
                 else  $response =  $this->readBookData();
                 break;
             case 'PUT':
-                if ($this->isbn) print_r("Updating " . $this->isbn);
+                if ($this->book_id) $response = $this->updateBook($this->book_id);
                 else $this->raiseException();
                 break;
             case 'DELETE':
-                if ($this->isbn) print_r("Deleting " . $this->isbn);
+                if ($this->book_id) $response = $this->deleteBook($this->book_id);
                 else $this->raiseException();
                 break;
             default:
@@ -82,6 +83,19 @@ class BooksController
                     }
             }
         }
+    }
+
+    private function updateBook($book_id)
+    {
+        print_r("Updating " . $book_id);
+        return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Not Implemented');
+    }
+
+    private function deleteBook($book_id)
+    {
+
+        print_r("Deleting " . $book_id);
+        return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Not Implemented');
     }
 
     private function validateInput($input)
