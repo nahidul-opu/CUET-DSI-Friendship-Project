@@ -100,9 +100,108 @@
 
 
             </div>
-            <!-------------main body after header design----------->
-            <div class="container-fluid row b-1">
-                
+            <!-------------body after header----------->
+            <div class="container-fluid row b-1" id="grid">
+                <!--------------------------------xxxx---------------------------------------->
+                <!--------------------------------card---------------------------------------->
+
+
+                <div class="category-card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align:Center">Title</h5>
+                        <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
+                        <!--
+                        <button id="edit-card" style=""> ? </button>-->
+                        <!--   edit category--------------->
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey">edit</button>
+                    </div>
+                </div>
+
+                <!--add category ---------------------------------------------------------------------------->
+                <div class="category-card" style="width: 18rem;">
+                    <div class="card-body">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category" style="float:right; margin-top:25px; background-color:white; color:black; width:100%; border:0;">+</button>
+                    </div>
+                </div>
+
+
+                <!--<a href="#" class="btn btn-primary">40/50</a>-->
+
+
+                <!-- The Modal -->
+                <!--
+--------------------------------edit category popup
+-->
+                <div class="modal" id="edit-category" style="top:25%">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal body -->
+                            <div class="modal-body" style="margin:auto">
+                                <form method="post" action="#">
+                                    <input id="edit-category-name" type="text" placeholder="New category name">
+                                    <input id="edit-category-submit" type="submit">
+                                </form>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <!--     <div class="modal-footer" style="margin:auto">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>-->
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--
+ ---------------------------------- add category popup
+-->
+                <div class="modal" id="add-category" style="top:25%">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal body -->
+                            <div class="modal-body" style="margin:auto">
+                                <form action="#action" method="post">
+                                    <input id="edit-category-name" type="text" placeholder="Add Category">
+                                    <input id="edit-category-submit" type="submit" value="Add Category">
+                                </form>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <!--     <div class="modal-footer" style="margin:auto">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>-->
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- <script>
+                    var total_cards = 5;
+                    console.log(total_cards);
+
+                    for (var i = 0; i < total_cards; i++) {
+                        /*$(".container-fluid row b-1").append('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');*/
+                        
+                        document.write('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');
+
+                    }
+                </script>-->
+
+
+
+
+
+
+
+
+
 
             </div>
         </div>
