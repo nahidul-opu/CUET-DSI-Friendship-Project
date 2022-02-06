@@ -11,8 +11,9 @@ $(document).ready(function () {
   $("#card-click").click(function (e) {
     e.preventDefault();
     // alert("clicked");
+    // $("#main-body").hide();
     $("#main-body").hide();
-    // $("#body-div").append("")
+    $("#book-details").show();
   });
 });
 

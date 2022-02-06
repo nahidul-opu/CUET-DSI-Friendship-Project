@@ -15,7 +15,7 @@
 
 <body>
 
-    <div class="d-flex flex-row bg-image" style="min-height: 100vh;">
+    <div class="d-flex flex-row bg-image" style="min-height: 100vh;" id="parent-div">
         <!--------------Navbar design--------->
         <div class="flex-column sticky-top"
             style="background-color: rgba(181, 184, 189,0.2);width: 300px;max-height: 100vh;" id="sidebar">
@@ -70,7 +70,7 @@
 
         </div>
         <!-------------body design----------->
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0" id="body-div">
             <!-------------header design----------->
             <div class="d-flex flex-row sticky-top p-3 header-design text-white">
                 <div class="container" style="width: fit-content;">
@@ -106,7 +106,7 @@
                 <!--------------------------------card---------------------------------------->
                 
 
-                <a href="#" id="card-click" class="category-card" style="width: 18rem;">
+                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
                     
                         <div class="card-body">
                             <h5 class="card-title" style="text-align:Center">Title</h5>
@@ -120,9 +120,11 @@
                 </a>
 
                 <!--add category ---------------------------------------------------------------------------->
-                <div class="category-card" style="width: 18rem;">
+                <div class="category-card" style="width: 18rem;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
                     <div class="card-body">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category" style="float:right; margin-top:25px; background-color:white; color:black; width:100%; border:0;">+</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category" style="float:right; margin-top:25px; background-color:white; color:black; width:100%; border:0;">
+                            <i class="bi bi-plus-circle"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -153,9 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <!--
- ---------------------------------- add category popup
--->
+                <!------------------------------------ add category popup----------->
                 <div class="modal" id="add-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -171,8 +171,105 @@
                     </div>
                 </div>
 
-                <!--------------book details page-------------->
+                
+                
+            </div>
+            <!--------------book details page-------------->
+            <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
+                <nav class="navbar navbar-light nav justify-content-center">
+                    <form class="form-inline float-center" >
+                        <input class="form-control mr-sm-2" type="search" style="background-color: rgba(181, 184, 189,0.1); color:white;" placeholder="Book Name" aria-label="Search" required>
+                        <button class="btn btn-info" type="submit">Search</button>
+                    </form>
+                </nav>
+                <div class="card-header">
+                    <h4 class="card-title">Book List</h4>
+                </div>
+                <div class="card-body">
 
+                    <table class="table table-hover table-dark" id="book-details-table">
+                        <thead>
+                            <tr>
+                                <th class="float-center">SL No.</th>
+                                <th class="float-center">Book Name</th>
+                                <th class="float-center">Writer Name</th>
+                                <th class="float-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>The Poet</td>
+                                <td>Michael Cornelly</td>
+                                <td>
+                                    <div class="float-center">
+                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
+                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>The Alchemist</td>
+                                <td>Paolo Cohelho</td>
+                                <td>
+
+                                    <div class="float-center">
+                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
+                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                            <tbody>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>The Chestnut Man</td>
+                                    <td>Soren  Sveistrup</td>
+                                    <td>
+
+                                    <div class="float-center">
+                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
+                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        </li>
+                        <li class="page-item active">
+                        <span class="page-link">1 
+                        <span class="sr-only">(current)</span>
+                        </span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        
+                        </a>
+                        </li>
+                    </ul>
+                    </nav>
+
+
+                </div>
             </div>
         </div>
     </div>
