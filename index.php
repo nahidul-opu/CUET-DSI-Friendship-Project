@@ -196,49 +196,6 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>The Poet</td>
-                                <td>Michael Cornelly</td>
-                                <td>
-                                    <div class="float-center">
-                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
-                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>The Alchemist</td>
-                                <td>Paolo Cohelho</td>
-                                <td>
-
-                                    <div class="float-center">
-                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
-                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>The Chestnut Man</td>
-                                    <td>Soren  Sveistrup</td>
-                                    <td>
-
-                                    <div class="float-center">
-                                        <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
-                                        <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
-                                    </div>
-                                    </td>
-                                </tr>
-                            </tbody>
                     </table>
 
                     <nav aria-label="Page navigation example">

@@ -11,28 +11,37 @@ $(document).ready(function () {
 
   $("#card-click").click(function (e) {
     e.preventDefault();
-    // alert("clicked");
+    // //alert("clicked");
     // $("#main-body").hide();
     $("#main-body").hide();
 
     $.ajax({
       type: "GET",
-      url: "/CUET-DSI-Friendship-Project/api/books",
-      dataType: "text",
+      url: "/CUET-DSI-Friendship-Project/api/books/",
+      dataType: "json",
       async: true,
       success: function (data, status) {
-        var output = data;
-        alert(output);
-        console.log(typeof data);
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i]);
-        }
-        var content = `<tbody>
+        // console.log(data.keys());
+
+        var output = data["message"];
+        //alert(output);
+        console.log(typeof output);
+        console.log(output);
+        // var content = None;
+        for (let i = 0; i < output.length; i++) {
+          console.log(output[i].author_name);
+          var content =
+            `<tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>The Poet</td>
-                            <td>Michael Cornelly</td>
+                            <th scope="row">` +
+            i +
+            `</th>
+                            <td>` +
+            output[i].title +
+            `</td>
+                            <td>` +
+            output[i].author_name +
+            `</td>
                             <td>
                                 <div class="float-center">
                                     <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
@@ -42,10 +51,11 @@ $(document).ready(function () {
                         </tr>
                       </tbody>`;
 
-        // $("#table-head").append();
+          $("#book-details-table").append(content);
+        }
       },
       error: function (data) {
-        alert("fail");
+        //alert("fail");
       },
     });
 
