@@ -196,6 +196,7 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
+                        
                     </table>
 
                     <nav aria-label="Page navigation example">

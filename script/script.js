@@ -1,17 +1,24 @@
 $(document).ready(function () {
-  // $("#main-body").html("../test.html");
-
+  var output;
+  //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
   $("#more").click(function () {
     $("#sidebar").toggle();
   });
-
+  //inventory tab click function
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
     $("#book-details").hide();
     $("#main-body").show();
   });
 
+  //update-button function
+  function x() {
+    // $(this).prop("disabled",true);
+    console.log(this);
+  }
+
+  //card click function
   $("#card-click").click(function (e) {
     e.preventDefault();
     // //alert("clicked");
@@ -20,6 +27,7 @@ $(document).ready(function () {
     var location = window.location.href;
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     console.log(directoryPath);
+    //receive book data with ajax get request
     $.ajax({
       type: "GET",
       url: directoryPath + "api/books/",
@@ -28,12 +36,22 @@ $(document).ready(function () {
       success: function (data, status) {
         // console.log(data.keys());
 
-        var output = data["message"];
+        output = data["message"];
         //alert(output);
         console.log(typeof output);
         console.log(output);
         // var content = None;
         $("#book-details-table").empty();
+        var table_header = `<thead id="table-head">
+                              <tr>
+                                  <th class="float-center">SL No.</th>
+                                  <th class="float-center">Book Name</th>
+                                  <th class="float-center">Writer Name</th>
+                                  <th class="float-center">Actions</th>
+                              </tr>
+                            </thead>`;
+
+        $("#book-details-table").append(table_header);
         for (let i = 0; i < output.length; i++) {
           console.log(output[i].author_name);
           var content =
@@ -50,7 +68,9 @@ $(document).ready(function () {
             `</td>
                             <td>
                                 <div class="float-center">
-                                    <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
+                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
+            i +
+            `">Update</button>
                                     <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
                                 </div>
                             </td>
@@ -67,30 +87,13 @@ $(document).ready(function () {
 
     $("#book-details").show();
   });
+
+  //update button handle successfully
+  $("#book-details-table").on("click", ".update-button", function (e) {
+    alert($(this));
+    var btn_id = $(this).attr("id");
+    console.log($(this).attr("id"));
+    console.log(output[btn_id].title);
+    console.log("****************************************");
+  });
 });
-
-var total_cards = 3;
-
-card_title = ["Fiction", "Sci-fi", "Engineering"];
-
-console.log(total_cards);
-
-for (var i = 0; i < total_cards; i++) {
-  /*html = '<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">'+ card_title[i]+ '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>';
-    
-    
-     $("#grid").append(html);*/
-  /*    $("#grid").append('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');*/
-}
-/*
-
-$("#add-card").click(function(){
-    $("#grid").append('<div class="card" style="width: 18rem;"><div class="card-body"><h5 class="card-title">New Card</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');
-    
-})
-
-
-$("#edit-card").click(function(){
-    
-})
-*/
