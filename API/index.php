@@ -33,8 +33,11 @@ if ($uri[1] == 'books' || $uri[1] == 'Books') {
     }
     $categoryController->processRequest();
 } else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
-    $controller = new BorrowController($dbConnection, $requestMethod);
-    $controller->selectMethod();
+    $borrowController = new BorrowController($dbConnection, $requestMethod, $queryString);
+    /*if (isset($uri[2])) {
+        $borrowController->readBorrows($uri[2]);
+    }*/
+    $borrowController->selectMethod();
 } else {
     header("HTTP/1.1 404 Not Found");
     exit();

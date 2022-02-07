@@ -1,21 +1,29 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__)));
+if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . '/Model/Borrow.php');
 class BorrowController{
 
     private $db = null;
     private $requestMethod;
+    private $queryParams;
     private $borrow;
-    function __construct($dbConnector,$method)
+    function __construct($dbConnector,$method,$queryString)
     {
         $this->db = $dbConnector;
         $this->requestMethod = $method;
+        parse_str($queryString, $this->queryParams);
         $this->borrow = new Borrow($this->db);
     }
     function selectMethod(){
            if($this->requestMethod=='GET'){
-               $this->readBorrow();
-           }
+                if(count($this->queryParams)>0){
+               if ($this->queryParams['book_id'] && count($this->queryParams) === 2)   {$this->readBorrows();}
+                }
+                else   $this->readBorrow();
+            }
+        else if($this->requestMethod=='DELETE'){
+            $this->delete();
+        }
     }
 
  public function readBorrow(){
@@ -48,6 +56,35 @@ class BorrowController{
 
 }
  }
+ public function delete(){
+     $this->borrow->book_id=$this->queryParams['book_id'];
+     $this->borrow->user_id=$this->queryParams['user_id'];
+     if($this->borrow->delete()){
+        echo json_encode(array("message" => "Product was deleted."));
+    }
+    else{
+        echo json_encode(array("message" => "Unable to delete product."));
+    }
+ }
+ 
+public function readBorrows(){
+    $this->borrow->book_id=$this->queryParams['book_id'];
+     $this->borrow->user_id=$this->queryParams['user_id'];
+
+
+     $this->borrow->readSpec();
+    // create array
+    $br_arr = array(
+        "book_id" =>  $this->borrow->book_id,
+        "user_id" =>  $this->borrow->user_id,
+        "issue_date" =>  $this->borrow->issue_date,
+        "due_date" =>  $this->borrow->due_date,
+        "created_at" =>  $this->borrow->created_at,
+        "updated_at" =>  $this->borrow->updated_at,
+    );
+  
+    echo json_encode($br_arr);
+}
 }
 
 ?>
