@@ -98,7 +98,7 @@
                 <!--------------------------------xxxx---------------------------------------->
                 <!--------------------------------card---------------------------------------->
 
-<!-- 
+                    <!-- 
                 <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
 
                     <div class="card-body">
@@ -118,15 +118,15 @@
                             
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
                         </div>
-                 --> 
-                </a>
+                 
+                </a>--> 
 
                 <!-- bishal card design begin -->
-                   <div class="book-category ">
+                   <div class="book-category " id="book-category-div">
                         <div class="title text-center md-3">
                             <h2  class="font-wight-bolder text-light">Books Category</h2>
                         </div>
-                        <div class="row" id="book-card" >
+                        <div class="row justify-content-center" id="book-card" >
                            <!-- jquery will append card here dynamically  -->
                            
                         </div>
