@@ -110,25 +110,6 @@ class CategoryController
         }
     }
 
-    // private function readCategoryDataWithParams()
-    // {
-    //     $result = $this->category->getCategoryWithParams($this->queryParams);
-    //     if ($result) {
-    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
-    //     } else {
-    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-    //     }
-    // }
-
-    // private function readCAtegoryDataSpecificColumns()
-    // {
-    //     $result = $this->category->getCategoryWithSpecificColumns($this->queryParams['category_id'], $this->queryParams['columns']);
-    //     if ($result) {
-    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
-    //     } else {
-    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-    //     }
-    // }
 
     private function updateCategory($category_id)
     {
@@ -149,7 +130,6 @@ class CategoryController
     private function deleteCategory($category_id)
     {
 
-        // todo: delete all books in this category from book table
         $result = $this->category->delete($category_id);
         if ($result) {
             return $this->Responce('HTTP/1.1 200', 'OK', $result);
@@ -157,7 +137,6 @@ class CategoryController
             return $this->Responce('HTTP/1.1 500', 'Internel Error', 'Failed');
         }
     }
-
 
 
     private function validateInput($input)
@@ -168,9 +147,6 @@ class CategoryController
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
         }
-        /*if (strlen($input['isbn']) != 17) {
-            return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Invalid ISBN Data', 'isValid', false);
-        }*/
         return $this->Responce('HTTP/1.1 200', 'OK', 'Valid', 'isValid', true);
     }
 

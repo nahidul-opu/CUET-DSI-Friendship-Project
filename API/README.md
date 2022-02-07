@@ -58,8 +58,25 @@
 3. (POST method)Insert a Category
    /api/category (with post request)
 
-4. (PUT method)Update a Book information having id 'x'
+4. (PUT method)Update a Category information having id 'x'
    /api/category/x (with put request)
 
-5. (DELETE method)Delete a Book information having id 'x'
+5. (DELETE method)Delete a Category information having id 'x'
    /api/category/x (with delete request)
+
+## User-API
+
+1. (GET method)Get All User information
+   /api/users
+
+2. (GET method)Get a User information having id 'x'
+   /api/users/x
+
+3. (POST method)Insert a User
+   /api/users (with post request)
+
+4. (PUT method)Update a User information having id 'x'
+   /api/users/x (with put request)
+
+5. (DELETE method)Delete a User information having id 'x'
+   /api/users/x (with delete request)

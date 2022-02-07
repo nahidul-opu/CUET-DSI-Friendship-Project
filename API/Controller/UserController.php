@@ -13,7 +13,6 @@ class UsersController
         $this->db = $dbConnector;
         $this->requestMethod = $method;
         parse_str($queryString, $this->queryParams);
-        //$this->queryParams = var_dump($this->queryParams);
         $this->user = new User($this->db);
         $this->queryParams['user_id'] = null;
     }
@@ -31,6 +30,7 @@ class UsersController
                 $response = $this->createUser();
                 break;
             case 'GET':
+                // print_r("ashci");
                 $response = $this->handleGETRequests();
                 break;
             case 'PUT':
@@ -54,10 +54,12 @@ class UsersController
     private function createUser()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+
         if (empty($input)) {
             $input = (array) $_POST;
         }
         $validation = $this->validateInput($input);
+
         if (!$validation['isValid']) {
             return $validation;
         }
@@ -68,10 +70,14 @@ class UsersController
 
     private function handleGETRequests()
     {
-        if ($this->queryParams['user_id'] && count($this->queryParams) === 1) $response =  $this->readUserData($this->queryParams['user_id']);
-        else if (count($this->queryParams) === 1)  $response =  $this->readUserData();
-        else if ($this->queryParams['user_id'] && count($this->queryParams) === 2) $response = $this->readUserDataSpecificColumns();
-        else if (empty($this->queryParams['user_id']) && count($this->queryParams) > 1) $response = $this->readUserDataWithParams();
+        if ($this->queryParams['user_id'] && count($this->queryParams) === 1){ 
+            print_r("ashci");
+            $response =  $this->readUserData($this->queryParams['user_id']);
+        }
+            else if (count($this->queryParams) === 1) { 
+                print_r("ashci");
+                $response =  $this->readUserData();
+            }
         else $response = $this->Responce('HTTP/1.1 404', 'Not Found', 'Invalid Request');
         return $response;
     }
@@ -83,7 +89,7 @@ class UsersController
             switch (count($arguments)) {
 
                 case 0:
-                    $result =  $this->User->getUsers();
+                    $result =  $this->user->getUsers();
                     if ($result) {
                         return $this->Responce('HTTP/1.1 200', 'OK', $result);
                     } else {
@@ -91,7 +97,7 @@ class UsersController
                     }
 
                 case 1:
-                    $result =  $this->User->getUser($arguments[0]);
+                    $result =  $this->user->getUser($arguments[0]);
                     if ($result) {
                         return $this->Responce('HTTP/1.1 200', 'OK', $result);
                     } else {
@@ -100,25 +106,6 @@ class UsersController
             }
         }
     }
-
-    // private function readUserDataWithParams()
-    // {
-    //     $result = $this->user->getUserWithParams($this->queryParams);
-    //     if ($result) {
-    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
-    //     } else {
-    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-    //     }
-    // }
-    // private function readUserDataSpecificColumns()
-    // {
-    //     $result = $this->user->getUserWithSpecificColumns($this->queryParams['user_id'], $this->queryParams['columns']);
-    //     if ($result) {
-    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
-    //     } else {
-    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-    //     }
-    // }
 
     private function updateUser($user_id)
     {
@@ -130,7 +117,7 @@ class UsersController
         if (!$validation['isValid']) {
             return $validation;
         }
-        $response = $this->User->update($user_id, $input);
+        $response = $this->user->update($user_id, $input);
         if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
     }
@@ -148,13 +135,11 @@ class UsersController
 
     private function validateInput($input)
     {
+        // print_r($input);
         $hasRequired = $this->user->hasRequiredField($input);
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
         }
-        /*if (strlen($input['isbn']) != 17) {
-            return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Invalid ISBN Data', 'isValid', false);
-        }*/
         return $this->Responce('HTTP/1.1 200', 'OK', 'Valid', 'isValid', true);
     }
 
