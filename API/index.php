@@ -20,7 +20,7 @@ $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if ($uri[1] == 'books' || $uri[1] == 'Books') {
-    print_r($uri);
+    //print_r($uri);
     $bookController = new BooksController($dbConnection, $requestMethod, $queryString);
     if (isset($uri[2])) {
         $bookController->setBookId($uri[2]);
