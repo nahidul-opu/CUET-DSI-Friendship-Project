@@ -1,12 +1,15 @@
 $(document).ready(function () {
   // $("#main-body").html("../test.html");
 
+  $("#inventory").css("background-color", "#2f0410");
   $("#more").click(function () {
     $("#sidebar").toggle();
   });
 
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
+    $("#book-details").hide();
+    $("#main-body").show();
   });
 
   $("#card-click").click(function (e) {
