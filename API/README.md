@@ -1,4 +1,4 @@
-##Book-API
+## Book-API
 
 1. (GET method)Get All Book information
    /api/books
@@ -47,7 +47,7 @@
 8. (DELETE method)Delete a Book information having id 'x'
    /api/books/x (with delete request)
 
-##Category-API
+## Category-API
 
 1. (GET method)Get All Category information
    /api/category
