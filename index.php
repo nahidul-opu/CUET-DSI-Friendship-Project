@@ -139,7 +139,7 @@
                         
 
                    </div>
-                --------------------------------------------
+                
                 <!-- bishal card design end -->
 
                 <!--add category ---------------------------------------------------------------------------->
@@ -242,15 +242,22 @@
             </div>
             <!--------------book details page-------------->
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
+                <!-- <div class="card-header">
+                    <h4 class="card-title">Book List</h4>
+                </div> -->
                 <nav class="navbar navbar-light nav justify-content-center">
-                    <form class="form-inline float-center">
-                        <input class="form-control mr-sm-2" type="search" style="background-color: rgba(181, 184, 189,0.1); color:white;" placeholder="Book Name" aria-label="Search" required>
-                        <button class="btn btn-info" type="submit">Search</button>
+                    <form class="d-flex flex-row" id="book-search-form">
+                        <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search" required>
+                        <!-- <button class="btn btn-info" type="submit" id="book-search-btn">Search</button> -->
+                        <div id="drop-down-search-container" class="row">
+                            <select name="book-search-dropdown" id="book-search-dropdown">
+                                <option value="title">by book title</option>
+                                <option value="author_name">by author name</option>
+                            </select>
+                        </div>
                     </form>
                 </nav>
-                <div class="card-header">
-                    <h4 class="card-title">Book List</h4>
-                </div>
+                
                 <div class="card-body">
 
                     <table class="table table-hover table-dark" id="book-details-table">
