@@ -3,7 +3,6 @@
 if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 // define('__ROOT__', dirname(dirname(__FILE__)));
 
-
 require_once(__ROOT__ . '/Model/Category.php');
 
 class CategoryController
@@ -24,7 +23,7 @@ class CategoryController
 
     public function setCategoryId($id)
     {
-        print_r($id);
+        // print_r($id);
         $this->queryParams['category_id'] = $id;
     }
 
