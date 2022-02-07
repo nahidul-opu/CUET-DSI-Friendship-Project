@@ -33,6 +33,7 @@ $(document).ready(function () {
         console.log(typeof output);
         console.log(output);
         // var content = None;
+        $("#book-details-table").empty();
         for (let i = 0; i < output.length; i++) {
           console.log(output[i].author_name);
           var content =
