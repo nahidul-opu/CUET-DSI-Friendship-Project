@@ -58,3 +58,12 @@ CREATE TRIGGER after_book_insert AFTER INSERT ON book FOR EACH ROW BEGIN
 END;
 $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_book_insert AFTER DELETE ON book FOR EACH ROW BEGIN
+     UPDATE category
+     SET category_count = category_count - 1
+     WHERE category_id=new.category_id;
+END;
+$$
+DELIMITER ;
