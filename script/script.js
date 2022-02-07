@@ -8,11 +8,46 @@ $(document).ready(function () {
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
   });
+
   $("#card-click").click(function (e) {
     e.preventDefault();
     // alert("clicked");
     // $("#main-body").hide();
     $("#main-body").hide();
+
+    $.ajax({
+      type: "GET",
+      url: "/CUET-DSI-Friendship-Project/api/books",
+      dataType: "text",
+      async: true,
+      success: function (data, status) {
+        var output = data;
+        alert(output);
+        console.log(typeof data);
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
+        var content = `<tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>The Poet</td>
+                            <td>Michael Cornelly</td>
+                            <td>
+                                <div class="float-center">
+                                    <button type="button" class="btn btn-primary badge-pill" style="width: 80px;">Update</button>
+                                    <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                      </tbody>`;
+
+        // $("#table-head").append();
+      },
+      error: function (data) {
+        alert("fail");
+      },
+    });
 
     $("#book-details").show();
   });

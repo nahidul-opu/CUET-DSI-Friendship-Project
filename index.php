@@ -188,7 +188,7 @@
                 <div class="card-body">
 
                     <table class="table table-hover table-dark" id="book-details-table">
-                        <thead>
+                        <thead id="table-head">
                             <tr>
                                 <th class="float-center">SL No.</th>
                                 <th class="float-center">Book Name</th>
