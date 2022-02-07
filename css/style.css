@@ -134,3 +134,35 @@ option{
     padding: 0;
     border-radius: 5px;
 }
+
+.floating-add-button{
+    color:black;
+    height: 55px;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(131, 247, 208,0.5);
+    border-radius: 10px;
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+    z-index: 1;
+    
+}
+
+.floating-add-button:hover{
+    color:black;
+    height: 60px;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(131, 247, 208,1);
+    border-radius: 10px;
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+    z-index: 1;
+    transform: scale(1.2);
+}

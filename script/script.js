@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var output;
+  var target_category_id;
 
   //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
@@ -7,14 +8,14 @@ $(document).ready(function () {
   // bishal starting card append
   var location = window.location.href;
   var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-  console.log(directoryPath);
+  //console.log(directoryPath);
   $.ajax({
     type: "GET",
     url: directoryPath + "api/category/",
     dataType: "json",
     async: true,
     success: function (data, status) {
-      // console.log(data.keys());
+      // //console.log(data.keys());
 
       var category = data["message"];
       for (let i = 0; i < category.length; i++) {
@@ -55,20 +56,20 @@ $(document).ready(function () {
   $("#book-details-table").on("click", ".update-button", function (e) {
     alert($(this));
     var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    console.log(output[btn_id].title);
-    console.log("****************************************");
+    //console.log($(this).attr("id"));
+    //console.log(output[btn_id].title);
+    //console.log("****************************************");
   });
 
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
-    // console.log($(this));
-    var target_category_id = $(this).attr("id");
+    // //console.log($(this));
+    target_category_id = $(this).attr("id");
 
     $("#main-body").hide();
     var location = window.location.href;
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-    console.log(directoryPath);
+    //console.log(directoryPath);
     //receive book data with ajax get request
     $.ajax({
       type: "GET",
@@ -76,12 +77,12 @@ $(document).ready(function () {
       dataType: "json",
       async: true,
       success: function (data, status) {
-        // console.log(data.keys());
+        // //console.log(data.keys());
 
         output = data["message"];
         //alert(output);
-        console.log(typeof output);
-        console.log(output);
+        //console.log(typeof output);
+        //console.log(output);
         // var content = None;
         $("#book-details-table").empty();
         var table_header = `<thead id="table-head">
@@ -95,13 +96,13 @@ $(document).ready(function () {
 
         $("#book-details-table").append(table_header);
         for (let i = 0; i < output.length; i++) {
-          console.log("###########################");
-          console.log(output[i].category_id);
-          console.log(target_category_id);
+          //console.log("###########################");
+          //console.log(output[i].category_id);
+          //console.log(target_category_id);
           if (output[i].category_id !== target_category_id) {
             continue;
           }
-          console.log(output[i].author_name);
+          //console.log(output[i].author_name);
           var content =
             `<tbody>
                         <tr>
@@ -153,7 +154,7 @@ $(document).ready(function () {
     // alert($(this).val());
     // alert($("#book-search-dropdown option:selected").val());
     // alert($("#book-search-dropdown").text());
-    console.log($(this).val());
+    //console.log($(this).val());
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
@@ -166,7 +167,7 @@ $(document).ready(function () {
       `&value='` +
       bookname +
       `'`;
-    console.log(crateUrl);
+    //console.log(crateUrl);
 
     $.ajax({
       type: "GET",
@@ -174,14 +175,14 @@ $(document).ready(function () {
       dataType: "json",
       async: true,
       success: function (data, status) {
-        // console.log(data.keys());
+        // //console.log(data.keys());
         // alert(status);
-        console.log("----------------------------------------------------");
-        console.log(data);
+        //console.log("----------------------------------------------------");
+        //console.log(data);
         output = data["message"];
         //alert(output);
-        console.log(typeof output);
-        console.log(output);
+        //console.log(typeof output);
+        //console.log(output);
         // var content = None;
         $("#book-details-table").empty();
         var table_header = `<thead id="table-head">
@@ -195,7 +196,11 @@ $(document).ready(function () {
 
         $("#book-details-table").append(table_header);
         for (let i = 0; i < output.length; i++) {
-          console.log(output[i].author_name);
+          //console.log()
+          if (output[i].category_id !== target_category_id) {
+            continue;
+          }
+          ////console.log(output[i].author_name);
           var content =
             `<tbody>
                         <tr>

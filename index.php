@@ -234,9 +234,14 @@
             </div>
             <!--------------book details page-------------->
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
-                <!-- <div class="card-header">
-                    <h4 class="card-title">Book List</h4>
-                </div> -->
+                
+                <a href="">
+                    <h1 class="display-4 floating-add-button" >
+                    <i class="bi bi-journal-plus"></i>
+                    </h1>
+                </a>
+
+
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
                         <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search" required>
