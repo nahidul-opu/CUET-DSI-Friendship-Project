@@ -11,15 +11,18 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$uri = explode('/', $uri);
-
+print_r($uri);
+$uri = explode('/api', $uri);
+print_r($uri);
+$uri = explode('/', $uri[1]);
+print_r($uri);
 $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-if ($uri[2] == 'books' || $uri[2] == 'Books') {
+if ($uri[1] == 'books' || $uri[1] == 'Books') {
     $bookController = new BooksController($dbConnection, $requestMethod, $queryString);
-    if (isset($uri[3])) {
-        $bookController->setBookId($uri[3]);
+    if (isset($uri[2])) {
+        $bookController->setBookId($uri[2]);
     }
     $bookController->processRequest();
 } else {
