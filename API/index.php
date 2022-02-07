@@ -4,6 +4,7 @@ require_once('Config/DatabaseConnector.php');
 require_once('Controller/BooksController.php');
 require_once('Controller/CategoryController.php');
 require_once('Controller/BorrowController.php');
+require_once('Controller/UserController.php');
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -32,10 +33,19 @@ if ($uri[1] == 'books' || $uri[1] == 'Books') {
         $categoryController->setCategoryId($uri[2]);
     }
     $categoryController->processRequest();
-} else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
+}
+else if ($uri[1] == 'users' || $uri[1] == 'Users') {
+    $userController = new UsersController($dbConnection, $requestMethod, $queryString);
+    if (isset($uri[2])) {
+        $userController->setUserId($uri[2]);
+    }
+    $userController->processRequest();
+} 
+ else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
     $controller = new BorrowController($dbConnection, $requestMethod);
     $controller->selectMethod();
-} else {
+}
+else {
     header("HTTP/1.1 404 Not Found");
     exit();
 }

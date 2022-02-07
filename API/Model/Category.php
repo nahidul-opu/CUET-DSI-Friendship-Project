@@ -90,53 +90,6 @@ class Category
         }
     }
 
-
-    // public function getCategoryWithParams($params)
-    // {
-    //     if (isset($params['sort']) && isset($params['column'])) {
-    //         $statement = "
-    //         SELECT * 
-    //         FROM category ORDER BY " . $params['column'];
-    //         if (isset($params['desc']) && $params['desc'] = true) {
-    //             $statement = $statement . " DESC";
-    //         }
-    //         if (isset($params['limit'])) {
-    //             $statement = $statement . " limit " . $params['limit'];
-    //             if (isset($params['offset'])) $statement = $statement . " offset " . $params['offset'];
-    //         }
-    //         return $this->executeQuery($statement);
-    //     } else if (isset($params['limit'])) {
-    //         $statement = "
-    //         SELECT * 
-    //         FROM category limit " . $params['limit'];
-    //         if (isset($params['offset'])) $statement = $statement . " offset " . $params['offset'];
-    //         return $this->executeQuery($statement);
-    //     } else if (isset($params['column']) && isset($params['value']) && in_array($params['column'], $this->allowedParams)) {
-    //         $statement = "
-    //             SELECT * 
-    //             FROM category
-    //             WHERE " . $params['column'];
-    //         if (isset($params['like']))
-    //             $statement = $statement . " LIKE '%" . $params['value'] . "%';";
-    //         else $statement = $statement . "=" . $params['value'] . ";";
-    //         return $this->executeQuery($statement);
-    //     } else if (isset($params['value']) && !isset($params['column'])) {
-    //         $statement = "
-    //             SELECT * 
-    //             FROM category
-    //             WHERE ";
-    //         for ($i = 0; $i < count($this->allowedParams) - 1; $i++) {
-    //             $statement = $statement . $this->allowedParams[$i] . " LIKE '%" . $params['value'] . "%' OR ";
-    //         }
-    //         $statement = $statement . $this->allowedParams[$i] . " LIKE '%" . $params['value'] . "%';";
-    //         return $this->executeQuery($statement);
-    //     } else {
-    //         print_r("Invalid API or Request Method");
-    //         header("HTTP/1.1 404 Not Found");
-    //         exit();
-    //     }
-    // }
-
     private function executeQuery($statement)
     {
         try {
@@ -148,27 +101,6 @@ class Category
             exit($e->getMessage());
         }
     }
-
-
-    // public function getCategoryWithSpecificColumns($category_id, $columns)
-    // {
-    //     $statement = "
-    //     SELECT " . $columns . " 
-    //     FROM category
-    //     WHERE category_id=:category_id;
-    // ";
-
-    //     try {
-    //         $statement = $this->db->prepare($statement);
-    //         $statement->execute(array(
-    //             'category_id' => $category_id
-    //         ));
-    //         $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-    //         return $result;
-    //     } catch (\PDOException $e) {
-    //         exit($e->getMessage());
-    //     }
-    // }
 
 
     public function update($category_id, $input)
