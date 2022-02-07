@@ -38,10 +38,10 @@ class CategoryController
                 // print_r("Get a dhukse");
                 $response = $this->handleGETRequests();
                 break;
-            // case 'PUT':
-            //     if ($this->queryParams['category_id']) $response = $this->updateCategory($this->queryParams['category_id']);
-            //     else $this->raiseException();
-            //     break;
+            case 'PUT':
+                if ($this->queryParams['category_id']) $response = $this->updateCategory($this->queryParams['category_id']);
+                else $this->raiseException();
+                break;
             case 'DELETE':
                 if ($this->queryParams['category_id']) $response = $this->deleteCategory($this->queryParams['category_id']);
                 else $this->raiseException();
@@ -130,20 +130,20 @@ class CategoryController
     //     }
     // }
 
-    // private function updateCategory($category_id)
-    // {
-    //     $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //     if (empty($input)) {
-    //         $input = (array) $_POST;
-    //     }
-    //     $validation = $this->validateInput($input);
-    //     if (!$validation['isValid']) {
-    //         return $validation;
-    //     }
-    //     $response = $this->category->update($category_id, $input);
-    //     if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
-    //     else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
-    // }
+    private function updateCategory($category_id)
+    {
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (empty($input)) {
+            $input = (array) $_POST;
+        }
+        $validation = $this->validateInput($input);
+        if (!$validation['isValid']) {
+            return $validation;
+        }
+        $response = $this->category->update($category_id, $input);
+        if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
+        else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
+    }
     
 
     private function deleteCategory($category_id)
@@ -162,6 +162,8 @@ class CategoryController
 
     private function validateInput($input)
     {
+        print_r($input);
+        
         $hasRequired = $this->category->hasRequiredField($input);
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);

@@ -171,30 +171,30 @@ class Category
     // }
 
 
-    // public function update($category_id, $input)
-    // {
-    //     $statement = "
-    //     UPDATE categoy 
-    //     SET category_name =:category_name, category_count=:category_count,updated_at=now()
-    //     WHERE category_id=:category_id;
-    //   ";
-    //     try {
-    //         $statement = $this->db->prepare($statement);
-    //         $result = $statement->execute(array(
-    //             'category_name' => $input['category_name'],
-    //             'category_count' => $input['category_count'],
-    //             'category_id' => $category_id
-    //         ));
-    //         $response['success'] = true;
-    //         if ($result === false) {
-    //             $response['success'] = false;
-    //             $response['error'] = $statement->errorInfo()[2];
-    //         }
-    //         return $response;
-    //     } catch (\PDOException $e) {
-    //         exit($e->getMessage());
-    //     }
-    // }
+    public function update($category_id, $input)
+    {
+        $statement = "
+        UPDATE category
+        SET category_name =:category_name,
+        updated_at=now()
+        WHERE category_id=:category_id;
+      ";
+        try {
+            $statement = $this->db->prepare($statement);
+            $result = $statement->execute(array(
+                'category_name' => $input['category_name'],
+                'category_id' => $category_id,
+            ));
+            $response['success'] = true;
+            if ($result === false) {
+                $response['success'] = false;
+                $response['error'] = $statement->errorInfo()[2];
+            }
+            return $response;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 
 
     public function delete($category_id)
