@@ -14,10 +14,12 @@ $(document).ready(function () {
     // //alert("clicked");
     // $("#main-body").hide();
     $("#main-body").hide();
-
+    var location = window.location.href;
+    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    console.log(directoryPath);
     $.ajax({
       type: "GET",
-      url: "/CUET-DSI-Friendship-Project/api/books/",
+      url: directoryPath + "api/books/",
       dataType: "json",
       async: true,
       success: function (data, status) {
