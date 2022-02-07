@@ -70,20 +70,33 @@ class BorrowController{
 public function readBorrows(){
     $this->borrow->book_id=$this->queryParams['book_id'];
      $this->borrow->user_id=$this->queryParams['user_id'];
-
-
-     $this->borrow->readSpec();
-    // create array
-    $br_arr = array(
-        "book_id" =>  $this->borrow->book_id,
-        "user_id" =>  $this->borrow->user_id,
-        "issue_date" =>  $this->borrow->issue_date,
-        "due_date" =>  $this->borrow->due_date,
-        "created_at" =>  $this->borrow->created_at,
-        "updated_at" =>  $this->borrow->updated_at,
-    );
-  
-    echo json_encode($br_arr);
+     $result=$this->borrow->readSpec();
+     $num= $result->rowCount();
+     if($num>0){
+     $bor_arr = array();
+     $bor_arr['data'] = array();
+ 
+     while($row = $result->fetch(PDO::FETCH_ASSOC)){
+         extract($row);
+ 
+         $bor_item = array(
+             'book_id'=>$book_id,
+             'user_id'=>$user_id,
+             'issue_date'=>$issue_date,
+             'due_date'=>$due_date,
+             'created_at'=>$created_at,
+             'updated_at'=>$updated_at,
+         );
+ 
+         array_push($bor_arr['data'],$bor_item);
+     }
+     echo json_encode($bor_arr);
+     }
+     else{
+         echo json_encode(
+             array('message'=>'No book issue history found')
+         );
+}
 }
 }
 

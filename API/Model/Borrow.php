@@ -49,23 +49,14 @@
         $query = "SELECT *
         FROM 
           borrow 
-        WHERE book_id=? and user_id=?";
+        WHERE book_id=:book_id and user_id=:user_id";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(1,$this->book_id);
-        $stmt->bindParam(1,$this->user_id);
+        $stmt->bindParam(':book_id',$this->book_id);
+        $stmt->bindParam(':user_id',$this->user_id);
 
         $stmt->execute();
-  
-    // get retrieved row
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-    // set values to object properties
-    $this->issue_date = $row['issue_date'];
-    $this->due_date = $row['due_date'];
-    $this->created_at = $row['created_at'];
-    $this->updated_at = $row['updated_at'];
-  //  $this->category_name = $row['category_name'];
+        return $stmt;
       
         
       } 
