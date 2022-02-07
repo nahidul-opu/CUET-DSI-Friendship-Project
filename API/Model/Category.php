@@ -197,26 +197,26 @@ class Category
     // }
 
 
-    // public function delete($category_id)
-    // {
+    public function delete($category_id)
+    {
 
-    //     $statement = "
-    //     DELETE FROM category WHERE category_id=:category_id;
-    // ";
-    //     try {
-    //         $statement = $this->db->prepare($statement);
-    //         $result = $statement->execute(array(
-    //             'category_id' => $category_id,
-    //         ));
-    //         $response['success'] = true;
-    //         if ($result === false) {
-    //             $response['success'] = false;
-    //             $response['error'] = $statement->errorInfo()[2];
-    //         }
-    //         return $response;
-    //     } catch (\PDOException $e) {
-    //         exit($e->getMessage());
-    //     }
-    // }
+        $statement = "
+        DELETE FROM category WHERE category_id=:category_id;
+    ";
+        try {
+            $statement = $this->db->prepare($statement);
+            $result = $statement->execute(array(
+                'category_id' => $category_id,
+            ));
+            $response['success'] = true;
+            if ($result === false) {
+                $response['success'] = false;
+                $response['error'] = $statement->errorInfo()[2];
+            }
+            return $response;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 
 }

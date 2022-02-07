@@ -42,10 +42,10 @@ class CategoryController
             //     if ($this->queryParams['category_id']) $response = $this->updateCategory($this->queryParams['category_id']);
             //     else $this->raiseException();
             //     break;
-            // case 'DELETE':
-            //     if ($this->queryParams['category_id']) $response = $this->deleteCategory($this->queryParams['category_id']);
-            //     else $this->raiseException();
-            //     break;
+            case 'DELETE':
+                if ($this->queryParams['category_id']) $response = $this->deleteCategory($this->queryParams['category_id']);
+                else $this->raiseException();
+                break;
             default:
                 $this->raiseException();
                 break;
@@ -146,17 +146,17 @@ class CategoryController
     // }
     
 
-    // private function deleteCategory($category_id)
-    // {
+    private function deleteCategory($category_id)
+    {
 
-    //     // todo: delete all books in this category from book table
-    //     $result = $this->category->delete($category_id);
-    //     if ($result) {
-    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
-    //     } else {
-    //         return $this->Responce('HTTP/1.1 500', 'Internel Error', 'Failed');
-    //     }
-    // }
+        // todo: delete all books in this category from book table
+        $result = $this->category->delete($category_id);
+        if ($result) {
+            return $this->Responce('HTTP/1.1 200', 'OK', $result);
+        } else {
+            return $this->Responce('HTTP/1.1 500', 'Internel Error', 'Failed');
+        }
+    }
 
 
 
