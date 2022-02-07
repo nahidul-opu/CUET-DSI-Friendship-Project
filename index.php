@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -97,19 +98,49 @@
                 <!--------------------------------xxxx---------------------------------------->
                 <!--------------------------------card---------------------------------------->
 
-
+<!-- 
                 <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
 
                     <div class="card-body">
                         <h5 class="card-title" style="text-align:Center">Title</h5>
                         <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                        <!--
-                            <button id="edit-card" style=""> ? </button>-->
-                        <!--   edit category--------------->
+                        
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                    </div>
+                    </div> -->
 
+                
+                <!--
+                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
+                    
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align:Center">Title</h5>
+                            <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
+                            
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
+                        </div>
+                 --> 
                 </a>
+
+                <!-- bishal card design begin -->
+                   <div class="book-category ">
+                        <div class="title text-center md-3">
+                            <h3  class="font-wight-bolder">Books Category</h3>
+                        </div>
+                        <!-- a single card -->
+                        
+
+                        
+
+                        <div class="row" id="book-card" >
+                           <!-- query will append card here dynamically  -->
+                           
+                        </div>
+
+                        
+
+                   </div>
+                --------------------------------------------
+                <!-- bishal card design end -->
 
                 <!--add category ---------------------------------------------------------------------------->
                 <div class="category-card" style="width: 18rem;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
@@ -271,6 +302,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./script/script.js"></script>
+    <script src="./script/category_add.js"></script>
 </body>
 
 </html>
