@@ -6,33 +6,39 @@ class BooksController
 {
     private $db = null;
     private $requestMethod;
-    private $book_id;
+    private $queryParams;
     private $book;
-    function __construct($dbConnector, $method, $book_id)
+    function __construct($dbConnector, $method, $queryString)
     {
         $this->db = $dbConnector;
         $this->requestMethod = $method;
-        if ($book_id) $this->book_id = $book_id;
-        $this->book = new Book($this->db, $this->book_id);
+        parse_str($queryString, $this->queryParams);
+        //$this->queryParams = var_dump($this->queryParams);
+        $this->book = new Book($this->db);
+        $this->queryParams['book_id'] = null;
+    }
+
+    public function setBookId($id)
+    {
+        $this->queryParams['book_id'] = $id;
     }
 
     function processRequest()
     {
         switch ($this->requestMethod) {
             case 'POST':
-                if ($this->book_id) $this->raiseException();
+                if ($this->queryParams['book_id']) $this->raiseException();
                 $response = $this->createBook();
                 break;
             case 'GET':
-                if ($this->book_id) $response =  $this->readBookData($this->book_id);
-                else  $response =  $this->readBookData();
+                $response = $this->handleGETRequests();
                 break;
             case 'PUT':
-                if ($this->book_id) $response = $this->updateBook($this->book_id);
+                if ($this->queryParams['book_id']) $response = $this->updateBook($this->queryParams['book_id']);
                 else $this->raiseException();
                 break;
             case 'DELETE':
-                if ($this->book_id) $response = $this->deleteBook($this->book_id);
+                if ($this->queryParams['book_id']) $response = $this->deleteBook($this->queryParams['book_id']);
                 else $this->raiseException();
                 break;
             default:
@@ -60,6 +66,16 @@ class BooksController
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Inserted 1 Row');
     }
 
+    private function handleGETRequests()
+    {
+        if ($this->queryParams['book_id'] && count($this->queryParams) === 1) $response =  $this->readBookData($this->queryParams['book_id']);
+        else if (count($this->queryParams) === 1)  $response =  $this->readBookData();
+        else if ($this->queryParams['book_id'] && count($this->queryParams) === 2) $response = $this->readBookDataSpecificColumns();
+        else if (empty($this->queryParams['book_id']) && count($this->queryParams) > 1) $response = $this->readBookDataWithParams();
+        else $response = $this->Responce('HTTP/1.1 404', 'Not Found', 'Invalid Request');
+        return $response;
+    }
+
     function __call($name_of_function, $arguments)
     {
         if ($name_of_function === 'readBookData') {
@@ -85,17 +101,49 @@ class BooksController
         }
     }
 
+    private function readBookDataWithParams()
+    {
+        $result = $this->book->getBookWithParams($this->queryParams);
+        if ($result) {
+            return $this->Responce('HTTP/1.1 200', 'OK', $result);
+        } else {
+            return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
+        }
+    }
+    private function readBookDataSpecificColumns()
+    {
+        $result = $this->book->getBookWithSpecificColumns($this->queryParams['book_id'], $this->queryParams['columns']);
+        if ($result) {
+            return $this->Responce('HTTP/1.1 200', 'OK', $result);
+        } else {
+            return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
+        }
+    }
+
     private function updateBook($book_id)
     {
-        print_r("Updating " . $book_id);
-        return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Not Implemented');
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (empty($input)) {
+            $input = (array) $_POST;
+        }
+        $validation = $this->validateInput($input);
+        if (!$validation['isValid']) {
+            return $validation;
+        }
+        $response = $this->book->update($book_id, $input);
+        if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
+        else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
     }
 
     private function deleteBook($book_id)
     {
 
-        print_r("Deleting " . $book_id);
-        return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Not Implemented');
+        $result = $this->book->delete($book_id);
+        if ($result) {
+            return $this->Responce('HTTP/1.1 200', 'OK', $result);
+        } else {
+            return $this->Responce('HTTP/1.1 500', 'Internel Error', 'Failed');
+        }
     }
 
     private function validateInput($input)

@@ -14,7 +14,6 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $uri = explode('/api', $uri);
 $uri = explode('/', $uri[1]);
-
 $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
@@ -35,8 +34,7 @@ else if ($uri[1] == 'category' || $uri[1] == 'Category') {
     }
     $categoryController->processRequest();
 }
-
-else {
+ else {
     header("HTTP/1.1 404 Not Found");
     exit();
 }
