@@ -13,6 +13,7 @@ $(document).ready(function () {
     // alert("clicked");
     // $("#main-body").hide();
     $("#main-body").hide();
+
     $("#book-details").show();
   });
 });
