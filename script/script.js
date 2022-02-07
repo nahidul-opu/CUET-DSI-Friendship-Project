@@ -20,20 +20,36 @@ $(document).ready(function () {
 
   //card click function
 
+
+
+
+
+
   // bishal starting card append
+var location = window.location.href;
+var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+console.log(directoryPath);
+$.ajax({
+  type: "GET",
+  url: directoryPath + "api/category/",
+  dataType: "json",
+  async: true,
+  success: function (data, status) {
+    // console.log(data.keys());
+
+  var category = data["message"];
   for (let i = 0; i < 5; i++) {
-    //console.log(output[i].author_name);
     var card =`<div class="col-lg-4">
-    <div class="card  m-3">
+    <div class="card  m-3 h-90">
         <!-- <div class="card-header">header</div> -->
-        <div class="card-body py-5">
-            <h4 class="card-title text-center">Category `+i+`</h4>
+        <div class="card-body py-5" id="card-body">
+            <h4 class="card-title text-center">`+category[i].category_name+`</h4>
         </div>
         <div class="card-footer">
             <div class ="container-fluid">
                 <div class ="row">
                     <div class ="col-md-6 col-sm-6">
-                        <h5 class="">50/30</h5>
+                        <h5 class="">`+category[i].category_count+`</h5>
                     </div>
                     <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
                         <i class="fas fa-2x fa-plus-circle "></i>                                                
@@ -47,33 +63,20 @@ $(document).ready(function () {
     $("#book-card").append(card);
 
   }
-
+}});
   //ending append
 
-
-//testing
-var location = window.location.href;
-var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-console.log(directoryPath);
-$.ajax({
-  type: "GET",
-  url: directoryPath + "api/category/",
-  dataType: "json",
-  async: true,
-  success: function (data, status) {
-    // console.log(data.keys());
-
-    var output = data["message"];
-    //alert(output);
-    console.log(typeof output);
-    console.log(output);}});
-
-//
+  $('#card-body').click(function(){
+    //Some code
+    console.log("click");
+});
 
 
 
 
-  $("#card-click").click(function (e) {
+
+  $("#card-bodyy").click(function (e) {
+   
     e.preventDefault();
     // //alert("clicked");
     // $("#main-body").hide();
