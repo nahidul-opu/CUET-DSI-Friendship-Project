@@ -40,13 +40,13 @@ class User
         try {
             $statement = $this->db->prepare($statement);
             $result = $statement->execute(array(
-                'isbn' => $input['isbn'],
-                'title' => $input['title'],
-                'author_name' => $input['author_name'],
-                'pub_year' => $input['pub_year'],
-                'total_count' => $input['total_count'],
-                'publisher' => $input['publisher'],
-                'category_id' => $input['category_id'],
+                'email' => $input['email'],
+                'name' => $input['name'],
+                'borrow_count' => $input['borrow_count'],
+                'contact_no' => $input['contact_no'],
+                'image_path' => $input['image_path'],
+                'fine' => $input['fine'],
+                // 'category_id' => $input['category_id'],
             ));
             $response['success'] = true;
             if ($result === false) {
@@ -176,24 +176,21 @@ class User
     {
         $statement = "
         UPDATE user 
-        SET isbn =:isbn, title=:title, author_name=:author_name, pub_year=:pub_year,
-        total_count=:total_count,current_count=:current_count,publisher=:publisher,
-        category_id=:category_id,updated_at=now()
+        SET email =:email, name=:name, borrow_count=:borrow_count, contact_no=:contact_no,
+        image_path=:image_path,fine=:fine,updated_at=now()
         WHERE user_id=:user_id;
       ";
 
         try {
             $statement = $this->db->prepare($statement);
             $result = $statement->execute(array(
-                'isbn' => $input['isbn'],
-                'title' => $input['title'],
-                'author_name' => $input['author_name'],
-                'pub_year' => $input['pub_year'],
-                'total_count' => $input['total_count'],
-                'current_count' => $input['current_count'],
-                'publisher' => $input['publisher'],
-                'category_id' => $input['category_id'],
-                'book_id' => $book_id
+                'email' => $input['email'],
+                'name' => $input['name'],
+                'borrow_count' => $input['borrow_count'],
+                'contact_no' => $input['contact_no'],
+                'image_path' => $input['image_path'],
+                'fine' => $input['fine'],
+                'user_id' => $user_id
             ));
             $response['success'] = true;
             if ($result === false) {
@@ -206,16 +203,16 @@ class User
         }
     }
 
-    public function delete($book_id)
+    public function delete($user_id)
     {
 
         $statement = "
-        DELETE FROM book WHERE book_id=:book_id;
+        DELETE FROM user WHERE user_id=:user_id;
     ";
         try {
             $statement = $this->db->prepare($statement);
             $result = $statement->execute(array(
-                'book_id' => $book_id,
+                'user_id' => $user_id,
             ));
             $response['success'] = true;
             if ($result === false) {
