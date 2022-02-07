@@ -33,9 +33,9 @@ create table book (
   publisher varchar(100) not null,
   created_at datetime not null,
   updated_at datetime not null,
-  category_id int not null,
+  category_id int,
   primary key (book_id),
-  foreign key (category_id) references category(category_id),
+  foreign key (category_id) references category(category_id) ON DELETE SET NULL,
   unique (isbn)
 );
 create table borrow (
@@ -60,10 +60,10 @@ $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER after_book_insert AFTER DELETE ON book FOR EACH ROW BEGIN
+CREATE TRIGGER after_book_delete AFTER DELETE ON book FOR EACH ROW BEGIN
      UPDATE category
      SET category_count = category_count - 1
-     WHERE category_id=new.category_id;
+     WHERE category_id=old.category_id;
 END;
 $$
 DELIMITER ;
