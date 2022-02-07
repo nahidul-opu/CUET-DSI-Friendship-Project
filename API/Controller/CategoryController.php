@@ -1,44 +1,49 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__ . '/Model/Book.php');
 
-class BooksController
+if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
+// define('__ROOT__', dirname(dirname(__FILE__)));
+
+require_once(__ROOT__ . '/Model/Category.php');
+
+class CategoryController
 {
     private $db = null;
     private $requestMethod;
     private $queryParams;
-    private $book;
+    private $category;
+
     function __construct($dbConnector, $method, $queryString)
     {
         $this->db = $dbConnector;
         $this->requestMethod = $method;
         parse_str($queryString, $this->queryParams);
-        //$this->queryParams = var_dump($this->queryParams);
-        $this->book = new Book($this->db);
-        $this->queryParams['book_id'] = null;
+        $this->category = new Category($this->db);
+        $this->queryParams['category_id'] = null;
     }
 
-    public function setBookId($id)
+    public function setCategoryId($id)
     {
-        $this->queryParams['book_id'] = $id;
+        // print_r($id);
+        $this->queryParams['category_id'] = $id;
     }
 
     function processRequest()
     {
         switch ($this->requestMethod) {
             case 'POST':
-                if ($this->queryParams['book_id']) $this->raiseException();
-                $response = $this->createBook();
+                if ($this->queryParams['category_id']) $this->raiseException();
+                $response = $this->createCategory();
                 break;
             case 'GET':
+                // print_r("Get a dhukse");
                 $response = $this->handleGETRequests();
                 break;
             case 'PUT':
-                if ($this->queryParams['book_id']) $response = $this->updateBook($this->queryParams['book_id']);
+                if ($this->queryParams['category_id']) $response = $this->updateCategory($this->queryParams['category_id']);
                 else $this->raiseException();
                 break;
             case 'DELETE':
-                if ($this->queryParams['book_id']) $response = $this->deleteBook($this->queryParams['book_id']);
+                if ($this->queryParams['category_id']) $response = $this->deleteCategory($this->queryParams['category_id']);
                 else $this->raiseException();
                 break;
             default:
@@ -51,7 +56,9 @@ class BooksController
         }
     }
 
-    private function createBook()
+
+    
+    private function createCategory()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (empty($input)) {
@@ -61,29 +68,31 @@ class BooksController
         if (!$validation['isValid']) {
             return $validation;
         }
-        $response = $this->book->insert($input);
+        $response = $this->category->insert($input);
         if (!$response['success']) return $this->Responce('HTTP/1.1 409', 'Duplicate Data', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Inserted 1 Row');
     }
 
     private function handleGETRequests()
     {
-        if ($this->queryParams['book_id'] && count($this->queryParams) === 1) $response =  $this->readBookData($this->queryParams['book_id']);
-        else if (count($this->queryParams) === 1)  $response =  $this->readBookData();
-        else if ($this->queryParams['book_id'] && count($this->queryParams) === 2) $response = $this->readBookDataSpecificColumns();
-        else if (empty($this->queryParams['book_id']) && count($this->queryParams) > 1) $response = $this->readBookDataWithParams();
+        // print_r($category);
+        if ($this->queryParams['category_id'] && count($this->queryParams) === 1) $response =  $this->readCategoryData($this->queryParams['category_id']);
+        else if (count($this->queryParams) === 1)  $response =  $this->readCategoryData();
+        else if ($this->queryParams['category_id'] && count($this->queryParams) === 2) $response = $this->readCategoryDataSpecificColumns();
+        else if (empty($this->queryParams['category_id']) && count($this->queryParams) > 1) $response = $this->readCategoryDataWithParams();
         else $response = $this->Responce('HTTP/1.1 404', 'Not Found', 'Invalid Request');
+        
         return $response;
     }
 
     function __call($name_of_function, $arguments)
     {
-        if ($name_of_function === 'readBookData') {
+        if ($name_of_function === 'readCategoryData') {
 
             switch (count($arguments)) {
 
                 case 0:
-                    $result =  $this->book->getBooks();
+                    $result =  $this->category->getCategorys();
                     if ($result) {
                         return $this->Responce('HTTP/1.1 200', 'OK', $result);
                     } else {
@@ -91,7 +100,7 @@ class BooksController
                     }
 
                 case 1:
-                    $result =  $this->book->getBook($arguments[0]);
+                    $result =  $this->category->getCategory($arguments[0]);
                     if ($result) {
                         return $this->Responce('HTTP/1.1 200', 'OK', $result);
                     } else {
@@ -101,26 +110,27 @@ class BooksController
         }
     }
 
-    private function readBookDataWithParams()
-    {
-        $result = $this->book->getBookWithParams($this->queryParams);
-        if ($result) {
-            return $this->Responce('HTTP/1.1 200', 'OK', $result);
-        } else {
-            return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-        }
-    }
-    private function readBookDataSpecificColumns()
-    {
-        $result = $this->book->getBookWithSpecificColumns($this->queryParams['book_id'], $this->queryParams['columns']);
-        if ($result) {
-            return $this->Responce('HTTP/1.1 200', 'OK', $result);
-        } else {
-            return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
-        }
-    }
+    // private function readCategoryDataWithParams()
+    // {
+    //     $result = $this->category->getCategoryWithParams($this->queryParams);
+    //     if ($result) {
+    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
+    //     } else {
+    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
+    //     }
+    // }
 
-    private function updateBook($book_id)
+    // private function readCAtegoryDataSpecificColumns()
+    // {
+    //     $result = $this->category->getCategoryWithSpecificColumns($this->queryParams['category_id'], $this->queryParams['columns']);
+    //     if ($result) {
+    //         return $this->Responce('HTTP/1.1 200', 'OK', $result);
+    //     } else {
+    //         return $this->Responce('HTTP/1.1 404', 'Not Found', 'No Data Found');
+    //     }
+    // }
+
+    private function updateCategory($category_id)
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (empty($input)) {
@@ -130,15 +140,17 @@ class BooksController
         if (!$validation['isValid']) {
             return $validation;
         }
-        $response = $this->book->update($book_id, $input);
+        $response = $this->category->update($category_id, $input);
         if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
     }
+    
 
-    private function deleteBook($book_id)
+    private function deleteCategory($category_id)
     {
 
-        $result = $this->book->delete($book_id);
+        // todo: delete all books in this category from book table
+        $result = $this->category->delete($category_id);
         if ($result) {
             return $this->Responce('HTTP/1.1 200', 'OK', $result);
         } else {
@@ -146,9 +158,13 @@ class BooksController
         }
     }
 
+
+
     private function validateInput($input)
     {
-        $hasRequired = $this->book->hasRequiredField($input);
+        print_r($input);
+        
+        $hasRequired = $this->category->hasRequiredField($input);
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
         }
@@ -178,3 +194,5 @@ class BooksController
         return $response;
     }
 }
+
+?>
