@@ -302,7 +302,7 @@
 
 
             <!----------------- book issue page ------------------->            
-            <div class="mx-5 p-5 text-white" id = "issue-book " >
+            <div class="mx-5 p-5 text-white" id = "issue-book" style="display:none">
                 
                 <div class="title text-center md-3">
                     <h2  class="font-wight-bolder text-light">Issue Book</h2>

@@ -237,7 +237,7 @@ $(document).ready(function () {
     $("#main-body").hide();
     $("#issue-book").show();
 
-    // loadCategoryCard();
+     loadCategoryCard();
   });
 
   //book search option, search by author and book title
