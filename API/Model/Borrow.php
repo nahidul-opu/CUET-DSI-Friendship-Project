@@ -60,6 +60,34 @@
       
         
       } 
+  public function readbyUser(){
+        $query = "SELECT *
+        FROM 
+          borrow 
+        WHERE user_id=:user_id";
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(':user_id',$this->user_id);
+
+        $stmt->execute();
+        return $stmt;
+      
+        
+      } 
+      public function readbyBookID(){
+        $query = "SELECT *
+        FROM 
+          borrow 
+        WHERE book_id=:book_id";
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(':book_id',$this->book_id);
+
+        $stmt->execute();
+        return $stmt;
+      
+        
+      } 
 
   }
 

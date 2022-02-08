@@ -17,7 +17,9 @@ class BorrowController{
     function selectMethod(){
            if($this->requestMethod=='GET'){
                 if(count($this->queryParams)>0){
-               if ($this->queryParams['book_id'] && count($this->queryParams) === 2)   {$this->readBorrows();}
+               if (isset($this->queryParams['book_id']) && isset( $this->queryParams['user_id']) && count($this->queryParams) === 2)   {$this->readBorrows();}
+               if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1)   {$this->readBorrowUser();}
+               if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1)   {$this->readBorrowbyBook();}
                 }
                 else   $this->readBorrow();
             }
@@ -98,6 +100,67 @@ public function readBorrows(){
          );
 }
 }
+public function readBorrowUser(){
+     $this->borrow->user_id=$this->queryParams['user_id'];
+     $result=$this->borrow->readbyUser();
+     $num= $result->rowCount();
+     if($num>0){
+     $bor_arr = array();
+     $bor_arr['data'] = array();
+ 
+     while($row = $result->fetch(PDO::FETCH_ASSOC)){
+         extract($row);
+ 
+         $bor_item = array(
+             'book_id'=>$book_id,
+             'user_id'=>$user_id,
+             'issue_date'=>$issue_date,
+             'due_date'=>$due_date,
+             'created_at'=>$created_at,
+             'updated_at'=>$updated_at,
+         );
+ 
+         array_push($bor_arr['data'],$bor_item);
+     }
+     echo json_encode($bor_arr);
+     }
+     else{
+         echo json_encode(
+             array('message'=>'No book issue history found')
+         );
+}
+}
+public function readBorrowbyBook(){
+    $this->borrow->book_id=$this->queryParams['book_id'];
+    $result=$this->borrow->readbyBookID();
+    $num= $result->rowCount();
+    if($num>0){
+    $bor_arr = array();
+    $bor_arr['data'] = array();
+
+    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
+
+        $bor_item = array(
+            'book_id'=>$book_id,
+            'user_id'=>$user_id,
+            'issue_date'=>$issue_date,
+            'due_date'=>$due_date,
+            'created_at'=>$created_at,
+            'updated_at'=>$updated_at,
+        );
+
+        array_push($bor_arr['data'],$bor_item);
+    }
+    echo json_encode($bor_arr);
+    }
+    else{
+        echo json_encode(
+            array('message'=>'No book issue history found')
+        );
+}
+}
+
 }
 
 ?>
