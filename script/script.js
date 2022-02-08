@@ -60,7 +60,7 @@ $(document).ready(function () {
   //ending append
 
   function showBookDetails(data, category_id) {
-    console.log("show book details function called");
+    // console.log("show book details function called");
     $("#book-details-table").empty();
     var table_header = `<thead id="table-head">
                               <tr>
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
       $("#book-details-table").append(content);
     }
-    console.log("function end here");
+    // console.log("function end here");
   }
 
   //update button handle
@@ -129,7 +129,7 @@ $(document).ready(function () {
     //receive book data with ajax get request
 
     var createDeleteUrl = directoryPath + "api/books/" + btn_id;
-    console.log(createDeleteUrl);
+    // console.log(createDeleteUrl);
     $.ajax({
       type: "DELETE",
       url: createDeleteUrl,
@@ -226,11 +226,12 @@ $(document).ready(function () {
   });
 
   //book search option, search by author and book title
-  $("#book-search-input").change(function () {
+  $("#book-search-input").on("keyup", function () {
+    console.log($(this).val());
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
-    $(this).val("");
+    // $(this).val("");
     //apt: /api/books/?column=column_name&value=keyword
     //category wise book search api: /api/books/?category_id=?&column=?&value=?
     var crateUrl =
@@ -241,14 +242,6 @@ $(document).ready(function () {
       searchBy +
       `&value=` +
       bookname;
-    // var crateUrl =
-    //   directoryPath +
-    //   `api/books/?column=` +
-    //   searchBy +
-    //   `&value=` +
-    //   bookname +
-    //   `&like=true`;
-    // console.log(crateUrl);
 
     $.ajax({
       type: "GET",
@@ -260,7 +253,7 @@ $(document).ready(function () {
         showBookDetails(output, target_category_id);
       },
       error: function (data, status) {
-        alert("Data not found");
+        // alert("Data not found");
       },
     });
 
