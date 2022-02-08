@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //global variable for data cache
   var output;
   var target_category_id;
 
@@ -77,7 +78,7 @@ $(document).ready(function () {
         `<tbody>
                         <tr>
                             <th scope="row">` +
-        i +
+        (i + 1) +
         `</th>
                             <td>` +
         data[i].title +
@@ -102,7 +103,8 @@ $(document).ready(function () {
     }
     console.log("function end here");
   }
-  //update button handle successfully
+
+  //update button handle
   $("#book-details-table").on("click", ".update-button", function (e) {
     alert($(this).text());
     var btn_id = $(this).attr("id");
@@ -111,6 +113,7 @@ $(document).ready(function () {
     //console.log("****************************************");
   });
 
+  //book delete button
   $("#book-details-table").on("click", ".delete-book-button", function (e) {
     // alert($(this).text());
     var btn_id = $(this).attr("id");
@@ -159,6 +162,7 @@ $(document).ready(function () {
     });
   });
 
+  //category card click button
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
     // //console.log($(this));
@@ -169,9 +173,23 @@ $(document).ready(function () {
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     //console.log(directoryPath);
     //receive book data with ajax get request
+
+    // category book api: /api/books/?column=column_name&value=keyword
+    var crateUrl =
+      directoryPath +
+      `api/books/?column=category_id&value=` +
+      target_category_id;
+    //   directoryPath +
+    //   `api/books/?category_id=` +
+    //   target_category_id +
+    //   `&column=` +
+    //   searchBy +
+    //   `&value=` +
+    //   bookname;
+
     $.ajax({
       type: "GET",
-      url: directoryPath + "api/books/",
+      url: crateUrl,
       dataType: "json",
       async: true,
       success: function (data, status) {
@@ -200,20 +218,30 @@ $(document).ready(function () {
     $("#main-body").show();
   });
 
+  //book search option, search by author and book title
   $("#book-search-input").change(function () {
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
     $(this).val("");
     //apt: /api/books/?column=column_name&value=keyword
+    //category wise book search api: /api/books/?category_id=?&column=?&value=?
     var crateUrl =
       directoryPath +
-      `api/books/?column=` +
+      `api/books/?category_id=` +
+      target_category_id +
+      `&column=` +
       searchBy +
       `&value=` +
-      bookname +
-      `&like=true`;
-    console.log(crateUrl);
+      bookname;
+    // var crateUrl =
+    //   directoryPath +
+    //   `api/books/?column=` +
+    //   searchBy +
+    //   `&value=` +
+    //   bookname +
+    //   `&like=true`;
+    // console.log(crateUrl);
 
     $.ajax({
       type: "GET",
@@ -232,6 +260,7 @@ $(document).ready(function () {
     $("#book-details").show();
   });
 
+  //book dropdown change the placeholder of the input field
   $("#book-search-dropdown").change(function () {
     if ($("#book-search-dropdown option:selected").val() === "title") {
       $("#book-search-input").attr("placeholder", "Enter book title");
