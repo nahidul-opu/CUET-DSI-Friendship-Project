@@ -122,7 +122,7 @@ class Book
                 WHERE " . $params['column'];
             if (isset($params['like']))
                 $statement = $statement . " LIKE '%" . $params['value'] . "%';";
-            else $statement = $statement . "=" . $params['value'] . ";";
+            else $statement = $statement . "='" . $params['value'] . "';";
             return $this->executeQuery($statement);
         } else if (isset($params['value']) && !isset($params['column'])) {
             $statement = "
