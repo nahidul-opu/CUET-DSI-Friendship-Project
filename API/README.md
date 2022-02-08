@@ -83,3 +83,19 @@
 
 5. (DELETE method)Delete a User information having id 'x'
    /api/users/x (with delete request)
+  ## Borrow-API
+
+1. (GET method)Get All borrow history
+   /api/borrow
+
+2. (GET method)Get a borrow history where book id is 'x' and user id is 'y'
+   /api/borrow?book_id=x&user_id=y
+
+3. (GET method)Get a borrow history where book id is 'x' 
+   /api/borrow?book_id=x
+
+4. (GET method)Get a borrow history where user id is 'x'
+   /api/borrow?user_id=x
+
+5. (DELETE method)Delete a borrow history where book id is 'x' and user id is 'y'
+   /api/borrow?book_id=x&user_id=y (with delete request)
