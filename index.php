@@ -299,6 +299,46 @@
 
                 </div>
             </div>
+
+
+            <!----------------- book issue page ------------------->            
+            <div class="mx-5 p-5 text-white" id = "issue-book" style="display:none">
+                
+                <div class="title text-center md-3">
+                    <h2  class="font-wight-bolder text-light">Issue Book</h2>
+                </div>
+
+                <div id="drop-down-issue-book" class="row p-3">
+                    <select name="issue-book-dropdown" id="issue-book-dropdown">
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="book11" class="form-label">Book1</label>
+                        <input type="text" class="form-control" >                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="book12" class="form-label">Book2</label>
+                        <input type="text" class="form-control" >                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="book13" class="form-label">Book3</label>
+                        <input type="text" class="form-control" >                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="User ID" class="form-label">User Id</label>
+                        <input type="text" class="form-control" >                        
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Issue Book</button>
+                </form>
+            </div>
+
+
+            
         </div>
     </div>
 
