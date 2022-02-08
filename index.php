@@ -142,50 +142,7 @@
                         </button>
                     </div>
                 </div>
-                <!-----------------------------------------------------temp form----------------->
-                <!------------------------------------------pop up form---------------------->
-                <div class="modal" tabindex="-1" id="edit-book-modal" style="display: none;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Book Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="#" method="post">
-                                    <div class="mb-3">
-                                        <label class="form-label">Book Name</label>
-                                        <input type="text" class="form-control" name="title">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Book Author</label>
-                                        <input type="text" class="form-control" name="author_name">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Publisher</label>
-                                        <input type="text" class="form-control" name="publisher">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Publish Year</label>
-                                        <input type="text" class="form-control" name="pub_year">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">ISBN</label>
-                                        <input type="text" class="form-control" name="isbn">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                
 
                 <!--<a href="#" class="btn btn-primary">40/50</a>-->
 
