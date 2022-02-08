@@ -268,4 +268,13 @@ $(document).ready(function () {
       $("#book-search-input").attr("placeholder", "Enter author name");
     }
   });
+    
+   /* -------------------------------happy wednesday---------------------------*/
+   /* -------------------------------happy wednesday---------------------------*/
+    
+    $("#book-details").on("click", "#float-button", function (){
+        alert("float button clicked");
+        $("#add-book-modal").show()
+        
+    });
 });
