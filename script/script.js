@@ -5,29 +5,6 @@ $(document).ready(function () {
   $("#inventory").css("background-color", "#2f0410");
 
   // bishal starting card append
-// var location = window.location.href;
-// var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-// console.log(directoryPath);
-// $.ajax({
-//   type: "GET",
-//   url: directoryPath + "api/category/",
-//   dataType: "json",
-//   async: true,
-//   success: function (data, status) {
-    // console.log(data.keys());
-
-  // var category = data["message"];
-  // for (let i = 0; i < 5; i++) {
-  //   var card =`<div class="col-lg-4">
-  //   <div class="card  m-3 h-90">
-  //       <!-- <div class="card-header">header</div> -->
-  //       <div class="card-body py-5" id="card-body">
-  //           <h4 class="card-title text-center" id = "cat-name">`+category[i].category_name+`</h4>
-  //       </div>
-  //       <div class="card-footer">
-  //           <div class ="container-fluid">
-
-  //           `
   var location = window.location.href;
   var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
   console.log(directoryPath);
@@ -45,23 +22,23 @@ $(document).ready(function () {
           `<button class="category-card-click m-3" id="` +
           category[i].category_id +
           `"><div class="col-lg-4">
-              <div class="card h-90" style="width:280px;height:220px;margin:0;padding:0;">
+              <div class="card h-90" style="width:280px;height:200px;margin:0;padding:0;">
                 <div class="card-body py-5" id="card-body">
                   <h4 class="card-title text-center">` +
-          category[i].category_name +
-          `</h4>
+                    category[i].category_name +
+                    `</h4>
                 </div>
-              <div class="card-footer">
-              <div class ="container-fluid">
-                <div class ="row">
-                    <div class ="col-md-6 col-sm-6">
-                        <h5 class="">` +
-          category[i].category_count +
-          `</h5>
+                <div class="card-footer">
+                  <div class ="container-fluid">
+                    <div class ="row">
+                      <div class ="col-md-6 col-sm-6">
+                        <h5 class="">` 
+                          + category[i].category_count +
+                        `</h5>
                       </div>
-                      <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
-                        <i class="fas fa-2x fa-plus-circle "></i>                                                
-                      </div>
+                    <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
+                      <i class="fas fa-2x fa-plus-circle "></i>                                                
+                   </div>
                 </div>
             </div>
           </div>
@@ -75,15 +52,6 @@ $(document).ready(function () {
   //ending append
 
 
-$(document).on('click', '#card-body', function()
-{
-// your code
-console.log("click");
-var x = $( "#cat-name" ).val();
-console.log( (x))
-
-
-});
 
 
   //update button handle successfully
