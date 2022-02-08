@@ -43,7 +43,7 @@ $.ajax({
     <div class="card  m-3 h-90">
         <!-- <div class="card-header">header</div> -->
         <div class="card-body py-5" id="card-body">
-            <h4 class="card-title text-center">`+category[i].category_name+`</h4>
+            <h4 class="card-title text-center" id = "cat-name">`+category[i].category_name+`</h4>
         </div>
         <div class="card-footer">
             <div class ="container-fluid">
@@ -66,11 +66,16 @@ $.ajax({
 }});
   //ending append
 
-  $('#card-body').click(function(){
-    //Some code
-    console.log("click");
-});
 
+$(document).on('click', '#card-body', function()
+{
+// your code
+console.log("click");
+var x = $( "#cat-name" ).val();
+console.log( (x))
+
+
+});
 
 
 

@@ -128,7 +128,26 @@
                         </div>
                         <div class="row" id="book-card" >
                            <!-- jquery will append card here dynamically  -->
-                           
+                           <div class="col-lg-4">
+    <div class="card  m-3 h-90">
+        <!-- <div class="card-header">header</div> -->
+        <div class="card-body py-5" id="card-body">
+            <h4 class="card-title text-center" id = "cat-name">`+category[i].category_name+`</h4>
+        </div>
+        <div class="card-footer">
+            <div class ="container-fluid">
+                <div class ="row">
+                    <div class ="col-md-6 col-sm-6">
+                        <h5 class="">`+category[i].category_count+`</h5>
+                    </div>
+                    <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
+                        <i class="fas fa-2x fa-plus-circle "></i>                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                         </div>
                    </div>
                 
