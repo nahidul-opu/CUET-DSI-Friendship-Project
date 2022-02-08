@@ -200,7 +200,7 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         // //console.log(data.keys());
-
+        console.log(data);
         output = data["message"];
         showBookDetails(output, target_category_id);
       },
@@ -224,20 +224,19 @@ $(document).ready(function () {
     $("#book-details").hide();
     $("#issue-book").hide();
     $("#main-body").show();
-    
+
     loadCategoryCard();
   });
 
-
-   //issuebook tab click function
-   $("#bookissue").click(function () {
+  //issuebook tab click function
+  $("#bookissue").click(function () {
     $("#bookissue").css("background-color", "#2f0410");
     $("#inventory").css("background-color", "");
     $("#book-details").hide();
     $("#main-body").hide();
     $("#issue-book").show();
 
-     loadCategoryCard();
+    loadCategoryCard();
   });
 
   //book search option, search by author and book title
@@ -282,5 +281,88 @@ $(document).ready(function () {
     } else {
       $("#book-search-input").attr("placeholder", "Enter author name");
     }
+  });
+
+  function setOption(text, optionId) {
+    //api: /api/books/?column=column_name&value=keyword&like=true
+    var crateUrl =
+      directoryPath + `api/books/?column=title&value=` + text + `&like=true`;
+    var result;
+    $.ajax({
+      type: "GET",
+      url: crateUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // console.log(data);
+        result = data["message"];
+        // showBookDetails(output, target_category_id);
+        for (let i = 0; i < result.length; i++) {
+          var single_option =
+            `<li class="list-group-item">` + result[i].title + `</li>`;
+          $(optionId).append(single_option);
+        }
+
+        // console.log("been there");
+        // console.log(result);
+      },
+      error: function (data, status) {
+        $(optionId).empty();
+        // alert("Data not found");
+      },
+    });
+    return result;
+  }
+
+  //book issue input
+  $("#book-1").on("keyup", function () {
+    var inpText = $(this).val();
+    var options = "";
+    // console.log($(this).val());
+    if (inpText.length > 0) {
+      setOption(inpText, "#book-option-1");
+    } else {
+      $("#book-option-1").empty();
+    }
+  });
+
+  $("#book-2").on("keyup", function () {
+    var inpText = $(this).val();
+    var options = "";
+    // console.log($(this).val());
+    if (inpText.length > 0) {
+      setOption(inpText, "#book-option-2");
+    } else {
+      $("#book-option-2").empty();
+    }
+  });
+
+  $("#book-3").on("keyup", function () {
+    var inpText = $(this).val();
+    var options = "";
+    console.log($(this).val());
+    if (inpText.length > 0) {
+      setOption(inpText, "#book-option-3");
+    } else {
+      $("#book-option-3").empty();
+    }
+  });
+
+  $("#book-option-1").on("click", "li", function () {
+    var selectecText = $(this).text();
+    $("#book-1").val(selectecText);
+    $("#book-option-1").empty();
+  });
+
+  $("#book-option-2").on("click", "li", function () {
+    var selectecText = $(this).text();
+    $("#book-2").val(selectecText);
+    $("#book-option-2").empty();
+  });
+
+  $("#book-option-3").on("click", "li", function () {
+    var selectecText = $(this).text();
+    $("#book-3").val(selectecText);
+    $("#book-option-3").empty();
   });
 });

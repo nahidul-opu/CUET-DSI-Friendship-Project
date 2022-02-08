@@ -314,24 +314,38 @@
                         <option value="outgoing">Outgoing</option>
                     </select>
                 </div>
-
+                <div class="mb-3">
+                        <label for="User ID" class="form-label">User Id</label>
+                        <input type="text" class="form-control" id="book-3"> 
+                                               
+                </div>
+                
                 <form>
                     <div class="mb-3">
                         <label for="book11" class="form-label">Book1</label>
-                        <input type="text" class="form-control" >                        
+                        <input type="text" class="form-control" id="book-1">
+                        <ul class="list-group" id="book-option-1">
+                            <!-- <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Vestibulum at eros</li> -->
+                        </ul>                    
                     </div>
                     <div class="mb-3">
                         <label for="book12" class="form-label">Book2</label>
-                        <input type="text" class="form-control" >                        
+                        <input type="text" class="form-control" id="book-2">
+                        <ul class="list-group" id="book-option-2">
+                            <!-- <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Vestibulum at eros</li> -->
+                        </ul>                
                     </div>
                     <div class="mb-3">
                         <label for="book13" class="form-label">Book3</label>
-                        <input type="text" class="form-control" >                        
+                        <input type="text" class="form-control" id="book-3">
+                        <ul class="list-group" id="book-option-3">
+                            <!-- <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Vestibulum at eros</li> -->
+                        </ul>                      
                     </div>
-                    <div class="mb-3">
-                        <label for="User ID" class="form-label">User Id</label>
-                        <input type="text" class="form-control" >                        
-                    </div>
+                    
 
                     <button type="submit" class="btn btn-primary">Issue Book</button>
                 </form>
