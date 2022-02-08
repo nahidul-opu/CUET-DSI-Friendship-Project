@@ -220,9 +220,24 @@ $(document).ready(function () {
   //inventory tab click function
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
+    $("#bookissue").css("background-color", "");
     $("#book-details").hide();
+    $("#issue-book").hide();
     $("#main-body").show();
+    
     loadCategoryCard();
+  });
+
+
+   //issuebook tab click function
+   $("#bookissue").click(function () {
+    $("#bookissue").css("background-color", "#2f0410");
+    $("#inventory").css("background-color", "");
+    $("#book-details").hide();
+    $("#main-body").hide();
+    $("#issue-book").show();
+
+    // loadCategoryCard();
   });
 
   //book search option, search by author and book title
