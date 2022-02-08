@@ -1,69 +1,77 @@
 $(document).ready(function () {
   var output;
+
   //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
-  $("#more").click(function () {
-    $("#sidebar").toggle();
-  });
-  //inventory tab click function
-  $("#inventory").click(function () {
-    $("#inventory").css("background-color", "#2f0410");
-    $("#book-details").hide();
-    $("#main-body").show();
-  });
-
-  //update-button function
-  function x() {
-    // $(this).prop("disabled",true);
-    console.log(this);
-  }
-
-  //card click function
-
-
-
-
-
 
   // bishal starting card append
-var location = window.location.href;
-var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-console.log(directoryPath);
-$.ajax({
-  type: "GET",
-  url: directoryPath + "api/category/",
-  dataType: "json",
-  async: true,
-  success: function (data, status) {
+// var location = window.location.href;
+// var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+// console.log(directoryPath);
+// $.ajax({
+//   type: "GET",
+//   url: directoryPath + "api/category/",
+//   dataType: "json",
+//   async: true,
+//   success: function (data, status) {
     // console.log(data.keys());
 
-  var category = data["message"];
-  for (let i = 0; i < 5; i++) {
-    var card =`<div class="col-lg-4">
-    <div class="card  m-3 h-90">
-        <!-- <div class="card-header">header</div> -->
-        <div class="card-body py-5" id="card-body">
-            <h4 class="card-title text-center" id = "cat-name">`+category[i].category_name+`</h4>
-        </div>
-        <div class="card-footer">
-            <div class ="container-fluid">
+  // var category = data["message"];
+  // for (let i = 0; i < 5; i++) {
+  //   var card =`<div class="col-lg-4">
+  //   <div class="card  m-3 h-90">
+  //       <!-- <div class="card-header">header</div> -->
+  //       <div class="card-body py-5" id="card-body">
+  //           <h4 class="card-title text-center" id = "cat-name">`+category[i].category_name+`</h4>
+  //       </div>
+  //       <div class="card-footer">
+  //           <div class ="container-fluid">
+
+  //           `
+  var location = window.location.href;
+  var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+  console.log(directoryPath);
+  $.ajax({
+    type: "GET",
+    url: directoryPath + "api/category/",
+    dataType: "json",
+    async: true,
+    success: function (data, status) {
+      // console.log(data.keys());
+
+      var category = data["message"];
+      for (let i = 0; i < category.length; i++) {
+        var card =
+          `<button class="category-card-click m-3" id="` +
+          category[i].category_id +
+          `"><div class="col-lg-4">
+              <div class="card h-90" style="width:280px;height:220px;margin:0;padding:0;">
+                <div class="card-body py-5" id="card-body">
+                  <h4 class="card-title text-center">` +
+          category[i].category_name +
+          `</h4>
+                </div>
+              <div class="card-footer">
+              <div class ="container-fluid">
                 <div class ="row">
                     <div class ="col-md-6 col-sm-6">
-                        <h5 class="">`+category[i].category_count+`</h5>
-                    </div>
-                    <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
+                        <h5 class="">` +
+          category[i].category_count +
+          `</h5>
+                      </div>
+                      <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
                         <i class="fas fa-2x fa-plus-circle "></i>                                                
-                    </div>
+                      </div>
                 </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>`
+    </div></button>`;
 
-    $("#book-card").append(card);
-
-  }
-}});
+        $("#book-card").append(card);
+      }
+    },
+  });
   //ending append
 
 
@@ -78,13 +86,20 @@ console.log( (x))
 });
 
 
+  //update button handle successfully
+  $("#book-details-table").on("click", ".update-button", function (e) {
+    alert($(this));
+    var btn_id = $(this).attr("id");
+    console.log($(this).attr("id"));
+    console.log(output[btn_id].title);
+    console.log("****************************************");
+  });
 
+  $("#book-card").on("click", ".category-card-click", function (e) {
+    // alert($(this).attr("id"));
+    // console.log($(this));
+    var target_category_id = $(this).attr("id");
 
-  $("#card-bodyy").click(function (e) {
-   
-    e.preventDefault();
-    // //alert("clicked");
-    // $("#main-body").hide();
     $("#main-body").hide();
     var location = window.location.href;
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
@@ -115,6 +130,12 @@ console.log( (x))
 
         $("#book-details-table").append(table_header);
         for (let i = 0; i < output.length; i++) {
+          console.log("###########################");
+          console.log(output[i].category_id);
+          console.log(target_category_id);
+          if (output[i].category_id !== target_category_id) {
+            continue;
+          }
           console.log(output[i].author_name);
           var content =
             `<tbody>
@@ -150,12 +171,15 @@ console.log( (x))
     $("#book-details").show();
   });
 
-  //update button handle successfully
-  $("#book-details-table").on("click", ".update-button", function (e) {
-    alert($(this));
-    var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    console.log(output[btn_id].title);
-    console.log("****************************************");
+  //toggle button for side bar
+  $("#more").click(function () {
+    $("#sidebar").toggle();
+  });
+
+  //inventory tab click function
+  $("#inventory").click(function () {
+    $("#inventory").css("background-color", "#2f0410");
+    $("#book-details").hide();
+    $("#main-body").show();
   });
 });
