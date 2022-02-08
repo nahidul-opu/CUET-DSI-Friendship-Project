@@ -241,13 +241,13 @@
                     </form>
                 </nav>
                 <div class="card-header">
-                    <h4 class="card-title">Book List</h4>
+                    <h4 class="card-title text-white">Book List</h4>
                 </div>
                 <div class="card-body">
 
-                    <table class="table table-hover table-dark" id="book-details-table">
-                        <thead id="table-head">
-                            <tr>
+                    <table class="table table-hover table-dark " id="book-details-table">
+                        <thead id="table-head rounded ">
+                            <tr class="">
                                 <th class="float-center">SL No.</th>
                                 <th class="float-center">Book Name</th>
                                 <th class="float-center">Writer Name</th>
