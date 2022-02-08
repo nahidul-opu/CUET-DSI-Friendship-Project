@@ -25,8 +25,8 @@ $(document).ready(function () {
           var card =
             `<button class="category-card-click m-3" id="` +
             category[i].category_id +
-            `"><div class="col-lg-4">
-                <div class="card h-90" style="width:280px;height:220px;margin:0;padding:0;">
+            `"><div class="col-lg-4 ">
+                <div class="card h-90 category-card-tarnsparent" style="width:280px;height:220px;margin:0;padding:0;">
                   <div class="card-body py-5" id="card-body">
                     <h4 class="card-title text-center">` +
             category[i].category_name +
