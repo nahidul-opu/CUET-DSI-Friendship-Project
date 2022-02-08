@@ -10,47 +10,53 @@ $(document).ready(function () {
   var location = window.location.href;
   var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
   //console.log(directoryPath);
-  $.ajax({
-    type: "GET",
-    url: directoryPath + "api/category/",
-    dataType: "json",
-    async: true,
-    success: function (data, status) {
-      // //console.log(data.keys());
+  function loadCategoryCard() {
+    $.ajax({
+      type: "GET",
+      url: directoryPath + "api/category/",
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // //console.log(data.keys());
 
-      var category = data["message"];
-      for (let i = 0; i < category.length; i++) {
-        var card =
-          `<button class="category-card-click m-3" id="` +
-          category[i].category_id +
-          `"><div class="col-lg-4">
-              <div class="card h-90" style="width:280px;height:220px;margin:0;padding:0;">
-                <div class="card-body py-5" id="card-body">
-                  <h4 class="card-title text-center">` +
-          category[i].category_name +
-          `</h4>
-                </div>
-              <div class="card-footer">
-              <div class ="container-fluid">
-                <div class ="row">
-                    <div class ="col-md-6 col-sm-6">
-                        <h5 class="">` +
-          category[i].category_count +
-          `</h5>
-                      </div>
-                      <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
-                        <i class="fas fa-2x fa-plus-circle "></i>                                                
-                      </div>
-                </div>
+        var category = data["message"];
+        $("#book-card").empty();
+        for (let i = 0; i < category.length; i++) {
+          var card =
+            `<button class="category-card-click m-3" id="` +
+            category[i].category_id +
+            `"><div class="col-lg-4">
+                <div class="card h-90" style="width:280px;height:220px;margin:0;padding:0;">
+                  <div class="card-body py-5" id="card-body">
+                    <h4 class="card-title text-center">` +
+            category[i].category_name +
+            `</h4>
+                  </div>
+                <div class="card-footer">
+                <div class ="container-fluid">
+                  <div class ="row">
+                      <div class ="col-md-6 col-sm-6">
+                          <h5 class="">` +
+            category[i].category_count +
+            `</h5>
+                        </div>
+                        <div class ="col-md-6 col-sm-6 text-center ps-5">                                               
+                          <i class="fas fa-2x fa-plus-circle "></i>                                                
+                        </div>
+                  </div>
+              </div>
             </div>
           </div>
-        </div>
-    </div></button>`;
+      </div></button>`;
 
-        $("#book-card").append(card);
-      }
-    },
-  });
+          $("#book-card").append(card);
+        }
+      },
+    });
+  }
+
+  loadCategoryCard();
+
   //ending append
 
   function showBookDetails(data, category_id) {
@@ -67,13 +73,9 @@ $(document).ready(function () {
 
     $("#book-details-table").append(table_header);
     for (let i = 0; i < data.length; i++) {
-      //console.log("###########################");
-      //console.log(output[i].category_id);
-      //console.log(target_category_id);
-      if (data[i].category_id !== category_id) {
-        continue;
-      }
-      //console.log(output[i].author_name);
+      // if (data[i].category_id !== category_id) {
+      //   continue;
+      // }
       var content =
         `<tbody>
                         <tr>
@@ -139,9 +141,13 @@ $(document).ready(function () {
         // console.log(data["message"]);
         alert("Delete Successful");
 
+        var dataFetch =
+          directoryPath +
+          `api/books/?column=category_id&value=` +
+          target_category_id;
         $.ajax({
           type: "GET",
-          url: directoryPath + "api/books/",
+          url: dataFetch,
           dataType: "json",
           async: true,
           success: function (data, status) {
@@ -216,6 +222,7 @@ $(document).ready(function () {
     $("#inventory").css("background-color", "#2f0410");
     $("#book-details").hide();
     $("#main-body").show();
+    loadCategoryCard();
   });
 
   //book search option, search by author and book title
