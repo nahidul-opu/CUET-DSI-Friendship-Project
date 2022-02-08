@@ -97,7 +97,12 @@ class Book
 
     public function getBookWithParams($params)
     {
-        if (isset($params['sort']) && isset($params['column'])) {
+        if (isset($params['category_id']) && isset($params['column']) && isset($params['value'])) {
+            $statement = "
+            SELECT * 
+            FROM book WHERE category_id=" . $params['category_id'] . " AND " . $params['column'] . " LIKE '%" . $params['value'] . "%';";
+            return $this->executeQuery($statement);
+        } else if (isset($params['sort']) && isset($params['column'])) {
             $statement = "
             SELECT * 
             FROM book ORDER BY " . $params['column'];

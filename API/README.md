@@ -20,6 +20,9 @@
 4.3. search on all over the table
 /api/books/?value=keyword
 
+4.4. search category wise with another column
+/api/books/?category_id=?&column=?&value=?
+
 5. (GET method) Get a specific number of rows from book
 
 5.1. specify limit only
