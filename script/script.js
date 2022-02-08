@@ -52,6 +52,56 @@ $(document).ready(function () {
   });
   //ending append
 
+  function showBookDetails(data, category_id) {
+    console.log("show book details function called");
+    $("#book-details-table").empty();
+    var table_header = `<thead id="table-head">
+                              <tr>
+                                  <th class="float-center">SL No.</th>
+                                  <th class="float-center">Book Name</th>
+                                  <th class="float-center">Writer Name</th>
+                                  <th class="float-center">Actions</th>
+                              </tr>
+                            </thead>`;
+
+    $("#book-details-table").append(table_header);
+    for (let i = 0; i < data.length; i++) {
+      //console.log("###########################");
+      //console.log(output[i].category_id);
+      //console.log(target_category_id);
+      if (data[i].category_id !== category_id) {
+        continue;
+      }
+      //console.log(output[i].author_name);
+      var content =
+        `<tbody>
+                        <tr>
+                            <th scope="row">` +
+        i +
+        `</th>
+                            <td>` +
+        data[i].title +
+        `</td>
+                            <td>` +
+        data[i].author_name +
+        `</td>
+                            <td>
+                                <div class="float-center">
+                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
+        i +
+        `">Update</button>
+                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
+        data[i].book_id +
+        `">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                      </tbody>`;
+
+      $("#book-details-table").append(content);
+    }
+    console.log("function end here");
+  }
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
     alert($(this).text());
@@ -85,6 +135,22 @@ $(document).ready(function () {
         // alert(data["message"]);
         // console.log(data["message"]);
         alert("Delete Successful");
+
+        $.ajax({
+          type: "GET",
+          url: directoryPath + "api/books/",
+          dataType: "json",
+          async: true,
+          success: function (data, status) {
+            // //console.log(data.keys());
+
+            output = data["message"];
+            showBookDetails(output, target_category_id);
+          },
+          error: function (data) {
+            //alert("fail");
+          },
+        });
       },
       error: function (data) {
         alert("failed");
@@ -112,56 +178,7 @@ $(document).ready(function () {
         // //console.log(data.keys());
 
         output = data["message"];
-        //alert(output);
-        //console.log(typeof output);
-        //console.log(output);
-        // var content = None;
-        $("#book-details-table").empty();
-        var table_header = `<thead id="table-head">
-                              <tr>
-                                  <th class="float-center">SL No.</th>
-                                  <th class="float-center">Book Name</th>
-                                  <th class="float-center">Writer Name</th>
-                                  <th class="float-center">Actions</th>
-                              </tr>
-                            </thead>`;
-
-        $("#book-details-table").append(table_header);
-        for (let i = 0; i < output.length; i++) {
-          //console.log("###########################");
-          //console.log(output[i].category_id);
-          //console.log(target_category_id);
-          if (output[i].category_id !== target_category_id) {
-            continue;
-          }
-          //console.log(output[i].author_name);
-          var content =
-            `<tbody>
-                        <tr>
-                            <th scope="row">` +
-            i +
-            `</th>
-                            <td>` +
-            output[i].title +
-            `</td>
-                            <td>` +
-            output[i].author_name +
-            `</td>
-                            <td>
-                                <div class="float-center">
-                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
-            i +
-            `">Update</button>
-                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
-            output[i].book_id +
-            `">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                      </tbody>`;
-
-          $("#book-details-table").append(content);
-        }
+        showBookDetails(output, target_category_id);
       },
       error: function (data) {
         //alert("fail");
@@ -184,11 +201,6 @@ $(document).ready(function () {
   });
 
   $("#book-search-input").change(function () {
-    // alert("The text has been changed.");
-    // alert($(this).val());
-    // alert($("#book-search-dropdown option:selected").val());
-    // alert($("#book-search-dropdown").text());
-    //console.log($(this).val());
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
@@ -209,59 +221,8 @@ $(document).ready(function () {
       dataType: "json",
       async: true,
       success: function (data, status) {
-        // //console.log(data.keys());
-        // alert(status);
-        //console.log("----------------------------------------------------");
-        //console.log(data);
         output = data["message"];
-        //alert(output);
-        //console.log(typeof output);
-        //console.log(output);
-        // var content = None;
-        $("#book-details-table").empty();
-        var table_header = `<thead id="table-head">
-                              <tr>
-                                  <th class="float-center">SL No.</th>
-                                  <th class="float-center">Book Name</th>
-                                  <th class="float-center">Writer Name</th>
-                                  <th class="float-center">Actions</th>
-                              </tr>
-                            </thead>`;
-
-        $("#book-details-table").append(table_header);
-        for (let i = 0; i < output.length; i++) {
-          //category filter logic
-          if (output[i].category_id !== target_category_id) {
-            continue;
-          }
-          ////console.log(output[i].author_name);
-          var content =
-            `<tbody>
-                        <tr>
-                            <th scope="row">` +
-            i +
-            `</th>
-                            <td>` +
-            output[i].title +
-            `</td>
-                            <td>` +
-            output[i].author_name +
-            `</td>
-                            <td>
-                                <div class="float-center">
-                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
-            i +
-            `">Update</button>
-                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
-            output[i].book_id +
-            `">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                      </tbody>`;
-
-          $("#book-details-table").append(content);
-        }
+        showBookDetails(output, target_category_id);
       },
       error: function (data, status) {
         alert("Data not found");
