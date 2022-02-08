@@ -54,11 +54,43 @@ $(document).ready(function () {
 
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
-    alert($(this));
+    alert($(this).text());
     var btn_id = $(this).attr("id");
     //console.log($(this).attr("id"));
     //console.log(output[btn_id].title);
     //console.log("****************************************");
+  });
+
+  $("#book-details-table").on("click", ".delete-book-button", function (e) {
+    // alert($(this).text());
+    var btn_id = $(this).attr("id");
+    console.log($(this).attr("id"));
+    //console.log($(this).attr("id"));
+    //console.log(output[btn_id].title);
+    //console.log("****************************************");
+    var location = window.location.href;
+    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    //console.log(directoryPath);
+    //receive book data with ajax get request
+
+    var createDeleteUrl = directoryPath + "api/books/" + btn_id;
+    console.log(createDeleteUrl);
+    $.ajax({
+      type: "DELETE",
+      url: createDeleteUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // //console.log(data.keys());
+        // alert(data["message"]);
+        // console.log(data["message"]);
+        alert("Delete Successful");
+      },
+      error: function (data) {
+        alert("failed");
+        //alert("fail");
+      },
+    });
   });
 
   $("#book-card").on("click", ".category-card-click", function (e) {
@@ -120,7 +152,9 @@ $(document).ready(function () {
                                     <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
             i +
             `">Update</button>
-                                    <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
+            output[i].book_id +
+            `">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -164,10 +198,10 @@ $(document).ready(function () {
       directoryPath +
       `api/books/?column=` +
       searchBy +
-      `&value='` +
+      `&value=` +
       bookname +
-      `'`;
-    //console.log(crateUrl);
+      `&like=true`;
+    console.log(crateUrl);
 
     $.ajax({
       type: "GET",
@@ -196,7 +230,7 @@ $(document).ready(function () {
 
         $("#book-details-table").append(table_header);
         for (let i = 0; i < output.length; i++) {
-          //console.log()
+          //category filter logic
           if (output[i].category_id !== target_category_id) {
             continue;
           }
@@ -218,7 +252,9 @@ $(document).ready(function () {
                                     <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
             i +
             `">Update</button>
-                                    <button type="button" class="btn btn-danger badge-pill" style="width: 80px;">Delete</button>
+                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
+            output[i].book_id +
+            `">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -242,8 +278,4 @@ $(document).ready(function () {
       $("#book-search-input").attr("placeholder", "Enter author name");
     }
   });
-
-  // $("#book-search-btn").click(function () {
-  //   alert($("#book-search-input").val());
-  // });
 });
