@@ -79,6 +79,13 @@ body{
     margin-bottom: 10pt;
 }
 
+#history-search-input{
+    background-color: rgba(255, 255, 255,0.5);
+    color:white;
+    margin-bottom: 10pt;
+    margin-top: 10pt;
+}
+
 #book-search-dropdown{
     /* height: 30px; */
     /* width: 200px; */

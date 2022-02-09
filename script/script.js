@@ -158,8 +158,7 @@ $(document).ready(function () {
       $("#edit-book-modal").hide();
     });
   });
-
-  //book delete button
+  /*---------------------------book delete button----------------------------------*/
   $("#book-details-table").on("click", ".delete-book-button", function (e) {
     // alert($(this).text());
     var btn_id = $(this).attr("id");
@@ -224,7 +223,7 @@ $(document).ready(function () {
       }
     });
   });
-  //category card click button
+  /*-------------------------category card click button----------------------------*/
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
     // //console.log($(this));
@@ -267,16 +266,19 @@ $(document).ready(function () {
 
     $("#book-details").show();
   });
-
-  //toggle button for side bar
+  /*-------------------------toggle button for side bar----------------------------*/
   $("#more").click(function () {
     $("#sidebar").toggle();
   });
 
-  //inventory tab click function
+  /*-----------------------inventory tab click function----------------------------*/
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
-    $("#bookissue").css("background-color", "");
+    $("#users").css("background-color", "");
+    $("#bookissue").css("background-color", ""); //#2f0410
+    $("#history").css("background-color", "");
+    $("#dashboard").css("background-color", "");
+
     $("#book-details").hide();
     $("#issue-book").hide();
     $("#main-body").show();
@@ -383,8 +385,10 @@ $(document).ready(function () {
 
   /*---------------------------------history tab design-----------------------*/
   $("#history").on("click", function () {
-    $("#bookissue").css("background-color", ""); //#2f0410
     $("#inventory").css("background-color", "");
+    $("#users").css("background-color", "");
+    $("#bookissue").css("background-color", ""); //#2f0410
+    $("#history").css("background-color", "#2f0410");
     $("#dashboard").css("background-color", "");
     $("#book-details").hide();
     $("#main-body").hide();

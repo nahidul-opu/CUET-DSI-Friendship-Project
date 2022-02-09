@@ -68,7 +68,7 @@
 
 
         </div>
-        <!-------------body design----------->
+        <!-----------------------body design----------------------->
         <div class="container-fluid p-0" id="body-div">
             <!-------------header design----------->
             <div class="d-flex flex-row sticky-top p-3 header-design text-white">
@@ -94,7 +94,7 @@
 
             </div>
 
-            <!-------------body after header----------->
+            <!----------------------body after header--------------->
             <div class="container-fluid row b-1" id="main-body">
 
                 <!-- bishal card design begin -->
@@ -110,7 +110,7 @@
 
                 <!-- bishal card design end -->
 
-                <!--add category ---------------------------------------------------------------------------->
+                <!------------------------------------add category -------------------------------------->
                 <div class="category-card" style="width: 18rem;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
                     <div class="card-body">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category" style="float:right; margin-top:25px; background-color:white; color:black; width:100%; border:0;">
@@ -150,72 +150,67 @@
                     </div>
                 </div>
             </div>
+
             <!--------------book details page-------------->
-            
-            <!-----------------------------------------------------update book----------------->
-                    <!------------------------------------------pop up form---------------------->
-                    <div class="modal" id="edit-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Book Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            <!------------------------------update book----------------->
+            <!------------------------------------------pop up form---------------------->
+            <div class="modal" id="edit-book-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Book Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
 
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#edit-book-modal").hide();
-                                        })
-                                    </script>
+                            <script>
+                                $(".btn-close").click(function(){
+                                    $("#edit-book-modal").hide();
+                                })
+                            </script>
 
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="edit-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="book-name" type="text" class="form-control" name="title" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="auth-name" class="form-control" name="author_name" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="total" class="form-control" name="total" placeholder="">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
-                    
-                    
+                        <div class="modal-body">
+                            <form action="#" method="post" id="edit-book-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Book Name</label>
+                                    <input id="book-name" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Book Author</label>
+                                    <input type="text" id="auth-name" class="form-control" name="author_name" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Publisher</label>
+                                    <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Publish Year</label>
+                                    <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">ISBN</label>
+                                    <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Total Count</label>
+                                    <input type="text" id="total" class="form-control" name="total" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
+                            </form>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-
-
-
-
+             <!------------------------------ book details main container ------------------->                           
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
-                
+                <!---------------------------floating add book button-------------------------->
                 <a href="" id="float-button">
                     <h1 class="display-4 floating-add-button" >
                     <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
                 
-                <!--------------------------delete book confirmation modal---------->
+                <!--------------------------delete book confirmation modal---------------------->
                 <div class="modal" id="delete-confirm">
                     <div class="modal-dialog modal-dialog-centered">
                        <div class="modal-content">
@@ -234,7 +229,7 @@
                 </div>
                 
                 
-                <!------------------------------------------pop up form---------------------->
+                <!------------------------------pop up form------------------------------------>
                     <div class="modal" id="add-book-modal">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -289,11 +284,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
+                <!------------------------------search design----------------------------------->
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
                         <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search" required>
@@ -306,13 +297,8 @@
                         </div>
                     </form>
                 </nav>
-
+                <!-----------------------book details main table--------------------------------->
                 <div class="card-body">
-                
-                
-                 
-
-
                     <table class="table table-hover table-dark" id="book-details-table">
                         <thead id="table-head">
                             <tr>
@@ -320,12 +306,11 @@
                                 <th class="float-center">Book Name</th>
                                 <th class="float-center">Writer Name</th>
                                 <th class="float-center">Actions</th>
+                                <!-------data will be added in script.js------>
                             </tr>
                         </thead>
-
                     </table>
-                   
-
+                    <!----------------- pagination ------------------->
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
                             <li class="page-item disabled">
@@ -352,10 +337,8 @@
                             </li>
                         </ul>
                     </nav>
-
                 </div>
             </div>
-
 
             <!----------------- book issue page ------------------->
             <div class="mx-5 p-5 text-white" id="issue-book" style="display:none">
@@ -397,6 +380,21 @@
 
                     <button type="submit" class="btn btn-primary">Issue Book</button>
                 </form>
+            </div>
+            
+            <!---------------------history tab design--------------->
+            <div class="container" id="history-tab-body">
+                <nav class="navbar navbar-light nav justify-content-center">
+                    <form class="d-flex flex-row" id="history-tab-search">
+                        <input class="form-control mr-sm-2" type="search" id="history-search-input" placeholder="Enter book title" aria-label="Search">
+                        <div id="drop-down-search-container" class="row">
+                            <select name="book-search-dropdown" id="book-search-dropdown">
+                                <option value="title">by book title</option>
+                                <option value="author_name">by author name</option>
+                            </select>
+                        </div>
+                    </form>
+                </nav>
             </div>
 
 
