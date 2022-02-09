@@ -343,10 +343,10 @@ $(document).ready(function () {
             data.publisher = $("#mAB-publisher").val();
             data.isbn = $("#mAB-isbn").val();
             data.total_count = $("#mAB-total-count").val();
-            data.current_count = $("#mAB-current-count").val();
+            data.current_count = $("#mAB-total-count").val();
             data.category_id = $("#mAB-category-id").val()
 
-            console.log(data);
+            console.log(JSON.stringify(data));
 
             $.post(url, JSON.stringify(data), function (msg) {
                 // Display the returned data in browser

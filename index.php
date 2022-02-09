@@ -299,10 +299,10 @@
                                             <label class="form-label">Total Count</label>
                                             <input type="text" id="mAB-total-count" class="form-control" placeholder="">
                                         </div>
-                                        <div class="mb-3">
+                                       <!-- <div class="mb-3">
                                             <label class="form-label">Current Count</label>
                                             <input type="text" id="mAB-current-count" class="form-control"  placeholder="">
-                                        </div>
+                                        </div>-->
                                         <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
                                     </form>
                                 </div>
