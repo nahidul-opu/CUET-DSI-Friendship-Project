@@ -98,7 +98,7 @@
                 <!--------------------------------xxxx---------------------------------------->
                 <!--------------------------------card---------------------------------------->
 
-                    <!-- 
+                <!-- 
                 <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
 
                     <div class="card-body">
@@ -108,7 +108,7 @@
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
                     </div> -->
 
-                
+
                 <!--
                 <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
                     
@@ -119,19 +119,19 @@
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
                         </div>
                  
-                </a>--> 
+                </a>-->
 
                 <!-- bishal card design begin -->
-                   <div class="book-category " id="book-category-div">
-                        <div class="title text-center md-3">
-                            <h2  class="font-wight-bolder text-light">Books Category</h2>
-                        </div>
-                        <div class="row justify-content-center" id="book-card" >
-                           <!-- jquery will append card here dynamically  -->
-                           
-                        </div>
-                   </div>
-                
+                <div class="book-category " id="book-category-div">
+                    <div class="title text-center md-3">
+                        <h2 class="font-wight-bolder text-light">Books Category</h2>
+                    </div>
+                    <div class="row justify-content-center" id="book-card">
+                        <!-- jquery will append card here dynamically  -->
+
+                    </div>
+                </div>
+
                 <!-- bishal card design end -->
 
                 <!--add category ---------------------------------------------------------------------------->
@@ -142,50 +142,7 @@
                         </button>
                     </div>
                 </div>
-                <!-----------------------------------------------------temp form----------------->
-    <!------------------------------------------pop up form---------------------->
-                <div class="modal" tabindex="-1" id="edit-book-modal" style="display: none;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Book Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="#" method="post">
-                                    <div class="mb-3">
-                                        <label class="form-label">Book Name</label>
-                                        <input type="text" class="form-control" name="title">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Book Author</label>
-                                        <input type="text" class="form-control" name="author_name">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label class="form-label">Publisher</label>
-                                        <input type="text" class="form-control" name="publisher">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Publish Year</label>
-                                        <input type="text" class="form-control" name="pub_year">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">ISBN</label>
-                                        <input type="text" class="form-control" name="isbn">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                
 
                 <!--<a href="#" class="btn btn-primary">40/50</a>-->
 
@@ -218,7 +175,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
 
-                             <!--Modal body -->
+                            <!--Modal body -->
                             <div class="modal-body" style="margin:auto">
                                 <form action="#action" method="post">
                                     <input id="edit-category-name" type="text" placeholder="Category Name">
@@ -233,13 +190,73 @@
 
             </div>
             <!--------------book details page-------------->
+            
+            <!-----------------------------------------------------update book----------------->
+                    <!------------------------------------------pop up form---------------------->
+                    <div class="modal" id="edit-book-modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Book Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                    <script>
+                                        $(".btn-close").click(function(){
+                                            $("#edit-book-modal").hide();
+                                        })
+                                    </script>
+
+                                </div>
+                                <div class="modal-body">
+                                    <form action="#" method="post" id="edit-book-form">
+                                        <div class="mb-3">
+                                            <label class="form-label">Book Name</label>
+                                            <input id="book-name" type="text" class="form-control" name="title" placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Book Author</label>
+                                            <input type="text" id="auth-name" class="form-control" name="author_name" placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Publisher</label>
+                                            <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Publish Year</label>
+                                            <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">ISBN</label>
+                                            <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Total Count</label>
+                                            <input type="text" id="total" class="form-control" name="total" placeholder="">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
-                
+
+
+
+
+
                 <a href="">
-                    <h1 class="display-4 floating-add-button" >
-                    <i class="bi bi-journal-plus"></i>
+                    <h1 class="display-4 floating-add-button">
+                        <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
+
+
 
 
                 <nav class="navbar navbar-light nav justify-content-center">
@@ -254,8 +271,12 @@
                         </div>
                     </form>
                 </nav>
-                
+
                 <div class="card-body">
+                
+                
+                 
+
 
                     <table class="table table-hover table-dark" id="book-details-table">
                         <thead id="table-head">
@@ -266,8 +287,9 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
-                        
+
                     </table>
+                   
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -296,16 +318,15 @@
                         </ul>
                     </nav>
 
-
                 </div>
             </div>
 
 
-            <!----------------- book issue page ------------------->            
-            <div class="mx-5 p-5 text-white" id = "issue-book" style="display:none">
-                
+            <!----------------- book issue page ------------------->
+            <div class="mx-5 p-5 text-white" id="issue-book" style="display:none">
+
                 <div class="title text-center md-3">
-                    <h2  class="font-wight-bolder text-light">Issue Book</h2>
+                    <h2 class="font-wight-bolder text-light">Issue Book</h2>
                 </div>
 
                 <div id="drop-down-issue-book" class="row p-3">
@@ -323,27 +344,19 @@
                 <form>
                     <div class="mb-3">
                         <label for="book11" class="form-label">Book1</label>
-                        <input type="text" class="form-control" id="book-1">
-                        <ul class="list-group" id="book-option-1">
-                            <!-- <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Vestibulum at eros</li> -->
-                        </ul>                    
+                        <input type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="book12" class="form-label">Book2</label>
-                        <input type="text" class="form-control" id="book-2">
-                        <ul class="list-group" id="book-option-2">
-                            <!-- <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Vestibulum at eros</li> -->
-                        </ul>                
+                        <input type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="book13" class="form-label">Book3</label>
-                        <input type="text" class="form-control" id="book-3">
-                        <ul class="list-group" id="book-option-3">
-                            <!-- <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Vestibulum at eros</li> -->
-                        </ul>                      
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="User ID" class="form-label">User Id</label>
+                        <input type="text" class="form-control">
                     </div>
                     
 
@@ -352,7 +365,7 @@
             </div>
 
 
-            
+
         </div>
     </div>
 
@@ -360,7 +373,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./script/script.js"></script>
-    
+
 </body>
 
 </html>

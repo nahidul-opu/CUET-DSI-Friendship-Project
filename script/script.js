@@ -2,13 +2,14 @@ $(document).ready(function () {
   //global variable for data cache
   var output;
   var target_category_id;
+  var directoryPath;
 
   //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
 
   // bishal starting card append
   var location = window.location.href;
-  var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+  directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
   //console.log(directoryPath);
   function loadCategoryCard() {
     $.ajax({
@@ -106,13 +107,55 @@ $(document).ready(function () {
     // console.log("function end here");
   }
 
-  //update button handle
+  //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
-    alert($(this).text());
+    /*alert($(this));*/
     var btn_id = $(this).attr("id");
-    //console.log($(this).attr("id"));
-    //console.log(output[btn_id].title);
-    //console.log("****************************************");
+    console.log($(this).attr("id"));
+    console.log(output[btn_id].title);
+    console.log("****************************************");
+
+    $("#edit-book-modal").show();
+
+    $("#book-name").attr("value", output[btn_id].title);
+    $("#auth-name").attr("value", output[btn_id].author_name);
+    $("#pub-year").attr("value", output[btn_id].pub_year);
+    $("#pub").attr("value", output[btn_id].publisher);
+    $("#isbn").attr("value", output[btn_id].isbn);
+    $("#total").attr("value", output[btn_id].total_count);
+
+    $("#edit-book-form").submit(function (e) {
+      //          alert("form submitted");
+      /*alert($("#book-name").val());*/
+      output[btn_id].title = $("#book-name").val();
+      output[btn_id].author_name = $("#auth-name").val();
+      output[btn_id].pub_year = $("#pub-year").val();
+      output[btn_id].publisher = $("#pub-year").val();
+      output[btn_id].isbn = $("#isbn").val();
+      output[btn_id].total_count = $("#total").val();
+
+      var url = "api/books/" + output[btn_id]["book_id"];
+      console.log(url);
+      e.preventDefault();
+
+      console.log(output[btn_id]);
+
+      $.ajax({
+        url: url,
+        type: "PUT",
+        dataType: "json",
+        data: JSON.stringify(output[btn_id]),
+        success: function (data, textStatus, xhr) {
+          showBookDetails(output);
+          console.log(data);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.log("Error in Operation");
+        },
+      });
+
+      $("#edit-book-modal").hide();
+    });
   });
 
   //book delete button
@@ -200,7 +243,7 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         // //console.log(data.keys());
-        console.log(data);
+
         output = data["message"];
         showBookDetails(output, target_category_id);
       },
@@ -281,88 +324,5 @@ $(document).ready(function () {
     } else {
       $("#book-search-input").attr("placeholder", "Enter author name");
     }
-  });
-
-  function setOption(text, optionId) {
-    //api: /api/books/?column=column_name&value=keyword&like=true
-    var crateUrl =
-      directoryPath + `api/books/?column=title&value=` + text + `&like=true`;
-    var result;
-    $.ajax({
-      type: "GET",
-      url: crateUrl,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        // console.log(data);
-        result = data["message"];
-        // showBookDetails(output, target_category_id);
-        for (let i = 0; i < result.length; i++) {
-          var single_option =
-            `<li class="list-group-item">` + result[i].title + `</li>`;
-          $(optionId).append(single_option);
-        }
-
-        // console.log("been there");
-        // console.log(result);
-      },
-      error: function (data, status) {
-        $(optionId).empty();
-        // alert("Data not found");
-      },
-    });
-    return result;
-  }
-
-  //book issue input
-  $("#book-1").on("keyup", function () {
-    var inpText = $(this).val();
-    var options = "";
-    // console.log($(this).val());
-    if (inpText.length > 0) {
-      setOption(inpText, "#book-option-1");
-    } else {
-      $("#book-option-1").empty();
-    }
-  });
-
-  $("#book-2").on("keyup", function () {
-    var inpText = $(this).val();
-    var options = "";
-    // console.log($(this).val());
-    if (inpText.length > 0) {
-      setOption(inpText, "#book-option-2");
-    } else {
-      $("#book-option-2").empty();
-    }
-  });
-
-  $("#book-3").on("keyup", function () {
-    var inpText = $(this).val();
-    var options = "";
-    console.log($(this).val());
-    if (inpText.length > 0) {
-      setOption(inpText, "#book-option-3");
-    } else {
-      $("#book-option-3").empty();
-    }
-  });
-
-  $("#book-option-1").on("click", "li", function () {
-    var selectecText = $(this).text();
-    $("#book-1").val(selectecText);
-    $("#book-option-1").empty();
-  });
-
-  $("#book-option-2").on("click", "li", function () {
-    var selectecText = $(this).text();
-    $("#book-2").val(selectecText);
-    $("#book-option-2").empty();
-  });
-
-  $("#book-option-3").on("click", "li", function () {
-    var selectecText = $(this).text();
-    $("#book-3").val(selectecText);
-    $("#book-option-3").empty();
   });
 });
