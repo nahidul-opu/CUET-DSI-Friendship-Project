@@ -106,6 +106,7 @@ $(document).ready(function () {
     }
     // console.log("function end here");
   }
+  // console.log("function end here");
 
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
@@ -173,6 +174,15 @@ $(document).ready(function () {
 
     var createDeleteUrl = directoryPath + "api/books/" + btn_id;
     // console.log(createDeleteUrl);
+
+    // //console.log(data.keys());
+    // alert(data["message"]);
+    // console.log(data["message"]);
+
+    var dataFetch =
+      directoryPath +
+      `api/books/?column=category_id&value=` +
+      target_category_id;
     $.ajax({
       type: "DELETE",
       url: createDeleteUrl,
@@ -263,6 +273,14 @@ $(document).ready(function () {
   //inventory tab click function
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
+    $("#book-details").hide();
+    $("#main-body").show();
+    loadCategoryCard();
+  });
+
+  //inventory tab click function
+  $("#inventory").click(function () {
+    $("#inventory").css("background-color", "#2f0410");
     $("#bookissue").css("background-color", "");
     $("#book-details").hide();
     $("#issue-book").hide();
@@ -282,41 +300,6 @@ $(document).ready(function () {
     loadCategoryCard();
   });
 
-  //book search option, search by author and book title
-  $("#book-search-input").on("keyup", function () {
-    console.log($(this).val());
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-    var bookname = $(this).val();
-    var searchBy = $("#book-search-dropdown option:selected").val();
-    // $(this).val("");
-    //apt: /api/books/?column=column_name&value=keyword
-    //category wise book search api: /api/books/?category_id=?&column=?&value=?
-    var crateUrl =
-      directoryPath +
-      `api/books/?category_id=` +
-      target_category_id +
-      `&column=` +
-      searchBy +
-      `&value=` +
-      bookname;
-
-    $.ajax({
-      type: "GET",
-      url: crateUrl,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        output = data["message"];
-        showBookDetails(output, target_category_id);
-      },
-      error: function (data, status) {
-        // alert("Data not found");
-      },
-    });
-
-    $("#book-details").show();
-  });
-
   //book dropdown change the placeholder of the input field
   $("#book-search-dropdown").change(function () {
     if ($("#book-search-dropdown option:selected").val() === "title") {
@@ -324,5 +307,47 @@ $(document).ready(function () {
     } else {
       $("#book-search-input").attr("placeholder", "Enter author name");
     }
+  });
+
+  /* -------------------------------happy wednesday---------------------------*/
+  /* -------------------------------happy wednesday---------------------------*/
+
+  $("#book-details").on("click", "#float-button", function (ev) {
+    /* alert("float button clicked");*/
+    $("#add-book-modal").show();
+    ev.preventDefault();
+
+    $("#add-book-form").submit(function (e) {
+      alert("submit attempted");
+      e.preventDefault();
+      let data = {
+        title: "",
+        author_name: "",
+        pub_year: "",
+        isbn: "",
+        total_count: "",
+        current_count: "",
+        category: "",
+        publisher: "",
+      };
+
+      var url = directoryPath + "api/books";
+
+      data.title = $("#book-name").val();
+      data.author_name = $("#auth-name").val();
+      data.pub_year = $("#pub-year").val();
+      data.publisher = $("#pub").val();
+      data.isbn = $("#isbn").val();
+      data.total_count = $("#total").val();
+      data.current_count = $("#cur_count").val();
+      data.category = $("#category").val();
+      console.log(data);
+      console.log(JSON.stringify(data));
+
+      $.post(url, JSON.stringify(data), function (msg) {
+        // Display the returned data in browser
+        $("#result").html(msg);
+      });
+    });
   });
 });
