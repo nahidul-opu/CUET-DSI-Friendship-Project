@@ -194,10 +194,7 @@ $(document).ready(function () {
           dataType: "json",
           async: true,
           success: function (data, status) {
-            // //console.log(data.keys());
-            // alert(data["message"]);
-            // console.log(data["message"]);
-            alert("Delete Successful");
+            console.log("clicked gggg");
 
             var dataFetch =
               directoryPath +
@@ -226,15 +223,6 @@ $(document).ready(function () {
         });
       }
     });
-    // $("#confirm").click(function () {
-    //   alert("confirm button pressed");
-    //   $("#delete-confirm").hide();
-    // });
-
-    // $("#cancel").click(function () {
-    //   alert("cancel button pressed");
-    //   $("#delete-confirm").hide();
-    // });
   });
 
   //category card click button
