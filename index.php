@@ -93,33 +93,9 @@
 
 
             </div>
+
             <!-------------body after header----------->
             <div class="container-fluid row b-1" id="main-body">
-                <!--------------------------------xxxx---------------------------------------->
-                <!--------------------------------card---------------------------------------->
-
-                <!-- 
-                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
-
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align:Center">Title</h5>
-                        <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                        
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                    </div> -->
-
-
-                <!--
-                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
-                    
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align:Center">Title</h5>
-                            <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                            
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                        </div>
-                 
-                </a>-->
 
                 <!-- bishal card design begin -->
                 <div class="book-category " id="book-category-div">
@@ -144,38 +120,26 @@
                 </div>
                 
 
-                <!--<a href="#" class="btn btn-primary">40/50</a>-->
 
 
-                <!-- The Modal -->
-                <!----------------------------------edit category popup-->
+                <!---------------------------------- The Modal ------------------------------------------>
+                <!----------------------------------edit category popup---------------------------------->
                 <div class="modal" id="edit-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
-                            <!-- Modal body -->
                             <div class="modal-body" style="margin:auto">
                                 <form method="post" action="#">
                                     <input id="edit-category-name" type="text" placeholder="New category name">
                                     <input id="edit-category-submit" type="submit">
                                 </form>
                             </div>
-
-                            <!-- Modal footer -->
-                            <!--     <div class="modal-footer" style="margin:auto">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>-->
-
-
                         </div>
                     </div>
                 </div>
-                <!------------------------------------ add category popup----------->
+                <!------------------------------------ add category popup--------------------------------->
                 <div class="modal" id="add-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
-                            <!--Modal body -->
                             <div class="modal-body" style="margin:auto">
                                 <form action="#action" method="post">
                                     <input id="edit-category-name" type="text" placeholder="Category Name">
@@ -185,9 +149,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
             <!--------------book details page-------------->
             

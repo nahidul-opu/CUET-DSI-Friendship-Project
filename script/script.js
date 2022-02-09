@@ -349,5 +349,13 @@ $(document).ready(function () {
     });
   });
 
-  $("#history").on("click", function () {});
+  /*---------------------------------history tab design-----------------------*/
+  $("#history").on("click", function () {
+    $("#bookissue").css("background-color", ""); //#2f0410
+    $("#inventory").css("background-color", "");
+    $("#dashboard").css("background-color", "");
+    $("#book-details").hide();
+    $("#main-body").hide();
+    $("#issue-book").hide();
+  });
 });
