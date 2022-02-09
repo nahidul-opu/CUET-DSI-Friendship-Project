@@ -4,12 +4,14 @@ $(document).ready(function () {
   var target_category_id;
   var directoryPath;
 
+  var location = window.location.href;
+  directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+
   //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
 
   // bishal starting card append
-  var location = window.location.href;
-  directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+
   //console.log(directoryPath);
   function loadCategoryCard() {
     $.ajax({
@@ -112,9 +114,9 @@ $(document).ready(function () {
   $("#book-details-table").on("click", ".update-button", function (e) {
     /*alert($(this));*/
     var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    console.log(output[btn_id].title);
-    console.log("****************************************");
+    // console.log($(this).attr("id"));
+    // console.log(output[btn_id].title);
+    // console.log("****************************************");
 
     $("#edit-book-modal").show();
 
@@ -162,12 +164,7 @@ $(document).ready(function () {
   $("#book-details-table").on("click", ".delete-book-button", function (e) {
     // alert($(this).text());
     var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    //console.log($(this).attr("id"));
-    //console.log(output[btn_id].title);
-    //console.log("****************************************");
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    // console.log($(this).attr("id"));
 
     var createDeleteUrl = directoryPath + "api/books/" + btn_id;
 
@@ -193,7 +190,7 @@ $(document).ready(function () {
           dataType: "json",
           async: true,
           success: function (data, status) {
-            console.log("clicked gggg");
+            // console.log("clicked gggg");
 
             var dataFetch =
               directoryPath +
@@ -230,8 +227,6 @@ $(document).ready(function () {
     target_category_id = $(this).attr("id");
 
     $("#main-body").hide();
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     //console.log(directoryPath);
     //receive book data with ajax get request
 
@@ -280,6 +275,7 @@ $(document).ready(function () {
     $("#dashboard").css("background-color", "");
 
     $("#book-details").hide();
+    $("#history-tab-body").hide();
     $("#issue-book").hide();
     $("#main-body").show();
     loadCategoryCard();
@@ -298,7 +294,6 @@ $(document).ready(function () {
   //book search option, search by author and book title
   $("#book-search-input").on("keyup", function () {
     console.log($(this).val());
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
     // $(this).val("");
@@ -384,14 +379,72 @@ $(document).ready(function () {
   });
 
   /*---------------------------------history tab design-----------------------*/
+
+  function fetchUserName(userId) {
+    var userUrl = directoryPath + "/api/users/" + userId;
+    $.get(userUrl, function (data, status) {
+      console.log("88888888888888888888");
+      console.log(data);
+    });
+  }
+  function fetchBookName() {}
+  function showHistoryTableData(data) {
+    console.log("#########################");
+    console.log(data);
+    console.log("#########################");
+    var singleRow;
+    $("#history-tab-table-body").empty();
+    for (let i = 0; i <= data.length; i++) {
+      singleRow =
+        `<tbody> <td>` +
+        (i + 1) +
+        `</td>
+                        <td>` +
+        data[i].user_id +
+        `</td>
+                        <td>` +
+        `dummy user name` +
+        `</td>
+                        <td>` +
+        `dummy book name` +
+        `</td>
+                        <td>` +
+        data[i].issue_date +
+        `</td>
+                        <td>` +
+        data[i].due_date +
+        `</td> </tbody>`;
+
+      $("#history-details-table").append(singleRow);
+    }
+  }
+
   $("#history").on("click", function () {
     $("#inventory").css("background-color", "");
     $("#users").css("background-color", "");
     $("#bookissue").css("background-color", ""); //#2f0410
     $("#history").css("background-color", "#2f0410");
     $("#dashboard").css("background-color", "");
+
     $("#book-details").hide();
     $("#main-body").hide();
     $("#issue-book").hide();
+    $("#history-tab-body").show();
+
+    //history fetch api:
+    var fetchHistoryUrl = directoryPath + "api/borrow";
+    $.ajax({
+      type: "GET",
+      url: fetchHistoryUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        console.log(data["data"]);
+        showHistoryTableData(data["data"]);
+      },
+      error: function (data) {
+        //alert("fail");
+      },
+    });
   });
 });

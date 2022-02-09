@@ -20,6 +20,10 @@ body{
     background-size: cover;
 }
 
+#history-search-container{
+    margin: 30px;
+}
+
 
 
 
@@ -79,13 +83,6 @@ body{
     margin-bottom: 10pt;
 }
 
-#history-search-input{
-    background-color: rgba(255, 255, 255,0.5);
-    color:white;
-    margin-bottom: 10pt;
-    margin-top: 10pt;
-}
-
 #book-search-dropdown{
     /* height: 30px; */
     /* width: 200px; */
@@ -96,6 +93,25 @@ body{
     border-radius: 5px;
 
 }
+
+#history-search-input{
+    background-color: rgba(255, 255, 255,0.5);
+    color:white;
+    margin-bottom: 10pt;
+    margin-top: 10pt;
+}
+
+#history-search-dropdown{
+    /* height: 30px; */
+    /* width: 200px; */
+    background-color: rgba(255, 255, 255,0.5);
+    color:black;
+    height: 39px;
+    width: fit-content;
+    border-radius: 5px;
+
+}
+
 
 #drop-down-search-container{
     /* height: 100px; */

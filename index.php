@@ -287,7 +287,7 @@
                 <!------------------------------search design----------------------------------->
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
-                        <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search" required>
+                        <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search">
                         <!-- <button class="btn btn-info" type="submit" id="book-search-btn">Search</button> -->
                         <div id="drop-down-search-container" class="row">
                             <select name="book-search-dropdown" id="book-search-dropdown">
@@ -383,18 +383,38 @@
             </div>
             
             <!---------------------history tab design--------------->
-            <div class="container" id="history-tab-body">
-                <nav class="navbar navbar-light nav justify-content-center">
-                    <form class="d-flex flex-row" id="history-tab-search">
-                        <input class="form-control mr-sm-2" type="search" id="history-search-input" placeholder="Enter book title" aria-label="Search">
+            <div class="container" id="history-tab-body" style="display:none;">
+
+                <!----------------history tab search option design--------------->
+                <div class="navbar navbar-light nav justify-content-center" id="history-search-container">
+                    <form class="d-flex flex-row align-middle" id="history-tab-search">
+                        <input class="form-control m-0" type="search" id="history-search-input" placeholder="Enter book title" aria-label="Search">
                         <div id="drop-down-search-container" class="row">
-                            <select name="book-search-dropdown" id="book-search-dropdown">
-                                <option value="title">by book title</option>
-                                <option value="author_name">by author name</option>
+                            <select name="book-search-dropdown" id="history-search-dropdown">
+                                <option value="title">by user name</option>
+                                <option value="author_name">by book title</option>
                             </select>
                         </div>
                     </form>
-                </nav>
+                </div>
+
+                <table class="table table-dark table-striped" id="history-details-table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Sl. no</th>
+                        <th scope="col">User id</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Book name</th>
+                        <!-- <th scope="col">Status</th> -->
+                        <th scope="col">Issue date</th>
+                        <th scope="col">Due date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="history-tab-table-body">
+                    
+                    </tbody>
+                </table>
             </div>
 
 
