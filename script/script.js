@@ -276,19 +276,10 @@ $(document).ready(function () {
   //inventory tab click function
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
-    $("#book-details").hide();
-    $("#main-body").show();
-    loadCategoryCard();
-  });
-
-  //inventory tab click function
-  $("#inventory").click(function () {
-    $("#inventory").css("background-color", "#2f0410");
     $("#bookissue").css("background-color", "");
     $("#book-details").hide();
     $("#issue-book").hide();
     $("#main-body").show();
-
     loadCategoryCard();
   });
 
