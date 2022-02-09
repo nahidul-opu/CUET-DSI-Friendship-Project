@@ -264,7 +264,7 @@
                                     
                                     <script>
                                         $(".btn-close").click(function(){
-                                            $("#edit-book-modal").hide();
+                                            $("#add-book-modal").hide();
                                         })
                                     </script>
                                     
@@ -273,37 +273,37 @@
                                     <form action="#" method="post" id="add-book-form">
                                         <div class="mb-3">
                                             <label class="form-label">Book Name</label>
-                                            <input id="book-name" type="text" class="form-control" name="title" placeholder="">
+                                            <input id="mAB-book-name" type="text" class="form-control"  placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Book Author</label>
-                                            <input type="text" id="auth-name" class="form-control" name="auth_name" placeholder="">
+                                            <input type="text" id="mAB-author-name" class="form-control"  placeholder="">
                                         </div>
                                          <div class="mb-3">
                                             <label class="form-label">Book Category</label>
-                                            <input type="text" id="category" class="form-control" name="category" placeholder="">
+                                            <input type="text" id="mAB-category-id" class="form-control"  placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Publisher</label>
-                                            <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
+                                            <input type="text" id="mAB-publisher" class="form-control"  placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Publish Year</label>
-                                            <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
+                                            <input type="text" id="mAB-pub-year" class="form-control"  placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">ISBN</label>
-                                            <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
+                                            <input type="text" id="mAB-isbn" class="form-control" placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Total Count</label>
-                                            <input type="text" id="total" class="form-control" name="total" placeholder="">
+                                            <input type="text" id="mAB-total-count" class="form-control" placeholder="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Current Count</label>
-                                            <input type="text" id="cur_count" class="form-control" name="cur_count" placeholder="">
+                                            <input type="text" id="mAB-current-count" class="form-control"  placeholder="">
                                         </div>
-                                        <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
+                                        <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
                                     </form>
                                 </div>
                             </div>
