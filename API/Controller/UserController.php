@@ -71,11 +71,11 @@ class UsersController
     private function handleGETRequests()
     {
         if ($this->queryParams['user_id'] && count($this->queryParams) === 1){ 
-            print_r("ashci");
+           
             $response =  $this->readUserData($this->queryParams['user_id']);
         }
             else if (count($this->queryParams) === 1) { 
-                print_r("ashci");
+               
                 $response =  $this->readUserData();
             }
         else $response = $this->Responce('HTTP/1.1 404', 'Not Found', 'Invalid Request');

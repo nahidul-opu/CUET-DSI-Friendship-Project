@@ -10,7 +10,6 @@ $(document).ready(function () {
   // bishal starting card append
   var location = window.location.href;
   directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-  //console.log(directoryPath);
   function loadCategoryCard() {
     $.ajax({
       type: "GET",
@@ -79,34 +78,89 @@ $(document).ready(function () {
       // }
       var content =
         `<tbody>
-                        <tr>
-                            <th scope="row">` +
-        (i + 1) +
-        `</th>
-                            <td>` +
-        data[i].title +
-        `</td>
-                            <td>` +
-        data[i].author_name +
-        `</td>
-                            <td>
-                                <div class="float-center">
-                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
-        i +
-        `">Update</button>
-                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
-        data[i].book_id +
-        `">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                      </tbody>`;
+        <tr>
+            <th scope="row">` +
+                (i + 1) +
+                `</th>
+                                    <td>` +
+                data[i].title +
+                `</td>
+                                    <td>` +
+                data[i].author_name +
+                `</td>
+                    <td>
+                        <div class="float-center">
+                            <button type="button" class="btn btn-success badge-pill issue-book-button" style="width: 80px;" id="` + data[i].book_id +`">Issue</button>
+                            <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` + i +`">Update</button>
+                            <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` + data[i].book_id +`">Delete</button>
+                        </div>
+            </td>
+        </tr>
+    </tbody>`;
 
       $("#book-details-table").append(content);
     }
     // console.log("function end here");
   }
-  // console.log("function end here");
+ 
+
+  //issue book button click
+  var users_list = []//global variable
+  $("#book-details-table").on("click", ".issue-book-button", function (e) {
+    var btn_id = $(this).attr("id");
+    //console.log(btn_id);
+    
+    $.ajax({
+      type: "GET",
+      url: directoryPath + `api/books/`+btn_id,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // //console.log(data.keys());
+        
+        var book = data["message"][0];
+        //console.log(book);
+        var book_info = 
+        `<b>Title:</b> `+book.title+`<br><br>
+        <b>Author:</b> `+book.author_name+`<br><br>
+        <b>Publisher:</b> `+book.publisher+`<br><br>        
+        <b>Published:</b>`+book.pub_year+`<br><br>
+        <b>ISBN:</b> `+book.isbn+`
+        `
+        $("#book-issue-book-info").empty();
+        $("#book-issue-book-info").append(book_info);
+        if (book.current_count>0){
+          $("#book-avalability").empty();
+          $("#book-avalability").append(`<h5 class="bg-success mx-5 p-2 rounded">Available</h5>`);
+        }
+        else{ 
+          $("#book-avalability").empty();
+          $("#book-avalability").append(`<h5 class="bg-danger mx-5 p-2 rounded">Not available</h5>`);
+        }
+        
+
+        $("#issue-book-modal").show();
+      },
+    });
+
+    //retrive userlist to use auto complete issue-user search
+    $.ajax({
+      type: "GET",
+      url: directoryPath + `api/users/`,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        var users = data["message"];
+        for(let i =0; i<users.length;i++)
+          users_list.push(users[i].user_id+'. '+users[i].name);
+      },
+    });
+    
+    
+  });
+
+
+
 
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
@@ -168,7 +222,7 @@ $(document).ready(function () {
     //console.log(output[btn_id].title);
     //console.log("****************************************");
     var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     //console.log(directoryPath);
     //receive book data with ajax get request
 
@@ -299,6 +353,53 @@ $(document).ready(function () {
 
     loadCategoryCard();
   });
+
+
+//issue user auto complete
+$(document).ready( function() {
+  var availableTags = users_list;
+
+  $( "#issue-user-search" ).autocomplete({
+    source:   availableTags });
+} );
+
+
+$('#issue-user-search').keypress(function (e) {
+  var location = window.location.href;
+  var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+ 
+  var key = e.which;
+  if(key == 13)  // the enter key code
+   {
+    
+    var s_user = $("#issue-user-search").val();
+    console.log(s_user);
+    // $.ajax({
+    //   type: "GET",
+    //   url: directoryPath + `/api/users`,
+    //   dataType: "json",
+    //   async: true,
+    //   success: function (data, status) {
+    //     var users = data["message"];
+    //   },
+    //   error: function (data) {
+    //     console.log(data);
+    //   },
+    // });
+    result = s_user.split('.');
+    var user_info = `
+    <b>Name: </b>`+ result[1]+`<br>
+    <b>User Id : </b>`+result[0]+`<br>
+    `
+    $('#book-issue-user-info').empty();
+    $('#book-issue-user-info').append(user_info);
+   }
+ }); 
+
+
+
+
+  ////////////////////
 
   //book dropdown change the placeholder of the input field
   $("#book-search-dropdown").change(function () {
