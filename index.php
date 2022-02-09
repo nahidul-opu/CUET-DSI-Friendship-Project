@@ -238,6 +238,8 @@
                                 </div>
                             </div>
                         </div>
+                    
+                    
                     </div>
 
 
@@ -252,6 +254,23 @@
                     </h1>
                 </a>
                 
+                <!--------------------------delete book confirmation modal---------->
+                <div class="modal" id="delete-confirm">
+                    <div class="modal-dialog modal-dialog-centered">
+                       <div class="modal-content">
+                           <div class="modal-body">
+                           <h2>Are you sure you want to delete?</h2>
+                        
+                            <div class="flex-row">
+                                <button class="btn btn-primary" id="cancel">Cancel</button>
+                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                            </div>
+                           </div>
+                       
+                       </div>
+
+                    </div>
+                </div>
                 
                 
                 <!------------------------------------------pop up form---------------------->

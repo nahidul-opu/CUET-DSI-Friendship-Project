@@ -169,56 +169,72 @@ $(document).ready(function () {
     //console.log("****************************************");
     var location = window.location.href;
     var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-    //console.log(directoryPath);
-    //receive book data with ajax get request
 
     var createDeleteUrl = directoryPath + "api/books/" + btn_id;
-    // console.log(createDeleteUrl);
 
-    // //console.log(data.keys());
-    // alert(data["message"]);
-    // console.log(data["message"]);
+    $("#delete-confirm").show();
 
-    var dataFetch =
-      directoryPath +
-      `api/books/?column=category_id&value=` +
-      target_category_id;
-    $.ajax({
-      type: "DELETE",
-      url: createDeleteUrl,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        // //console.log(data.keys());
-        // alert(data["message"]);
-        // console.log(data["message"]);
-        alert("Delete Successful");
+    $("#delete-confirm").on("click", "button", function () {
+      var deleteStatus = $(this).attr("id");
+      // console.log($(this).attr("id"));
+      if (deleteStatus === "cancel") {
+        $("#delete-confirm").hide();
+      }
+
+      if (deleteStatus === "confirm") {
+        $("#delete-confirm").hide();
 
         var dataFetch =
           directoryPath +
           `api/books/?column=category_id&value=` +
           target_category_id;
         $.ajax({
-          type: "GET",
-          url: dataFetch,
+          type: "DELETE",
+          url: createDeleteUrl,
           dataType: "json",
           async: true,
           success: function (data, status) {
             // //console.log(data.keys());
+            // alert(data["message"]);
+            // console.log(data["message"]);
+            alert("Delete Successful");
 
-            output = data["message"];
-            showBookDetails(output, target_category_id);
+            var dataFetch =
+              directoryPath +
+              `api/books/?column=category_id&value=` +
+              target_category_id;
+            $.ajax({
+              type: "GET",
+              url: dataFetch,
+              dataType: "json",
+              async: true,
+              success: function (data, status) {
+                // //console.log(data.keys());
+
+                output = data["message"];
+                showBookDetails(output, target_category_id);
+              },
+              error: function (data) {
+                //alert("fail");
+              },
+            });
           },
           error: function (data) {
+            alert("failed");
             //alert("fail");
           },
         });
-      },
-      error: function (data) {
-        alert("failed");
-        //alert("fail");
-      },
+      }
     });
+    // $("#confirm").click(function () {
+    //   alert("confirm button pressed");
+    //   $("#delete-confirm").hide();
+    // });
+
+    // $("#cancel").click(function () {
+    //   alert("cancel button pressed");
+    //   $("#delete-confirm").hide();
+    // });
   });
 
   //category card click button
