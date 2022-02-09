@@ -293,6 +293,38 @@ $(document).ready(function () {
 
     loadCategoryCard();
   });
+  //book search option, search by author and book title
+  $("#book-search-input").on("keyup", function () {
+    console.log($(this).val());
+    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    var bookname = $(this).val();
+    var searchBy = $("#book-search-dropdown option:selected").val();
+    // $(this).val("");
+    //apt: /api/books/?column=column_name&value=keyword
+    //category wise book search api: /api/books/?category_id=?&column=?&value=?
+    var crateUrl =
+      directoryPath +
+      `api/books/?category_id=` +
+      target_category_id +
+      `&column=` +
+      searchBy +
+      `&value=` +
+      bookname;
+
+    $.ajax({
+      type: "GET",
+      url: crateUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        output = data["message"];
+        showBookDetails(output, target_category_id);
+      },
+      error: function (data, status) {
+        showBookDetails({}, target_category_id);
+      },
+    });
+  });
 
   //book dropdown change the placeholder of the input field
   $("#book-search-dropdown").change(function () {
