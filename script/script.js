@@ -253,7 +253,7 @@ $(document).ready(function () {
         showBookDetails(output, target_category_id);
       },
       error: function (data, status) {
-        // alert("Data not found");
+        showBookDetails({}, target_category_id);
       },
     });
 
