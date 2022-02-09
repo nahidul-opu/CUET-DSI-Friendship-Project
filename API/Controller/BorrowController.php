@@ -16,16 +16,24 @@ class BorrowController{
     }
     function selectMethod(){
            if($this->requestMethod=='GET'){
-                if(count($this->queryParams)>0){
-               if (isset($this->queryParams['book_id']) && isset( $this->queryParams['user_id']) && count($this->queryParams) === 2)   {$this->readBorrows();}
-               if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1)   {$this->readBorrowUser();}
-               if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1)   {$this->readBorrowbyBook();}
-                }
-                else   $this->readBorrow();
+                //if(count($this->queryParams)>0){
+               //if (isset($this->queryParams['book_id']) && isset( $this->queryParams['user_id']) && count($this->queryParams) === 2)   {$this->readBorrows();}
+               //if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1)   {$this->readBorrowUser();}
+               //if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1)   {$this->readBorrowbyBook();}
+                //}
+                $this->readBorrow();
             }
         else if($this->requestMethod=='DELETE'){
             $this->delete();
         }
+        else if($this->requestMethod=='POST'){
+            $this->createBorrow();
+        }
+        else if($this->requestMethod=='PUT'){
+            if ($this->queryParams['book_id']) $response = $this->updateBorrow($this->queryParams['book_id']);
+            else ($this->raiseException());
+        }
+        
     }
 
  public function readBorrow(){
@@ -160,6 +168,60 @@ public function readBorrowbyBook(){
         );
 }
 }
+public function createBorrow()
+    {
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (empty($input)) {
+            $input = (array) $_POST;
+        }
+        $validation = $this->validateInput($input);
+        if (!$validation['isValid']) {
+            return $validation;
+        }
+        $response = $this->borrow->create($input);
+        if (!$response['success']) return $this->Responce('HTTP/1.1 409', 'Duplicate Data', $response['error']);
+        else return $this->Responce('HTTP/1.1 200', 'OK', 'Inserted 1 Row');
+    }
+public function updateBorrow($book_id)
+    {
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (empty($input)) {
+            $input = (array) $_POST;
+        }
+        $validation = $this->validateInput($input);
+        if (!$validation['isValid']) {
+            return $validation;
+        }
+        $response = $this->borrow->update($book_id,$input);
+        if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
+        else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
+    }
+    public function validateInput($input)
+    {
+        print_r($input)
+        $hasRequired = $this->create->hasRequiredField($input);
+        if (!$hasRequired) {
+            return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
+        }
+        return $this->Responce('HTTP/1.1 200', 'OK', 'Valid', 'isValid', true);
+    }
+    public function Responce($headerCode, $headerMsg, $bodyMsg, $customKey = null, $customValue = null)
+    {
+        $response['status_code_header'] = $headerCode . ' ' . $headerMsg;
+        if ($customKey)
+            $response[$customKey] = $customValue;
+        $response['body'] = json_encode([
+            'message' => $bodyMsg
+        ]);
+        return $response;
+    }
+    function raiseException()
+    {
+        print_r("Invalid API or Request Method");
+        header("HTTP/1.1 404 Not Found");
+        exit();
+    }
+
 
 }
 
