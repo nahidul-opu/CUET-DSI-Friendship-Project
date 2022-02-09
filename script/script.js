@@ -357,4 +357,6 @@ $(document).ready(function () {
       $("#add-book-modal").hide();
     });
   });
+
+  $("#history").on("click", function () {});
 });
