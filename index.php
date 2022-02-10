@@ -121,7 +121,7 @@
                         <h2 class="font-wight-bolder text-light">Books Category</h2>
                     </div>
                     <div class="row justify-content-center" id="book-card">
-                        
+
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
                         </button>
                     </div>
                 </div> -->
-                
+
 
                 <!--<a href="#" class="btn btn-primary">40/50</a>-->
 
@@ -183,125 +183,125 @@
 
             </div>
             <!--------------book details page-------------->
-            
+
             <!-----------------------------------------------------update book----------------->
-                    <!------------------------------------------pop up form---------------------->
-                    <div class="modal" id="edit-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Book Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            <!------------------------------------------pop up form---------------------->
+            <div class="modal" id="edit-book-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Book Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
 
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#edit-book-modal").hide();
-                                        })
-                                    </script>
+                            <script>
+                                $(".btn-close").click(function() {
+                                    $("#edit-book-modal").hide();
+                                })
+                            </script>
 
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" id="edit-book-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Book Name</label>
+                                    <input id="book-name" type="text" class="form-control" name="title" placeholder="">
                                 </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="edit-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="book-name" type="text" class="form-control" name="title" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="auth-name" class="form-control" name="author_name" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="total" class="form-control" name="total" placeholder="">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
-                                    </form>
+                                <div class="mb-3">
+                                    <label class="form-label">Book Author</label>
+                                    <input type="text" id="auth-name" class="form-control" name="author_name" placeholder="">
                                 </div>
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Publisher</label>
+                                    <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Publish Year</label>
+                                    <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">ISBN</label>
+                                    <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Total Count</label>
+                                    <input type="text" id="total" class="form-control" name="total" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
+                            </form>
                         </div>
                     </div>
+                </div>
+            </div>
 
 
 
 
 
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
-                
+
                 <a href="" id="float-button">
-                    <h1 class="display-4 floating-add-button" >
-                    <i class="bi bi-journal-plus"></i>
+                    <h1 class="display-4 floating-add-button">
+                        <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
-                
-                
-                
+
+
+
                 <!------------------------------------------pop up form to add book---------------------->
-                    <div class="modal" id="add-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Book</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#edit-book-modal").hide();
-                                        })
-                                    </script>
-                                    
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="add-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="book-name" type="text" class="form-control" name="title" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="auth-name" class="form-control" name="auth_name" placeholder="">
-                                        </div>
-                                         <div class="mb-3">
-                                            <label class="form-label">Book Category</label>
-                                            <input type="text" id="category" class="form-control" name="category" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="total" class="form-control" name="total" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Current Count</label>
-                                            <input type="text" id="cur_count" class="form-control" name="cur_count" placeholder="">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
-                                    </form>
-                                </div>
+                <div class="modal" id="add-book-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Book</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                <script>
+                                    $(".btn-close").click(function() {
+                                        $("#edit-book-modal").hide();
+                                    })
+                                </script>
+
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" method="post" id="add-book-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Name</label>
+                                        <input id="book-name" type="text" class="form-control" name="title" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Author</label>
+                                        <input type="text" id="auth-name" class="form-control" name="auth_name" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Category</label>
+                                        <input type="text" id="category" class="form-control" name="category" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publisher</label>
+                                        <input type="text" id="pub" class="form-control" name="publisher" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publish Year</label>
+                                        <input type="text" id="pub-year" class="form-control" name="pub_year" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">ISBN</label>
+                                        <input type="text" id="isbn" class="form-control" name="isbn" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Total Count</label>
+                                        <input type="text" id="total" class="form-control" name="total" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Current Count</label>
+                                        <input type="text" id="cur_count" class="form-control" name="cur_count" placeholder="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 
@@ -321,9 +321,9 @@
                 </nav>
 
                 <div class="card-body">
-                
-                
-                 
+
+
+
 
 
                     <table class="table table-hover table-dark" id="book-details-table">
@@ -337,7 +337,7 @@
                         </thead>
 
                     </table>
-                   
+
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -370,124 +370,126 @@
             </div>
 
 
-            
+
 
 
             <!------------------- book issue modal start ----------------->
             <div class="modal" id="issue-book-modal">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Issue Book Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Issue Book Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
 
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#issue-book-modal").hide();
-                                        });
-                                    </script>
+                            <script>
+                                $(".btn-close").click(function() {
+                                    $("#issue-book-modal").hide();
+                                });
+                            </script>
 
+                        </div>
+
+                        <div class="modal-body ui-front">
+                            <!-- ------------- -->
+
+
+                            <div class="p-3 rounded" style="background-color: rgba(215, 215, 215, 0.8);">
+                                <div class="row ">
+                                    <div class="col-md-8 text-black ">
+                                        <!-- 1 -->
+                                        <div class="row  p-1 rounded-top m-1">
+                                            <!-- 1.1 -->
+                                            <div class="col-md-6">
+                                                <img class="img-fluid" src="https://qph.fs.quoracdn.net/main-qimg-dbc42d0568904c9577ae8ccbca61099c-lq" alt="c">
+                                            </div>
+                                            <!-- 1.2 -->
+                                            <div class="col-md-6 text-black" id="book-issue-book-info">
+                                                <!-- jquery will append code here  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 2 -->
+                                    <div class="col-md-4 text-black p-3 rounded my-1">
+
+                                        <div class="form-group">
+                                            <style>
+                                                /* inside css file not working so.. -_- */
+                                                .ui-autocomplete {
+                                                    position: absolute;
+                                                    top: 100%;
+                                                    left: 0;
+                                                    z-index: 1000;
+                                                    display: none;
+                                                    float: left;
+                                                    min-width: 160px;
+                                                    padding: 5px 0;
+                                                    margin: 2px 0 0;
+                                                    list-style: none;
+                                                    font-size: 14px;
+                                                    text-align: left;
+                                                    background-color: #ffffff;
+                                                    border: 1px solid #cccccc;
+                                                    border: 1px solid rgba(0, 0, 0, 0.15);
+                                                    border-radius: 4px;
+                                                    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+                                                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+                                                    background-clip: padding-box;
+                                                }
+
+                                                .ui-autocomplete>li>div {
+                                                    display: block;
+                                                    padding: 3px 20px;
+                                                    clear: both;
+                                                    font-weight: normal;
+                                                    line-height: 1.42857143;
+                                                    color: #333333;
+                                                    white-space: nowrap;
+                                                }
+
+                                                .ui-state-hover,
+                                                .ui-state-active,
+                                                .ui-state-focus {
+                                                    text-decoration: none;
+                                                    color: #262626;
+                                                    background-color: #f5f5f5;
+                                                    cursor: pointer;
+                                                }
+                                            </style>
+                                            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                                            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                                            <label for="Student">
+                                                <h5>Search User</h5>
+                                            </label>
+                                            <input class="rounded-2 form-control " type="text" id="issue-user-search" placeholder="User Name" />
+                                            <div id="book-issue-user-info" class="py-3">
+                                                <!-- jquery will append user info here dynamically  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- 3 -->
+                                    <div class="col-md-8  text-white text-center p-3 rounded" id="book-avalability">
+
+                                    </div>
+                                    <!-- 4 -->
+                                    <div class="col-md-4 text-center p-3 rounded">
+                                        <button type="button" class="btn btn-success btn-block" id="book-issue-btn">Issue Book</button>
+                                    </div>
                                 </div>
 
-                                <div class="modal-body ui-front">
-                                    <!-- ------------- -->
-                                    
-
-                                    <div class="p-3 rounded"style="background-color: rgba(215, 215, 215, 0.8);">
-                                        <div class="row ">
-                                            <div class="col-md-8 text-black ">
-                                                <!-- 1 -->
-                                                <div class="row  p-1 rounded-top m-1" >
-                                                    <!-- 1.1 -->
-                                                    <div class="col-md-6">
-                                                        <img  class="img-fluid" src="https://qph.fs.quoracdn.net/main-qimg-dbc42d0568904c9577ae8ccbca61099c-lq" alt="c">
-                                                    </div>
-                                                    <!-- 1.2 -->
-                                                    <div class="col-md-6 text-black" id="book-issue-book-info">
-                                                         <!-- jquery will append code here  -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 2 -->
-                                            <div class="col-md-4 text-black p-3 rounded my-1">
-                                                
-                                                <div class="form-group">
-                                                    <style>
-                                                        /* inside css file not working so.. -_- */
-                                                        .ui-autocomplete {
-                                                            position: absolute;
-                                                            top: 100%;
-                                                            left: 0;
-                                                            z-index: 1000;
-                                                            display: none;
-                                                            float: left;
-                                                            min-width: 160px;
-                                                            padding: 5px 0;
-                                                            margin: 2px 0 0;
-                                                            list-style: none;
-                                                            font-size: 14px;
-                                                            text-align: left;
-                                                            background-color: #ffffff;
-                                                            border: 1px solid #cccccc;
-                                                            border: 1px solid rgba(0, 0, 0, 0.15);
-                                                            border-radius: 4px;
-                                                            -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                                                            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                                                            background-clip: padding-box;
-                                                        }
-                                                        
-                                                        .ui-autocomplete > li > div {
-                                                            display: block;
-                                                            padding: 3px 20px;
-                                                            clear: both;
-                                                            font-weight: normal;
-                                                            line-height: 1.42857143;
-                                                            color: #333333;
-                                                            white-space: nowrap;
-                                                        }
-                                                        
-                                                        .ui-state-hover,
-                                                        .ui-state-active,
-                                                        .ui-state-focus {
-                                                            text-decoration: none;
-                                                            color: #262626;
-                                                            background-color: #f5f5f5;
-                                                            cursor: pointer;
-                                                        }
-                                                    </style>
-                                                    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-                                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                                                    <label for="Student"><h5>Search User</h5></label>
-                                                    <input class="rounded-2 form-control " type="text" id="issue-user-search" placeholder="User Name" />
-                                                    <div id="book-issue-user-info" class="py-3">
-                                                        <!-- jquery will append user info here dynamically  -->
-
-                                                    </div>
-                                                        
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <!-- 3 -->
-                                            <div class="col-md-8  text-white text-center p-3 rounded" id="book-avalability">
-                                                
-                                            </div>
-                                            <!-- 4 -->
-                                            <div class="col-md-4 text-center p-3 rounded">
-                                                <button type="button" class="btn btn-success btn-block">Issue Book</button>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <!-- ------------- -->
-                                
                             </div>
+                            <!-- ------------- -->
+
                         </div>
                     </div>
                 </div>
-                <!------------------- book issue modal start end----------------->
-            
+            </div>
+            <!------------------- book issue modal start end----------------->
+
 
 
 
