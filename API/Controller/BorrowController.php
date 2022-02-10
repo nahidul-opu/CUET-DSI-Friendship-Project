@@ -30,26 +30,8 @@ class BorrowController{
 
  public function readBorrow(){
     $result= $this->borrow -> read();
-    $num= $result->rowCount();
-    if($num>0){
-    $borrow_arr = array();
-    $borrow_arr['data'] = array();
-
-    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-
-        $borrow_item = array(
-            'book_id'=>$book_id,
-            'user_id'=>$user_id,
-            'issue_date'=>$issue_date,
-            'due_date'=>$due_date,
-            'created_at'=>$created_at,
-            'updated_at'=>$updated_at,
-        );
-
-        array_push($borrow_arr['data'],$borrow_item);
-    }
-    echo json_encode($borrow_arr);
+    if($result){
+    echo json_encode($result);
     }
     else{
         echo json_encode(
@@ -162,5 +144,3 @@ public function readBorrowbyBook(){
 }
 
 }
-
-?>
