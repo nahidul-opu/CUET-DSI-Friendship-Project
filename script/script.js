@@ -105,11 +105,13 @@ $(document).ready(function () {
  
 
   //issue book button click
-  var users_list = []//global variable
+  //global variable
+  var users_list = [];
+  var book;
   $("#book-details-table").on("click", ".issue-book-button", function (e) {
     var btn_id = $(this).attr("id");
 
-    var book;
+    
     $.ajax({
       type: "GET",
       url: directoryPath + `api/books/`+btn_id,
@@ -156,16 +158,20 @@ $(document).ready(function () {
       success: function (data, status) {
         var users = data["message"];
         //users_list = [];//making empty 
-        for(let i =0; i<users.length;i++)
-          users_list.push(users[i].user_id+'. '+users[i].name);
+        if(users_list.length == 0){
+          for(let i =0; i<users.length;i++)
+            users_list.push(users[i].user_id+'. '+users[i].name);     
+          }           
       },
     });
     
-    
-    //issue book button action
-  $( "#book-issue-btn" ).on( "click" ,function() {
+   
+});
+ 
+//issue book button action
+ $( "#book-issue-btn" ).on( "click" ,function() {
   user_id = $("#issue-user-search").val().split('.');
-
+console.log("-------------print");
   let data = {
      book_id: "",
      user_id: "",
@@ -180,13 +186,12 @@ $(document).ready(function () {
       });
       $("#issue-book-modal").hide();
     }
-  }else{
+  }
+  else{
     alert("please select a user to issue book.")
   }
   
  }); 
-});
-
   
 
 
