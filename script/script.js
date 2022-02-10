@@ -108,8 +108,7 @@ $(document).ready(function () {
   var users_list = []//global variable
   $("#book-details-table").on("click", ".issue-book-button", function (e) {
     var btn_id = $(this).attr("id");
-    //console.log(btn_id);
-    
+
     var book;
     $.ajax({
       type: "GET",
@@ -129,6 +128,9 @@ $(document).ready(function () {
         <b>Available copy:</b> `+book.current_count+`<br><br>
         <b>ISBN:</b> `+book.isbn+`
         `
+        $("#issue-user-search").val('');
+        $('#book-issue-user-info').empty();
+
         $("#book-issue-book-info").empty();
         $("#book-issue-book-info").append(book_info);
         if (book.current_count>0){
@@ -161,22 +163,27 @@ $(document).ready(function () {
     
     
     //issue book button action
-  $( "#book-issue-btn" ).on( "click" ,function() {    
-    user_id = $("#issue-user-search").val().split('.');
+  $( "#book-issue-btn" ).on( "click" ,function() {
+  user_id = $("#issue-user-search").val().split('.');
 
-    let data = {
+  let data = {
      book_id: "",
      user_id: "",
    };
    var url = directoryPath + "api/borrow";
    data.book_id = book.book_id;
    data.user_id = user_id[0];
-
-   $.post(url, JSON.stringify(data), function (msg) {   
-     $("#result").html(msg);
-     alert("float button clicked222");
-    console.log("ddddd")
-   });
+   if (data.book_id != "" && data.user_id!= ""){
+    if( confirm("Confirm book issue?")){
+      $.post(url, JSON.stringify(data), function (msg) {   
+        $("#result").html(msg);        
+      });
+      $("#issue-book-modal").hide();
+    }
+  }else{
+    alert("please select a user to issue book.")
+  }
+  
  }); 
 });
 
@@ -366,21 +373,20 @@ $(document).ready(function () {
   });
 
   //issuebook tab click function
-  $("#bookissue").click(function () {
-    $("#bookissue").css("background-color", "#2f0410");
-    $("#inventory").css("background-color", "");
-    $("#book-details").hide();
-    $("#main-body").hide();
-    $("#issue-book").show();
+  // $("#bookissue").click(function () {
+  //   $("#bookissue").css("background-color", "#2f0410");
+  //   $("#inventory").css("background-color", "");
+  //   $("#book-details").hide();
+  //   $("#main-body").hide();
+  //   $("#issue-book").show();
 
-    loadCategoryCard();
-  });
+  //   loadCategoryCard();
+  // });
 
 
 //issue user auto complete
 $(document).ready( function() {
   var availableTags = users_list;
-
   $( "#issue-user-search" ).autocomplete({
     source:   availableTags });
 } );
@@ -391,23 +397,9 @@ $('#issue-user-search').keypress(function (e) {
   var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
  
   var key = e.which;
-  if(key == 13)  // the enter key code
-   {
-    
+  if(key == 13) {
     var s_user = $("#issue-user-search").val();
     console.log(s_user);
-    // $.ajax({
-    //   type: "GET",
-    //   url: directoryPath + `/api/users`,
-    //   dataType: "json",
-    //   async: true,
-    //   success: function (data, status) {
-    //     var users = data["message"];
-    //   },
-    //   error: function (data) {
-    //     console.log(data);
-    //   },
-    // });
     result = s_user.split('.');
     var user_info = `
     <b>Name: </b>`+ result[1]+`<br>
@@ -475,3 +467,5 @@ $('#issue-user-search').keypress(function (e) {
 
   });
 });
+
+
