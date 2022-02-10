@@ -38,9 +38,13 @@ if ($uri[1] == 'books') {
         $userController->setUserId($uri[2]);
     }
     $userController->processRequest();
-} else if ($uri[1] == 'borrow') {
-    $controller = new BorrowController($dbConnection, $requestMethod);
-    $controller->selectMethod();
+} 
+ else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
+    $borrowController = new BorrowController($dbConnection, $requestMethod, $queryString);
+    /*if (isset($uri[2])) {
+        $borrowController->readBorrows($uri[2]);
+    }*/
+    $borrowController->selectMethod();
 } else {
     header("HTTP/1.1 404 Not Found");
     exit();
