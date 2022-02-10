@@ -43,6 +43,7 @@ create table borrow (
   user_id int not null,
   issue_date datetime not null,
   due_date datetime not null,
+  status int not null default 0,
   created_at datetime not null,
   updated_at datetime not null,
   primary key (book_id, user_id),
