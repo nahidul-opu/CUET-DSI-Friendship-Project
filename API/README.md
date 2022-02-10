@@ -83,7 +83,8 @@
 
 5. (DELETE method)Delete a User information having id 'x'
    /api/users/x (with delete request)
-  ## Borrow-API
+
+## Borrow-API
 
 1. (GET method)Get All borrow history
    /api/borrow
@@ -91,7 +92,7 @@
 2. (GET method)Get a borrow history where book id is 'x' and user id is 'y'
    /api/borrow?book_id=x&user_id=y
 
-3. (GET method)Get a borrow history where book id is 'x' 
+3. (GET method)Get a borrow history where book id is 'x'
    /api/borrow?book_id=x
 
 4. (GET method)Get a borrow history where user id is 'x'
@@ -99,3 +100,12 @@
 
 5. (DELETE method)Delete a borrow history where book id is 'x' and user id is 'y'
    /api/borrow?book_id=x&user_id=y (with delete request)
+
+6. (POST method) Create a boorow history
+   /api/borrow
+
+7. (PUT method) Send user_id and book_id using put method
+   7.1. Update due date
+   /api/borrow/?renew
+   7.2. Update borrow status to returned (default status is borrowed) (status=0 means borrowed and status=1 means returned)
+   /api/borrow/?return
