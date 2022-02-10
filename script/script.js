@@ -108,6 +108,79 @@ $(document).ready(function () {
   }
   // console.log("function end here");
 
+
+
+  function show_user(data, category_id) {
+
+    $("#user-details").empty();
+    var table_header = `<thead id="table-head">
+                              <tr>
+                                  <th class="float-center">User ID</th>
+                                  <th class="float-center">Email</th>
+                                  <th class="float-center">Name</th>
+                                  <th class="float-center">Borrowed Books</th>
+                                  <th class="float-center">Contact No</th>
+                                  <th class="float-center">Image Path</th>
+                                  <th class="float-center">Fine</th>
+                                  <th class="float-center">Created At</th>
+                                  <th class="float-center">Updated At</th>
+                                  <th class="float-center">Actions</th>
+                              </tr>
+                            </thead>`;
+
+    $("#user-details").append(table_header);
+    for (let i = 0; i < data.length; i++) {
+      // if (data[i].category_id !== category_id) {
+      //   continue;
+      // }
+      var content =
+        `<tbody>
+                        <tr>
+                            <th scope="row">` +
+        (i + 1) +
+        `</th>
+                            <td>` +
+        data[i].user_id +
+        `</td>
+                            <td>` +
+        data[i].email +
+        `</td>
+                            <td>` +
+        data[i].name +
+        `</td>
+                            <td>` +
+        data[i].borrow_count +
+        `</td>
+                            <td>` +
+        data[i].contact_no +
+        `</td>
+                            <td>` +
+        data[i].fine +
+        `</td>
+                            <td>` +
+        data[i].created_at +
+        `</td>
+                           <td>` +
+        data[i].updated_at +
+        `</td>
+                            <td>
+                                <div class="float-center">
+                                    <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
+        i +
+        `">Update</button>
+                                    <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
+        data[i].user_id +
+        `">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                      </tbody>`;
+
+      $("#user-details").append(content);
+    }
+    // console.log("function end here");
+  }
+
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
     /*alert($(this));*/
@@ -269,6 +342,7 @@ $(document).ready(function () {
     $("#book-details").show();
   });
 
+
   //toggle button for side bar
   $("#more").click(function () {
     $("#sidebar").toggle();
@@ -292,6 +366,17 @@ $(document).ready(function () {
 
     loadCategoryCard();
   });
+
+//user tab click function
+$("#users").click(function () {
+  $("#users").css("background-color", "#2f0410");
+  $("#inventory").css("background-color", "");
+  $("#user-details").hide();
+  $("#main-body").hide();
+  $("#users").show();
+
+  loadCategoryCard();
+});
 
   //issuebook tab click function
   $("#bookissue").click(function () {

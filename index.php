@@ -392,6 +392,24 @@
                         </ul>
                     </nav>
 
+                    <table class="table table-hover table-dark" id="user-details">
+                        <thead id="table-head">
+                            <tr>
+                                <th class="float-center">User Id</th>
+                                <th class="float-center">Email</th>
+                                <th class="float-center">Name</th>
+                                <th class="float-center">Borrowed Books</th>
+                                <th class="float-center">Contact No</th>
+                                <th class="float-center">Image Path</th>
+                                <th class="float-center">Fine</th>
+                                <th class="float-center">Created At</th>
+                                <th class="float-center">Updated At</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+
                 </div>
             </div>
 
