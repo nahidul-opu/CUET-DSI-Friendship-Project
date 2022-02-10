@@ -125,6 +125,7 @@ $(document).ready(function () {
         <b>Author:</b> `+book.author_name+`<br><br>
         <b>Publisher:</b> `+book.publisher+`<br><br>        
         <b>Published:</b>`+book.pub_year+`<br><br>
+        <b>Available copy:</b> `+book.current_count+`<br><br>
         <b>ISBN:</b> `+book.isbn+`
         `
         $("#book-issue-book-info").empty();
@@ -151,6 +152,7 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         var users = data["message"];
+        //users_list = [];//making empty 
         for(let i =0; i<users.length;i++)
           users_list.push(users[i].user_id+'. '+users[i].name);
       },
