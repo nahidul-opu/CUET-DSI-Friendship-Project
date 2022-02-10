@@ -10,6 +10,7 @@
       public $due_date;
       public $created_at;
       public $updated_at;
+      public $required= ['book_id','user_id'];
       //constructor with DB
       public function __construct($db){
           $this->conn = $db;

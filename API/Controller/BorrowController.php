@@ -16,12 +16,12 @@ class BorrowController{
     }
     function selectMethod(){
            if($this->requestMethod=='GET'){
-                //if(count($this->queryParams)>0){
-               //if (isset($this->queryParams['book_id']) && isset( $this->queryParams['user_id']) && count($this->queryParams) === 2)   {$this->readBorrows();}
-               //if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1)   {$this->readBorrowUser();}
-               //if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1)   {$this->readBorrowbyBook();}
-                //}
-                $this->readBorrow();
+                if(count($this->queryParams)>0){
+               if (isset($this->queryParams['book_id']) && isset( $this->queryParams['user_id']) && count($this->queryParams) === 2)   {$this->readBorrows();}
+               if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1)   {$this->readBorrowUser();}
+               if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1)   {$this->readBorrowbyBook();}
+                }
+                else $this->readBorrow();
             }
         else if($this->requestMethod=='DELETE'){
             $this->delete();
@@ -30,8 +30,12 @@ class BorrowController{
             $this->createBorrow();
         }
         else if($this->requestMethod=='PUT'){
-            if ($this->queryParams['book_id']) $response = $this->updateBorrow($this->queryParams['book_id']);
-            else ($this->raiseException());
+            if ($this->queryParams['book_id']) 
+            {$response = $this->updateBorrow($this->queryParams['book_id']);}
+            else{
+                $this->print_r('No book issue found');
+        
+        }
         }
         
     }
@@ -188,18 +192,13 @@ public function updateBorrow($book_id)
         if (empty($input)) {
             $input = (array) $_POST;
         }
-        $validation = $this->validateInput($input);
-        if (!$validation['isValid']) {
-            return $validation;
-        }
         $response = $this->borrow->update($book_id,$input);
         if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
     }
     public function validateInput($input)
     {
-        print_r($input)
-        $hasRequired = $this->create->hasRequiredField($input);
+        $hasRequired = $this->borrow->hasRequiredField($input);
         if (!$hasRequired) {
             return $this->Responce('HTTP/1.1 422', 'Unprocessable Request', 'Missing Field(s)', 'isValid', false);
         }
