@@ -34,11 +34,7 @@ class BorrowController
         } else if ($this->requestMethod == 'POST') {
             $this->createBorrow();
         } else if ($this->requestMethod == 'PUT') {
-            if ($this->queryParams['book_id']) {
-                $response = $this->updateBorrow($this->queryParams['book_id']);
-            } else {
-                print_r('No book issue found');
-            }
+            $response = $this->updateBorrow();
         }
     }
 
@@ -121,13 +117,12 @@ class BorrowController
         if (!$response['success']) return $this->Responce('HTTP/1.1 409', 'Duplicate Data', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Inserted 1 Row');
     }
-    public function updateBorrow($book_id)
+    public function updateBorrow()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (empty($input)) {
-            $input = (array) $_POST;
-        }
-        $response = $this->borrow->update($book_id, $input);
+        $this->borrow->book_id = $input['book_id'];
+        $this->borrow->user_id = $input['user_id'];
+        $response = $this->borrow->update($this->queryParams);
         if (!$response['success']) return $this->Responce('HTTP/1.1 500', 'Internel Server Error', $response['error']);
         else return $this->Responce('HTTP/1.1 200', 'OK', 'Updated 1 Row');
     }

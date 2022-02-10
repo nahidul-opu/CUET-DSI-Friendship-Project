@@ -28,7 +28,7 @@ class Borrow
   }
   public function read()
   {
-    $query = 'SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    $query = 'SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
           FROM 
             borrow, book, user
           WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id
@@ -59,7 +59,7 @@ class Borrow
   }
   public function readSpec()
   {
-    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE borrow.book_id=:book_id and borrow.user_id=:user_id AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
@@ -73,7 +73,7 @@ class Borrow
   }
   public function readbyUser()
   {
-    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE borrow.user_id=:user_id AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
@@ -86,7 +86,7 @@ class Borrow
   }
   public function readbyBookID()
   {
-    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE borrow.book_id=:book_id  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
@@ -122,18 +122,27 @@ class Borrow
     }
   }
 
-  public function update($book_id, $input)
+  public function update($params)
   {
-    $statement = "
+    $statement = "";
+    if (isset($params['renew'])) {
+      $statement = "
         UPDATE borrow 
         SET  due_date=(DATE_ADD(now(),interval 20 day)) ,updated_at=now()
-        WHERE book_id=:book_id;
+        WHERE book_id=:book_id AND user_id=:user_id;
       ";
-
+    } else if (isset($params['return'])) {
+      $statement = "
+          UPDATE borrow 
+          SET  status = 1 ,updated_at=now()
+          WHERE book_id=:book_id AND user_id=:user_id;
+        ";
+    }
     try {
       $statement = $this->conn->prepare($statement);
       $result = $statement->execute(array(
-        'book_id' => $book_id,
+        'book_id' => $this->book_id,
+        'user_id' => $this->user_id,
       ));
       $response['success'] = true;
       if ($result === false) {
