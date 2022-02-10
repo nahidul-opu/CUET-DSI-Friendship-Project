@@ -59,10 +59,10 @@ class Borrow
   }
   public function readSpec()
   {
-    $query = "SELECT *
-        FROM 
-          borrow 
-        WHERE book_id=:book_id and user_id=:user_id";
+    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE borrow.book_id=:book_id and borrow.user_id=:user_id AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':book_id', $this->book_id);
@@ -73,10 +73,10 @@ class Borrow
   }
   public function readbyUser()
   {
-    $query = "SELECT *
-        FROM 
-          borrow 
-        WHERE user_id=:user_id";
+    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE borrow.user_id=:user_id AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':user_id', $this->user_id);
@@ -86,10 +86,10 @@ class Borrow
   }
   public function readbyBookID()
   {
-    $query = "SELECT *
-        FROM 
-          borrow 
-        WHERE book_id=:book_id";
+    $query = "SELECT borrow.book_id, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE borrow.book_id=:book_id  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':book_id', $this->book_id);
