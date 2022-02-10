@@ -433,9 +433,6 @@ $(document).ready(function () {
   });
 
   $("#issue-user-search").keypress(function (e) {
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-
     var key = e.which;
     if (key == 13) {
       var s_user = $("#issue-user-search").val();
@@ -513,43 +510,36 @@ $(document).ready(function () {
   });
 
   /*---------------------------------history tab design-----------------------*/
-
-  function fetchUserName(userId) {
-    var userUrl = directoryPath + "/api/users/" + userId;
-    $.get(userUrl, function (data, status) {
-      console.log("88888888888888888888");
-      console.log(data);
-    });
-  }
-  function fetchBookName() {}
-  function showHistoryTableData(data) {
-    console.log("#########################");
-    console.log(data);
-    console.log("#########################");
-    var singleRow;
+  function historyTableLoad(data) {
     $("#history-tab-table-body").empty();
-    for (let i = 0; i <= data.length; i++) {
-      singleRow =
-        `<tbody> <td>` +
+
+    var tableRow;
+    for (let i = 0; i < data.length; i++) {
+      tableRow =
+        `<tr>
+                    <td>` +
         (i + 1) +
         `</td>
-                        <td>` +
+                    <td>` +
         data[i].user_id +
         `</td>
-                        <td>` +
-        `dummy user name` +
+                    <td>` +
+        data[i].name +
         `</td>
-                        <td>` +
-        `dummy book name` +
+                    <td>` +
+        data[i].title +
         `</td>
-                        <td>` +
+                    <td>` +
+        data[i].status +
+        `</td>
+                    <td>` +
         data[i].issue_date +
         `</td>
-                        <td>` +
+                    <td>` +
         data[i].due_date +
-        `</td> </tbody>`;
-
-      $("#history-details-table").append(singleRow);
+        `</td>
+                  </tr>`;
+      $("#history-tab-table-body").append(tableRow);
     }
   }
 
@@ -567,18 +557,24 @@ $(document).ready(function () {
 
     //history fetch api:
     var fetchHistoryUrl = directoryPath + "api/borrow";
+    console.log(fetchHistoryUrl);
     $.ajax({
       type: "GET",
       url: fetchHistoryUrl,
       dataType: "json",
       async: true,
       success: function (data, status) {
-        console.log(data["data"]);
-        showHistoryTableData(data["data"]);
+        console.log(data);
+        console.log(data[0].book_id);
+        historyTableLoad(data);
       },
       error: function (data) {
         //alert("fail");
       },
     });
+  });
+
+  $("#history-search-input").on("keyup", function () {
+    console.log($(this).val());
   });
 });

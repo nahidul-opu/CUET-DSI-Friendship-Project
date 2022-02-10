@@ -482,7 +482,7 @@
                         <th scope="col">User id</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Book name</th>
-                        <!-- <th scope="col">Status</th> -->
+                        <th scope="col">Status</th>
                         <th scope="col">Issue date</th>
                         <th scope="col">Due date</th>
                         </tr>
