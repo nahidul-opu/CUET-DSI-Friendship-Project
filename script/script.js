@@ -110,6 +110,7 @@ $(document).ready(function () {
     var btn_id = $(this).attr("id");
     //console.log(btn_id);
     
+    var book;
     $.ajax({
       type: "GET",
       url: directoryPath + `api/books/`+btn_id,
@@ -118,7 +119,7 @@ $(document).ready(function () {
       success: function (data, status) {
         // //console.log(data.keys());
         
-        var book = data["message"][0];
+         book = data["message"][0];
         //console.log(book);
         var book_info = 
         `<b>Title:</b> `+book.title+`<br><br>
@@ -159,14 +160,33 @@ $(document).ready(function () {
     });
     
     
-  });
+    //issue book button action
+  $( "#book-issue-btn" ).on( "click" ,function() {    
+    user_id = $("#issue-user-search").val().split('.');
+
+    let data = {
+     book_id: "",
+     user_id: "",
+   };
+   var url = directoryPath + "api/borrow";
+   data.book_id = book.book_id;
+   data.user_id = user_id[0];
+
+   $.post(url, JSON.stringify(data), function (msg) {   
+     $("#result").html(msg);
+     alert("float button clicked222");
+    console.log("ddddd")
+   });
+ }); 
+});
+
+  
 
 
 
 
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
-    /*alert($(this));*/
     var btn_id = $(this).attr("id");
     console.log($(this).attr("id"));
     console.log(output[btn_id].title);
@@ -452,5 +472,6 @@ $('#issue-user-search').keypress(function (e) {
         $("#result").html(msg);
       });
     });
+
   });
 });
