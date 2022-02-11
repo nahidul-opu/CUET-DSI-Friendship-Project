@@ -42,7 +42,7 @@ class BorrowController
                     $this->readBorrowbyLimit();
                 }
                 if (isset($this->queryParams['sort'])&&!isset($this->queryParams['limit'])) {
-                    print_r("2");
+                    // print_r("2");
                     $this->readSort();
                 }
                 if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])) {

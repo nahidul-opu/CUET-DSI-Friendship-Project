@@ -1,8 +1,49 @@
+var historySortHeader;
+var historyFunction;
+var directoryPath;
+var historySortTrack = {
+  book_id: 0,
+  created_at: 0,
+  due_date: 0,
+  issue_date: 0,
+  name: 0,
+  status: 0,
+  title: 0,
+  updated_at: 0,
+  user_id: 0,
+};
+
+function tableHeader(data) {
+  alert("table header cliked");
+  console.log(typeof data);
+  historySortHeader = data;
+  // historyFunction();
+  var fetchSortUrl;
+  if (historySortTrack[data] === 0) {
+    fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=0`;
+    historySortTrack[data] = 1;
+  } else {
+    fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=1`;
+    historySortTrack[data] = 0;
+  }
+  console.log(fetchSortUrl);
+  $.ajax({
+    type: "GET",
+    url: fetchSortUrl,
+    dataType: "json",
+    async: true,
+    success: function (data, status) {
+      console.log(data);
+      historyTableLoad(data);
+    },
+    error: function (data, status) {},
+  });
+}
+
 $(document).ready(function () {
   //global variable for data cache
   var output;
   var target_category_id;
-  var directoryPath;
 
   var location = window.location.href;
   directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
@@ -450,25 +491,25 @@ $(document).ready(function () {
     });
   });
 
-  $("#issue-user-search").keypress(function (e) {
-    var key = e.which;
-    if (key == 13) {
-      var s_user = $("#issue-user-search").val();
-      console.log(s_user);
-      result = s_user.split(".");
-      var user_info =
-        `
-      <b>Name: </b>` +
-        result[1] +
-        `<br>
-      <b>User Id : </b>` +
-        result[0] +
-        `<br>
-      `;
-      $("#book-issue-user-info").empty();
-      $("#book-issue-user-info").append(user_info);
-    }
-  });
+  // $("#issue-user-search").keypress(function (e) {
+  //   var key = e.which;
+  //   if (key == 13) {
+  //     var s_user = $("#issue-user-search").val();
+  //     console.log(s_user);
+  //     result = s_user.split(".");
+  //     var user_info =
+  //       `
+  //     <b>Name: </b>` +
+  //       result[1] +
+  //       `<br>
+  //     <b>User Id : </b>` +
+  //       result[0] +
+  //       `<br>
+  //     `;
+  //     $("#book-issue-user-info").empty();
+  //     $("#book-issue-user-info").append(user_info);
+  //   }
+  // });
 
   $("#issue-user-search").keypress(function (e) {
     var location = window.location.href;
@@ -570,8 +611,8 @@ $(document).ready(function () {
                     <td>` +
         data[i].title +
         `</td>
-                    <td>` +
-        data[i].status +
+                    <td class="text-info">` +
+        (data[i].status === "0" ? `Issued` : `Returned`) +
         `</td>
                     <td>` +
         data[i].issue_date +
@@ -627,20 +668,24 @@ $(document).ready(function () {
     console.log($(this).val());
     var searchValue = $(this).val();
 
-    var dataFetchUrl = "";
-    directoryPath +
-      $.ajax({
-        type: "GET",
-        url: dataFetchUrl,
-        dataType: "json",
-        async: true,
-        success: function (data, status) {
-          output = data["message"];
-          showBookDetails(output, target_category_id);
-        },
-        error: function (data, status) {
-          console.log(data);
-        },
-      });
+    var dataFetchUrl;
+    if ($("#history-search-dropdown option:selected").val() === "title") {
+      dataFetchUrl = directoryPath + "api/borrow?title=" + searchValue;
+    } else {
+      dataFetchUrl = directoryPath + "api/borrow?name=" + searchValue;
+    }
+    console.log(dataFetchUrl);
+    $.ajax({
+      type: "GET",
+      url: dataFetchUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        console.log(data);
+        historyTableLoad(data);
+      },
+      error: function (data, status) {},
+    });
   });
+  historyFunction = historyTableLoad;
 });

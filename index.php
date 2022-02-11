@@ -478,13 +478,13 @@
                 <table class="table table-dark table-striped" id="history-details-table">
                     <thead>
                         <tr>
-                        <th scope="col">Sl. no</th>
-                        <th scope="col">User id</th>
-                        <th scope="col">User Name</th>
-                        <th scope="col">Book name</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Issue date</th>
-                        <th scope="col">Due date</th>
+                        <th scope="col" onclick="tableHeader(0)">Sl. no</th>
+                        <th scope="col" onclick="tableHeader('user_id')">User id</th>
+                        <th scope="col" onclick="tableHeader('name')">User Name</th>
+                        <th scope="col" onclick="tableHeader('title')">Book name</th>
+                        <th scope="col" onclick="tableHeader('status')">Status</th>
+                        <th scope="col" onclick="tableHeader('issue_date')">Issue date</th>
+                        <th scope="col" onclick="tableHeader('due_date')">Due date</th>
                         </tr>
                     </thead>
 
