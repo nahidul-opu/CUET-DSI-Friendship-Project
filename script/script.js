@@ -574,7 +574,32 @@ $(document).ready(function () {
     });
   });
 
+  $("#history-search-dropdown").change(function () {
+    if ($("#history-search-dropdown option:selected").val() === "title") {
+      $("#history-search-input").attr("placeholder", "Enter book title");
+    } else {
+      $("#history-search-input").attr("placeholder", "Enter user name");
+    }
+  });
+
   $("#history-search-input").on("keyup", function () {
     console.log($(this).val());
+    var searchValue = $(this).val();
+
+    var dataFetchUrl = "";
+    directoryPath +
+      $.ajax({
+        type: "GET",
+        url: dataFetchUrl,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          output = data["message"];
+          showBookDetails(output, target_category_id);
+        },
+        error: function (data, status) {
+          console.log(data);
+        },
+      });
   });
 });

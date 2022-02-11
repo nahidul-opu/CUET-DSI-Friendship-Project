@@ -468,8 +468,8 @@
                         <input class="form-control m-0" type="search" id="history-search-input" placeholder="Enter book title" aria-label="Search">
                         <div id="drop-down-search-container" class="row">
                             <select name="book-search-dropdown" id="history-search-dropdown">
-                                <option value="title">by user name</option>
-                                <option value="author_name">by book title</option>
+                                <option value="title">by book title</option>
+                                <option value="author_name">by user name</option>
                             </select>
                         </div>
                     </form>
