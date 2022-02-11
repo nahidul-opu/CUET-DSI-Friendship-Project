@@ -33,6 +33,31 @@ This is an automated system for managing a library. A librarian can manage libra
 3. Step-3: Clone this repository to xampp/htdocs folder
 4. Step-4: Go to `http://localhost/Library-Management-System/`
 
+## Contributors ✨
+
+<!-- prettier-ignore -->
+<table>
+    <h3>Frontend Team</h3>
+    <tr>
+        <td align="center"><a href="https://github.com/Bishal16"><img src="https://avatars.githubusercontent.com/u/38830643" width="100px"><br><h5>Mahathir Bishal</h5></a></td>
+        <td align="center"><a href="https://github.com/a541k"><img src="https://avatars.githubusercontent.com/u/83023907" width="100px"><br><h5>Ashik Mahmud</h5></a></td>
+        <td align="center"><a href="https://github.com/ashish-pondit"><img src="https://avatars.githubusercontent.com/u/48186079" width="100px"><br><h5>Ashish Pondit</h5></a></td>
+        <td align="center"><a href="https://github.com/SabihaIslam"><img src="https://avatars.githubusercontent.com/u/98734213" width="100px"><br><h5>Sabiha Islam</h5></a></td>
+        <td align="center"><a href="https://github.com/sabiha-samad"><img src="https://avatars.githubusercontent.com/u/44741879" width="100px"><br><h5>Sabiha Samad</h5></a></td>
+    </tr>
+</table>
+<table>
+    <h3>Backend Team</h3>
+    <tr>
+        <td align="center"><a href="https://github.com/1604078-MEHEDI"><img src="https://avatars.githubusercontent.com/u/31961808" width="100px"><br><h5>Mehedi Hasan</h5></a></td>
+        <td align="center"><a href="https://github.com/Muzahid037"><img src="https://avatars.githubusercontent.com/u/48602232" width="100px"><br><h5>Md. Muzahidul Islam</h5></a></td>
+        <td align="center"><a href="https://github.com/nahidul-opu"><img src="https://avatars.githubusercontent.com/u/37839072" width="100px"><br><h5>Md. Nahidul Islam Opu</h5></a></td>
+        <td align="center"><a href=""><img src="https://avatars.githubusercontent.com/u/70045339" width="100px"><br><h5>Samsun Naher</h5></a></td>
+        <td align="center"><a href="https://github.com/ahmedfahmida"><img src="https://avatars.githubusercontent.com/u/98795775" width="100px"><br><h5>Fahmida Ahmed</h5></a></td>
+        <td align="center"><a href="https://github.com/Rushnan-Faria"><img src="https://avatars.githubusercontent.com/u/98732391" width="100px"><br><h5>Rushnan Faria</h5></a></td>
+    </tr>
+</table>
+
 
 
 
