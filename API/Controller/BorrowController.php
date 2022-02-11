@@ -31,6 +31,9 @@ class BorrowController
                 if (isset($this->queryParams['title']) && count($this->queryParams) === 1) {
                     $this->readBorrowbyTitle();
                 }
+                if (isset($this->queryParams['limit'])) {
+                    $this->readBorrowbyLimit();
+                }
             } else $this->readBorrow();
         } else if ($this->requestMethod == 'DELETE') {
             $this->delete();
@@ -110,6 +113,23 @@ class BorrowController
     {
         $this->borrow->title = $this->queryParams['title'];
         $stmt = $this->borrow->readbyBookName();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readBorrowbyLimit()
+    {
+        $this->borrow->LIMIT = $this->queryParams['limit'];
+        if(isset($this->queryParams['offset'])){
+            $this->borrow->offset = $this->queryParams['offset'];
+        }
+        $stmt = $this->borrow->readbyLimit();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         if ($result) {
