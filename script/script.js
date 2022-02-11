@@ -14,27 +14,34 @@ var historySortTrack = {
 };
 
 function tableHeader(data) {
-  alert("table header cliked");
-  console.log(typeof data);
+  // alert("table header cliked");
+  // console.log(typeof data);
   historySortHeader = data;
   // historyFunction();
   var fetchSortUrl;
+  var iconSelector;
+  $(".no-display").hide();
   if (historySortTrack[data] === 0) {
+    iconSelector = "#" + data + "0";
+    $(iconSelector).show();
     fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=0`;
     historySortTrack[data] = 1;
   } else {
+    iconSelector = "#" + data + "1";
+    $(iconSelector).show();
     fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=1`;
     historySortTrack[data] = 0;
   }
-  console.log(fetchSortUrl);
+  // console.log(iconSelector);
+  // console.log(fetchSortUrl);
   $.ajax({
     type: "GET",
     url: fetchSortUrl,
     dataType: "json",
     async: true,
     success: function (data, status) {
-      console.log(data);
-      historyTableLoad(data);
+      // console.log(data);
+      historyFunction(data);
     },
     error: function (data, status) {},
   });
@@ -451,7 +458,7 @@ $(document).ready(function () {
   // });
   //book search option, search by author and book title
   $("#book-search-input").on("keyup", function () {
-    console.log($(this).val());
+    // console.log($(this).val());
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
     // $(this).val("");
@@ -639,15 +646,15 @@ $(document).ready(function () {
 
     //history fetch api:
     var fetchHistoryUrl = directoryPath + "api/borrow";
-    console.log(fetchHistoryUrl);
+    // console.log(fetchHistoryUrl);
     $.ajax({
       type: "GET",
       url: fetchHistoryUrl,
       dataType: "json",
       async: true,
       success: function (data, status) {
-        console.log(data);
-        console.log(data[0].book_id);
+        // console.log(data);
+        // console.log(data[0].book_id);
         historyTableLoad(data);
       },
       error: function (data) {
@@ -665,7 +672,7 @@ $(document).ready(function () {
   });
 
   $("#history-search-input").on("keyup", function () {
-    console.log($(this).val());
+    // console.log($(this).val());
     var searchValue = $(this).val();
 
     var dataFetchUrl;
@@ -674,14 +681,14 @@ $(document).ready(function () {
     } else {
       dataFetchUrl = directoryPath + "api/borrow?name=" + searchValue;
     }
-    console.log(dataFetchUrl);
+    // console.log(dataFetchUrl);
     $.ajax({
       type: "GET",
       url: dataFetchUrl,
       dataType: "json",
       async: true,
       success: function (data, status) {
-        console.log(data);
+        // console.log(data);
         historyTableLoad(data);
       },
       error: function (data, status) {},

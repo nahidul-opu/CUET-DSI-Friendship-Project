@@ -461,7 +461,7 @@
             
             <!---------------------history tab design--------------->
             <div class="container" id="history-tab-body" style="display:none;">
-
+                <div class="display-4 m-4 p-0" id="history-header">History</div>
                 <!----------------history tab search option design--------------->
                 <div class="navbar navbar-light nav justify-content-center" id="history-search-container">
                     <form class="d-flex flex-row align-middle" id="history-tab-search">
@@ -478,13 +478,58 @@
                 <table class="table table-dark table-striped" id="history-details-table">
                     <thead>
                         <tr>
-                        <th scope="col" onclick="tableHeader(0)">Sl. no</th>
-                        <th scope="col" onclick="tableHeader('user_id')">User id</th>
-                        <th scope="col" onclick="tableHeader('name')">User Name</th>
-                        <th scope="col" onclick="tableHeader('title')">Book name</th>
-                        <th scope="col" onclick="tableHeader('status')">Status</th>
-                        <th scope="col" onclick="tableHeader('issue_date')">Issue date</th>
-                        <th scope="col" onclick="tableHeader('due_date')">Due date</th>
+                        <th scope="col">Sl. no</th>
+                        <th scope="col" onclick="tableHeader('user_id')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="user_id0"></i>
+                            <i class="bi bi-caret-down no-display" id="user_id1"></i>
+                            <br>
+                            User id
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('name')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="name0"></i>
+                            <i class="bi bi-caret-down no-display" id="name1"></i>
+                            <br>
+                            User Name
+                        </div>
+                        </th>
+                        <th scope="col" onclick="tableHeader('title')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="title0"></i>
+                            <i class="bi bi-caret-down no-display" id="title1"></i>
+                            <br>
+                            Book name
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('status')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="status0"></i>
+                            <i class="bi bi-caret-down no-display" id="status1"></i>
+                            <br>
+                            Status
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('issue_date')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="issue_date0"></i>
+                            <i class="bi bi-caret-down no-display" id="issue_date1"></i>
+                            <br>
+                            Issue date
+                        </div>
+                        </th>
+                        <th scope="col" onclick="tableHeader('due_date')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="due_date0"></i>
+                            <i class="bi bi-caret-down no-display" id="due_date1"></i>
+                            <br>
+                            Due date
+                        </div>
+                        </th>
                         </tr>
                     </thead>
 
