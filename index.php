@@ -519,6 +519,18 @@
                 <h3 class="text-center text-white bg-dark rounded p-2">User List</h3>
 
                 <table class="table table-hover table-dark" id="user-list-table">
+                    <thead id="table-head">
+                        <tr>
+                            <th class="float-center">SL No.</th>
+                            <th class="float-center">ID</th>
+                            <th class="float-center">User Name</th>
+                            <th class="float-center">email</th>
+                            <th class="float-center">Phone</th>
+                            <th class="float-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-list-table-body">
+                    </tbody>
                     <!-- jquery will append user table here -->
                 </table>
 
@@ -526,6 +538,45 @@
 
             <!------------------bishal User list end here ----------------------->
 
+
+            <!----------------- bishal user update modal start ------------------------->
+            <div class="modal" id="edit-user-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit User Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+
+                            <script>
+                                $(".btn-close").click(function() {
+                                    $("#edit-user-modal").hide();
+                                })
+                            </script>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" id="edit-user-form">
+                                <div class="mb-3">
+                                    <label class="form-label">User Name</label>
+                                    <input id="user-name" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">phone no.</label>
+                                    <input id="phone-no" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" id="email-id" class="form-control" name="author_name" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="user-edit-form-submit">Update info</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!----------------- bishal user update modal start ------------------------->
 
 
 

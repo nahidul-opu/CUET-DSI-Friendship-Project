@@ -182,32 +182,31 @@ $(document).ready(function () {
     });
   });
 
-  //issue book button action
-  $("#book-issue-btn").on("click", function () {
-    user_id = $("#issue-user-search").val().split(".");
-    let data = {
-      book_id: "",
-      user_id: "",
-    };
-    var url = directoryPath + "api/borrow";
-    data.book_id = book.book_id;
-    data.user_id = user_id[0];
-    if (data.book_id != "" && data.user_id != "") {
-      if (confirm("Confirm book issue?")) {
-        $.post(url, JSON.stringify(data), function (msg) {
-          $("#result").html(msg);
-        });
-        $("#issue-book-modal").hide();
-      }
-    } else {
-      alert("please select a user to issue book.");
-    }
-  });
+  // //issue book button action
+  // $("#book-issue-btn").on("click", function () {
+  //   user_id = $("#issue-user-search").val().split(".");
+  //   let data = {
+  //     book_id: "",
+  //     user_id: "",
+  //   };
+  //   var url = directoryPath + "api/borrow";
+  //   data.book_id = book.book_id;
+  //   data.user_id = user_id[0];
+  //   if (data.book_id != "" && data.user_id != "") {
+  //     if (confirm("Confirm book issue?")) {
+  //       $.post(url, JSON.stringify(data), function (msg) {
+  //         $("#result").html(msg);
+  //       });
+  //       $("#issue-book-modal").hide();
+  //     }
+  //   } else {
+  //     alert("please select a user to issue book.");
+  //   }
+  // });
 
   //issue book button action
   $("#book-issue-btn").on("click", function () {
     user_id = $("#issue-user-search").val().split(".");
-    console.log("-------------print");
     let data = {
       book_id: "",
       user_id: "",
@@ -560,68 +559,100 @@ $(document).ready(function () {
 
 
   // show user list start
-
-
-  // show user list end
+  var user_list;
   $("#users").click(function () {
     $("#users").css("background-color", "#2f0410");
     $("#inventory").css("background-color", "");
     $("#main-body").hide();
+    $("#book-details").hide();
     $("#user-list-div").show();
 
     //retriving user list from db
+    
     $.ajax({
       type: "GET",
       url: directoryPath + `api/users/`,
       dataType: "json",
       async: true,
       success: function (data, status) {
-        var user_list = data["message"];
+        user_list = data["message"];
         show_user_list(user_list)
       },
     });
     
   });
+  function show_user_list(user_list, ) {
+    $("#user-list-table-body").empty(); /// not working ◣_◢, appending every time
+    
+    for (let i = 0; i < user_list.length; i++) {
+      var userTableRows =
+      `
+        <tr>
+            <th scope="row">` + (i+1) +`</th>
+            <td class="text-center">` + user_list[i].user_id +`</td>
+            <td>` + user_list[i].name +`</td>
+            <td>` + user_list[i].email +`</td>
+            <td>` + user_list[i].contact_no +`</td>
+            <td>
+                <div class="float-center">            
+                    <button type="button" class="btn btn-primary badge-pill user-update-button" style="width: 80px;"id="` + user_list[i].user_id  + `">Edit</button>
+                    <button type="button" class="btn btn-danger badge-pill user-delete-book-button" style="width: 80px;" id="` +user_list[i].user_id +`">Rmove</button>
+                </div>
+            </td>
+        </tr>
+      `;
+  
+      $("#user-list-table-body").append(userTableRows);
+    }
+  }
+
+  // show user list end
+
+  //update user info start
+  var uid;
+  $("#user-list-table").on("click", ".user-update-button", function (e) {
+     uid = $(this).attr("id");
+    var uname,phn,email;
+    for (var i = 0; i < user_list.length; i++){
+      if (user_list[i].user_id == uid){
+        uname = user_list[i].name;
+        phn = user_list[i].contact_no;
+        email = user_list[i].email;
+        break;
+      }
+    }
+
+     $("#edit-user-modal").show();
+
+     $("#user-name").attr("value", uname);
+     $("#phone-no").attr("value", phn);
+     $("#email-id").attr("value", email);
+    
+
+
+  });
+  $("#edit-user-form").submit(function (e) {
+    e.preventDefault();
+    let data = {
+      name: "",
+      email: "",
+      contact_no:"",
+    };
+    var url = directoryPath + "api/users/"+uid;
+    data.name = $("#user-name").val();
+    data.email = $("#email-id").val();
+    data.contact_no = $("#phone-no").val();
+    //console.log(data);
+    if (confirm("Confirm Edit?")) {
+      $.post(url, JSON.stringify(data), function (msg) {
+        $("#result").html(msg);
+      });
+      $("#edit-user-modal").hide();
+    }
+    
+  });
+  // update user info end
+
+
 });
 
-function show_user_list(user_list, ) {
-  $("user-list-table").empty();
-  console.log("empty table");
-  var table_header = `<thead id="table-head">
-                            <tr>
-                                <th class="float-center">SL No.</th>
-                                <th class="float-center">ID</th>
-                                <th class="float-center">User Name</th>
-                                <th class="float-center">email</th>
-                                <th class="float-center">Phone</th>
-                                <th class="float-center">Actions</th>
-                            </tr>
-                      </thead>`;
-  $("#user-list-table").append(table_header);
-  console.log("append head-----");
-
-  for (let i = 0; i < user_list.length; i++) {
-    var userTableRows =
-    `<tbody>
-      <tr>
-          <th scope="row">` + (i+1) +`</th>
-          <td>` + user_list[i].user_id +`</td>
-          <td>` + user_list[i].name +`</td>
-          <td>` + user_list[i].email +`</td>
-          <td>` + user_list[i].contact_no +`</td>
-          <td>
-              <div class="float-center">            
-                  <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
-                  i + `">Update</button>
-                  <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
-                  user_list[i].user_id +`">Delete</button>
-              </div>
-          </td>
-      </tr>
-    </tbody>`;
-
-    $("#user-list-table").append(userTableRows);
-    console.log("append row");
-
-  }
-}
