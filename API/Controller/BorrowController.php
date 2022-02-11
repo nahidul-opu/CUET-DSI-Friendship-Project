@@ -34,6 +34,9 @@ class BorrowController
                 if (isset($this->queryParams['limit'])) {
                     $this->readBorrowbyLimit();
                 }
+                if (isset($this->queryParams['sort'])) {
+                    $this->readSort();
+                }
             } else $this->readBorrow();
         } else if ($this->requestMethod == 'DELETE') {
             $this->delete();
@@ -130,6 +133,26 @@ class BorrowController
             $this->borrow->offset = $this->queryParams['offset'];
         }
         $stmt = $this->borrow->readbyLimit();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readSort()
+    {
+        if(isset($this->queryParams['desc'])){
+                $this->borrow->desc=$this->queryParams['desc'];
+        }
+        else{
+            $this->borrow->desc=0;
+        }
+        $this->borrow->column = $this->queryParams['sort'];
+        $stmt = $this->borrow->sort();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         if ($result) {

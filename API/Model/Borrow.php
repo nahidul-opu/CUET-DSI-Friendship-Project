@@ -128,6 +128,24 @@ class Borrow
     $stmt->execute();
     return $stmt;
   }
+  public function sort()
+  {
+    if($this->desc==1){
+      $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC ";
+    }
+    else{
+    $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." ";
+    }
+    $stmt = $this->conn->prepare($query); 
+    $stmt->execute();
+    return $stmt;
+  }
   public function create($input)
   {
     $statement = "
