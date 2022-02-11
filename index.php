@@ -229,8 +229,8 @@
                                 <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
                             </form>
                         </div>
-                    
-                    
+
+
                     </div>
                 </div>
             </div>
@@ -246,82 +246,82 @@
                         <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
-                
+
                 <!--------------------------delete book confirmation modal---------->
                 <div class="modal" id="delete-confirm">
                     <div class="modal-dialog modal-dialog-centered">
-                       <div class="modal-content">
-                           <div class="modal-body">
-                           <h2>Are you sure you want to delete?</h2>
-                        
-                            <div class="flex-row">
-                                <button class="btn btn-primary" id="cancel">Cancel</button>
-                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h2>Are you sure you want to delete?</h2>
+
+                                <div class="flex-row">
+                                    <button class="btn btn-primary" id="cancel">Cancel</button>
+                                    <button class="btn btn-danger" id="confirm">Confirm</button>
+                                </div>
                             </div>
-                           </div>
-                       
-                       </div>
+
+                        </div>
 
                     </div>
                 </div>
-                
-                
-                <!------------------------------------------pop up form---------------------->
-                    <div class="modal" id="add-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Book</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#add-book-modal").hide();
-                                        })
-                                    </script>
-                                    
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="add-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="mAB-book-name" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="mAB-author-name" class="form-control"  placeholder="">
-                                        </div>
-                                         <div class="mb-3">
-                                            <label class="form-label">Book Category</label>
-                                            <input type="text" id="mAB-category-id" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="mAB-publisher" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="mAB-pub-year" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="mAB-isbn" class="form-control" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="mAB-total-count" class="form-control" placeholder="">
-                                        </div>
-                                       <!-- <div class="mb-3">
+
+
+                <!---------------------------- pop up form ---------------------->
+                <div class="modal" id="add-book-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Book</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                <script>
+                                    $(".btn-close").click(function() {
+                                        $("#add-book-modal").hide();
+                                    })
+                                </script>
+
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" method="post" id="add-book-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Name</label>
+                                        <input id="mAB-book-name" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Author</label>
+                                        <input type="text" id="mAB-author-name" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Category</label>
+                                        <input type="text" id="mAB-category-id" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publisher</label>
+                                        <input type="text" id="mAB-publisher" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publish Year</label>
+                                        <input type="text" id="mAB-pub-year" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">ISBN</label>
+                                        <input type="text" id="mAB-isbn" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Total Count</label>
+                                        <input type="text" id="mAB-total-count" class="form-control" placeholder="">
+                                    </div>
+                                    <!-- <div class="mb-3">
                                             <label class="form-label">Current Count</label>
                                             <input type="text" id="mAB-current-count" class="form-control"  placeholder="">
                                         </div>-->
-                                        <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
-                                    </form>
-                                </div>
-                            
+                                    <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
+                </div>
 
 
 
@@ -514,8 +514,25 @@
 
 
 
+            <!------------------bishal User list TAB start here ----------------------->
+            <div class="p-4" id="user-list-div" style="display:none">
+                <h3 class="text-center text-white bg-dark rounded p-2">User List</h3>
+
+                <table class="table table-hover table-dark" id="user-list-table">
+                    <!-- jquery will append user table here -->
+                </table>
+
+            </div>
+
+            <!------------------bishal User list end here ----------------------->
+
+
+
+
         </div>
     </div>
+
+
 
 
 

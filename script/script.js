@@ -394,9 +394,10 @@ $(document).ready(function () {
   //inventory tab click function
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
+    $("#users").css("background-color", "");
     $("#bookissue").css("background-color", "");
     $("#book-details").hide();
-    $("#issue-book").hide();
+    $("#user-list-div").hide();
     $("#main-body").show();
     loadCategoryCard();
   });
@@ -556,4 +557,71 @@ $(document).ready(function () {
       $("#add-book-modal").hide();
     });
   });
+
+
+  // show user list start
+
+
+  // show user list end
+  $("#users").click(function () {
+    $("#users").css("background-color", "#2f0410");
+    $("#inventory").css("background-color", "");
+    $("#main-body").hide();
+    $("#user-list-div").show();
+
+    //retriving user list from db
+    $.ajax({
+      type: "GET",
+      url: directoryPath + `api/users/`,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        var user_list = data["message"];
+        show_user_list(user_list)
+      },
+    });
+    
+  });
 });
+
+function show_user_list(user_list, ) {
+  $("user-list-table").empty();
+  console.log("empty table");
+  var table_header = `<thead id="table-head">
+                            <tr>
+                                <th class="float-center">SL No.</th>
+                                <th class="float-center">ID</th>
+                                <th class="float-center">User Name</th>
+                                <th class="float-center">email</th>
+                                <th class="float-center">Phone</th>
+                                <th class="float-center">Actions</th>
+                            </tr>
+                      </thead>`;
+  $("#user-list-table").append(table_header);
+  console.log("append head-----");
+
+  for (let i = 0; i < user_list.length; i++) {
+    var userTableRows =
+    `<tbody>
+      <tr>
+          <th scope="row">` + (i+1) +`</th>
+          <td>` + user_list[i].user_id +`</td>
+          <td>` + user_list[i].name +`</td>
+          <td>` + user_list[i].email +`</td>
+          <td>` + user_list[i].contact_no +`</td>
+          <td>
+              <div class="float-center">            
+                  <button type="button" class="btn btn-primary badge-pill update-button" style="width: 80px;"id="` +
+                  i + `">Update</button>
+                  <button type="button" class="btn btn-danger badge-pill delete-book-button" style="width: 80px;" id="` +
+                  user_list[i].user_id +`">Delete</button>
+              </div>
+          </td>
+      </tr>
+    </tbody>`;
+
+    $("#user-list-table").append(userTableRows);
+    console.log("append row");
+
+  }
+}
