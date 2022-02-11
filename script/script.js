@@ -128,7 +128,6 @@ $(document).ready(function () {
         // //console.log(data.keys());
 
         book = data["message"][0];
-        //console.log(book);
         var book_info =
           `<b>Title:</b> ` +
           book.title +
@@ -178,13 +177,34 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         var users = data["message"];
-        //users_list = [];//making empty
         if (users_list.length == 0) {
           for (let i = 0; i < users.length; i++)
             users_list.push(users[i].user_id + ". " + users[i].name);
         }
       },
     });
+  });
+
+  //issue book button action
+  $("#book-issue-btn").on("click", function () {
+    user_id = $("#issue-user-search").val().split(".");
+    let data = {
+      book_id: "",
+      user_id: "",
+    };
+    var url = directoryPath + "api/borrow";
+    data.book_id = book.book_id;
+    data.user_id = user_id[0];
+    if (data.book_id != "" && data.user_id != "") {
+      if (confirm("Confirm book issue?")) {
+        $.post(url, JSON.stringify(data), function (msg) {
+          $("#result").html(msg);
+        });
+        $("#issue-book-modal").hide();
+      }
+    } else {
+      alert("please select a user to issue book.");
+    }
   });
 
   //issue book button action
@@ -239,8 +259,6 @@ $(document).ready(function () {
       var url = "api/books/" + output[btn_id]["book_id"];
       console.log(url);
       e.preventDefault();
-
-      console.log(output[btn_id]);
 
       $.ajax({
         url: url,
@@ -433,6 +451,29 @@ $(document).ready(function () {
   });
 
   $("#issue-user-search").keypress(function (e) {
+    var key = e.which;
+    if (key == 13) {
+      var s_user = $("#issue-user-search").val();
+      console.log(s_user);
+      result = s_user.split(".");
+      var user_info =
+        `
+      <b>Name: </b>` +
+        result[1] +
+        `<br>
+      <b>User Id : </b>` +
+        result[0] +
+        `<br>
+      `;
+      $("#book-issue-user-info").empty();
+      $("#book-issue-user-info").append(user_info);
+    }
+  });
+
+  $("#issue-user-search").keypress(function (e) {
+    var location = window.location.href;
+    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+
     var key = e.which;
     if (key == 13) {
       var s_user = $("#issue-user-search").val();

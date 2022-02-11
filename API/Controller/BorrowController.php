@@ -22,11 +22,31 @@ class BorrowController
                 if (isset($this->queryParams['book_id']) && isset($this->queryParams['user_id']) && count($this->queryParams) === 2) {
                     $this->readBorrows();
                 }
+                if (isset($this->queryParams['title']) && isset($this->queryParams['name']) && count($this->queryParams) === 2) {
+                    $this->readBorrowsName();
+                }
                 if (isset($this->queryParams['user_id']) && count($this->queryParams) === 1) {
                     $this->readBorrowUser();
                 }
                 if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1) {
                     $this->readBorrowbyBook();
+                }
+                if (isset($this->queryParams['title']) && count($this->queryParams) === 1) {
+                    $this->readBorrowbyTitle();
+                }
+                if (isset($this->queryParams['name']) && count($this->queryParams) === 1) {
+                    $this->readBorrowbyName();
+                }
+                if (isset($this->queryParams['limit'])&&!isset($this->queryParams['sort'])) {
+                    print_r("1");
+                    $this->readBorrowbyLimit();
+                }
+                if (isset($this->queryParams['sort'])&&!isset($this->queryParams['limit'])) {
+                    print_r("2");
+                    $this->readSort();
+                }
+                if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])) {
+                    $this->readSortwithLimit();
                 }
             } else $this->readBorrow();
         } else if ($this->requestMethod == 'DELETE') {
@@ -75,6 +95,21 @@ class BorrowController
             );
         }
     }
+    public function readBorrowsName()
+    {
+        $this->borrow->title = $this->queryParams['title'];
+        $this->borrow->name = $this->queryParams['name'];
+        $stmt = $this->borrow->readSpecName();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
     public function readBorrowUser()
     {
         $this->borrow->user_id = $this->queryParams['user_id'];
@@ -93,6 +128,95 @@ class BorrowController
     {
         $this->borrow->book_id = $this->queryParams['book_id'];
         $stmt = $this->borrow->readbyBookID();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readBorrowbyTitle()
+    {
+        $this->borrow->title = $this->queryParams['title'];
+        $stmt = $this->borrow->readbyBookName();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readBorrowbyName()
+    {
+        $this->borrow->name = $this->queryParams['name'];
+        $stmt = $this->borrow->readbyUserName();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readBorrowbyLimit()
+    {
+        $this->borrow->LIMIT = $this->queryParams['limit'];
+        if(isset($this->queryParams['offset'])){
+            $this->borrow->offset = $this->queryParams['offset'];
+        }
+        $stmt = $this->borrow->readbyLimit();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }
+    public function readSort()
+    {
+        if(isset($this->queryParams['desc'])){
+                $this->borrow->desc=$this->queryParams['desc'];
+        }
+        else{
+            $this->borrow->desc=0;
+        }
+        $this->borrow->column = $this->queryParams['sort'];
+        $stmt = $this->borrow->sort();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No book issue history found')
+            );
+        }
+    }   
+    public function readSortwithLimit()
+    {
+        if(isset($this->queryParams['desc'])){
+                $this->borrow->desc=$this->queryParams['desc'];
+        }
+        else{
+            $this->borrow->desc=0;
+        }
+        if(isset($this->queryParams['offset'])){
+            $this->borrow->offset=$this->queryParams['offset'];
+    }
+        $this->borrow->column = $this->queryParams['sort'];
+        $this->borrow->LIMIT = $this->queryParams['limit'];
+        $stmt = $this->borrow->sortWithLimit();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         if ($result) {
