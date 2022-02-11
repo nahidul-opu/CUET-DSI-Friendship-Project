@@ -89,10 +89,22 @@ class Borrow
     $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE borrow.book_id=:book_id  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    WHERE book.book_id=:book_id  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':book_id', $this->book_id);
+    $stmt->execute();
+    return $stmt;
+  }
+  public function readbyBookName()
+  {
+    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE book.title=:title  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(':title', $this->title);
     $stmt->execute();
     return $stmt;
   }
