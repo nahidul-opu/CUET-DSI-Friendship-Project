@@ -461,7 +461,7 @@
             
             <!---------------------history tab design--------------->
             <div class="container" id="history-tab-body" style="display:none;">
-                <div class="display-4 m-4 p-0" id="history-header">History</div>
+                <div class="display-6 m-4 p-2" id="history-header">History</div>
                 <!----------------history tab search option design--------------->
                 <div class="navbar navbar-light nav justify-content-center" id="history-search-container">
                     <form class="d-flex flex-row align-middle" id="history-tab-search">
