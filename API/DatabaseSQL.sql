@@ -43,6 +43,7 @@ create table borrow (
   user_id int not null,
   issue_date datetime not null,
   due_date datetime not null,
+  status int not null default 0,
   created_at datetime not null,
   updated_at datetime not null,
   primary key (book_id, user_id),
@@ -64,6 +65,30 @@ CREATE TRIGGER after_book_delete AFTER DELETE ON book FOR EACH ROW BEGIN
      UPDATE category
      SET category_count = category_count - 1
      WHERE category_id=old.category_id;
+END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_borrow_book AFTER INSERT ON borrow FOR EACH ROW BEGIN
+     UPDATE user
+     SET borrow_count = borrow_count + 1
+     WHERE user_id=new.user_id;
+     UPDATE book
+     SET current_count = current_count - 1
+     WHERE book_id=new.book_id;
+END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_return_book AFTER DELETE ON borrow FOR EACH ROW BEGIN
+     UPDATE user
+     SET borrow_count = borrow_count - 1
+     WHERE user_id=old.user_id;
+     UPDATE book
+     SET current_count = current_count + 1
+     WHERE book_id=old.book_id;
 END;
 $$
 DELIMITER ;

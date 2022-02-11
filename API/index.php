@@ -14,38 +14,37 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$uri = explode('/API', $uri);
+$uri = strtolower($uri);
+$uri = explode('/api', $uri);
 $uri = explode('/', $uri[1]);
 $dbConnection = (new DatabaseConnector())->getConnection();
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-if ($uri[1] == 'books' || $uri[1] == 'Books') {
-    //print_r($uri);
+if ($uri[1] == 'books') {
     $bookController = new BooksController($dbConnection, $requestMethod, $queryString);
     if (isset($uri[2])) {
         $bookController->setBookId($uri[2]);
     }
     $bookController->processRequest();
-} else if ($uri[1] == 'category' || $uri[1] == 'Category') {
-    // print_r($uri);
+} else if ($uri[1] == 'category') {
     $categoryController = new CategoryController($dbConnection, $requestMethod, $queryString);
     if (isset($uri[2])) {
         $categoryController->setCategoryId($uri[2]);
     }
     $categoryController->processRequest();
-}
-else if ($uri[1] == 'users' || $uri[1] == 'Users') {
+} else if ($uri[1] == 'users') {
     $userController = new UsersController($dbConnection, $requestMethod, $queryString);
     if (isset($uri[2])) {
         $userController->setUserId($uri[2]);
     }
     $userController->processRequest();
-} 
- else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
-    $controller = new BorrowController($dbConnection, $requestMethod);
-    $controller->selectMethod();
-}
-else {
+} else if ($uri[1] == 'borrow' || $uri[1] == 'Borrow') {
+    $borrowController = new BorrowController($dbConnection, $requestMethod, $queryString);
+    /*if (isset($uri[2])) {
+        $borrowController->readBorrows($uri[2]);
+    }*/
+    $borrowController->selectMethod();
+} else {
     header("HTTP/1.1 404 Not Found");
     exit();
 }
