@@ -5,11 +5,11 @@ This is an automated system for managing a library. A librarian can manage libra
 
 ## Main Features
 
-- **Inventory Management**: Automatically keep track of avaliable books in the inventory. 
-- **Circulation Management**: Keep track of the books that are being issued to different users.
-- **Membership Management**: Manage member data. Create, Update, Read and Delete user data.
-- **Search Facility**: Provides search functionality, so that admin can search and find information quickly.
-- **Online Access**: It is an online system so a admin can access it from anywhere.
+- [x] **Inventory Management**: Automatically keep track of avaliable books in the inventory. 
+- [x] **Circulation Management**: Keep track of the books that are being issued to different users.
+- [x] **Membership Management**: Manage member data. Create, Update, Read and Delete user data.
+- [x] **Search Facility**: Provides search functionality, so that admin can search and find information quickly.
+- [x] **Online Access**: It is an online system so a admin can access it from anywhere.
 
 ## Built With:
 
@@ -21,6 +21,21 @@ This is an automated system for managing a library. A librarian can manage libra
 - **[Axaj](https://redirect.is/4596mjt)**: Used to handle APIs and asynchronous  data transfer.
 - **[PHP](https://www.php.net/)**: Used to establish connection with MySQL database and create APIs.
 - **[MySQL](https://www.mysql.com/)**: MySQL is an open-source relational database management system. Used as our main database.
+
+## How to run
+
+1. Step-1: Intall xampp
+2. Step-2: Go to phpmyadmin:
+    - Start Apache and MySQL from xampp control panel
+    - Import API/DatabaseSQL.sql file
+    - Select Database library and again import API/DummyData.sql file
+    (It will create necessary database with dummydata)
+3. Step-3: Clone this repository to xampp/htdocs folder
+4. Step-4: Go to `http://localhost/Library-Management-System/`
+
+
+
+
 
 
 
