@@ -33,7 +33,7 @@ This is an automated system for managing a library. A librarian can manage libra
 3. Step-3: Clone this repository to xampp/htdocs folder
 4. Step-4: Go to `http://localhost/Library-Management-System/`
 
-## Contributors ✨
+## Contributors
 
 <!-- prettier-ignore -->
 <table>
