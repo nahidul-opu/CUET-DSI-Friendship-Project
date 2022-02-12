@@ -14,7 +14,10 @@
 </head>
 
 <body>
+    <!-------------------------page loading animation div-------------------------------->
+    <div id="loading-animation"></div>
 
+    <!------------------------------parent div of all the content--------------------------------->
     <div class="d-flex flex-row bg-image" style="min-height: 100vh;" id="parent-div">
         <!--------------Navbar design--------->
         <div class="flex-column sticky-top" style="background-color: rgba(181, 184, 189,0.2);width: 300px;max-height: 100vh;" id="sidebar">
@@ -62,7 +65,7 @@
 
 
         </div>
-        <!-------------body design----------->
+        <!-----------------------body design----------------------->
         <div class="container-fluid p-0" id="body-div">
             <!-------------header design----------->
             <div class="d-flex flex-row sticky-top p-3 header-design text-white">
@@ -87,33 +90,9 @@
 
 
             </div>
-            <!-------------body after header----------->
+
+            <!----------------------body after header--------------->
             <div class="container-fluid row b-1" id="main-body">
-                <!--------------------------------xxxx---------------------------------------->
-                <!--------------------------------card---------------------------------------->
-
-                <!-- 
-                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
-
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align:Center">Title</h5>
-                        <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                        
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                    </div> -->
-
-
-                <!--
-                <a href="#" id="card-click" class="category-card" style="width: 18rem; color:black;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
-                    
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align:Center">Title</h5>
-                            <p class="card-text" style="float:left; margin-top:30px;">40/50</p>
-                            
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" style="float:right; margin-top:25px; background-color:grey" id="editbtn">edit</button>
-                        </div>
-                 
-                </a>-->
 
                 <!-- bishal card design begin -->
                 <div class="book-category " id="book-category-div">
@@ -137,38 +116,26 @@
                 </div> -->
 
 
-                <!--<a href="#" class="btn btn-primary">40/50</a>-->
 
 
-                <!-- The Modal -->
-                <!----------------------------------edit category popup-->
+                <!---------------------------------- The Modal ------------------------------------------>
+                <!----------------------------------edit category popup---------------------------------->
                 <div class="modal" id="edit-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
-                            <!-- Modal body -->
                             <div class="modal-body" style="margin:auto">
                                 <form method="post" action="#">
                                     <input id="edit-category-name" type="text" placeholder="New category name">
                                     <input id="edit-category-submit" type="submit">
                                 </form>
                             </div>
-
-                            <!-- Modal footer -->
-                            <!--     <div class="modal-footer" style="margin:auto">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>-->
-
-
                         </div>
                     </div>
                 </div>
-                <!------------------------------------ add category popup----------->
+                <!------------------------------------ add category popup--------------------------------->
                 <div class="modal" id="add-category" style="top:25%">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
-                            <!--Modal body -->
                             <div class="modal-body" style="margin:auto">
                                 <form action="#action" method="post">
                                     <input id="edit-category-name" type="text" placeholder="Category Name">
@@ -178,13 +145,10 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-            <!--------------book details page-------------->
 
-            <!-----------------------------------------------------update book----------------->
+            <!--------------book details page-------------->
+            <!------------------------------update book----------------->
             <!------------------------------------------pop up form---------------------->
             <div class="modal" id="edit-book-modal">
                 <div class="modal-dialog">
@@ -229,99 +193,96 @@
                                 <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
                             </form>
                         </div>
-                    
-                    
+
+
                     </div>
                 </div>
             </div>
 
-
-
-
-
+             <!------------------------------ book details main container ------------------->                           
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
-
+                <!---------------------------floating add book button-------------------------->
                 <a href="" id="float-button">
                     <h1 class="display-4 floating-add-button">
                         <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
-                
+
                 <!--------------------------delete book confirmation modal---------->
                 <div class="modal" id="delete-confirm">
                     <div class="modal-dialog modal-dialog-centered">
-                       <div class="modal-content">
-                           <div class="modal-body">
-                           <h2>Are you sure you want to delete?</h2>
-                        
-                            <div class="flex-row">
-                                <button class="btn btn-primary" id="cancel">Cancel</button>
-                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h2>Are you sure you want to delete?</h2>
+
+                                <div class="flex-row">
+                                    <button class="btn btn-primary" id="cancel">Cancel</button>
+                                    <button class="btn btn-danger" id="confirm">Confirm</button>
+                                </div>
                             </div>
-                           </div>
-                       
-                       </div>
+
+                        </div>
 
                     </div>
                 </div>
-                
-                
-                <!------------------------------------------pop up form---------------------->
-                    <div class="modal" id="add-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Book</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#add-book-modal").hide();
-                                        })
-                                    </script>
-                                    
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="add-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="mAB-book-name" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="mAB-author-name" class="form-control"  placeholder="">
-                                        </div>
-                                         <div class="mb-3">
-                                            <label class="form-label">Book Category</label>
-                                            <input type="text" id="mAB-category-id" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="mAB-publisher" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="mAB-pub-year" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="mAB-isbn" class="form-control" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="mAB-total-count" class="form-control" placeholder="">
-                                        </div>
-                                       <!-- <div class="mb-3">
+
+
+                <!---------------------------- pop up form ---------------------->
+                <div class="modal" id="add-book-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Book</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                <script>
+                                    $(".btn-close").click(function() {
+                                        $("#add-book-modal").hide();
+                                    })
+                                </script>
+
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" method="post" id="add-book-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Name</label>
+                                        <input id="mAB-book-name" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Author</label>
+                                        <input type="text" id="mAB-author-name" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Category</label>
+                                        <input type="text" id="mAB-category-id" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publisher</label>
+                                        <input type="text" id="mAB-publisher" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publish Year</label>
+                                        <input type="text" id="mAB-pub-year" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">ISBN</label>
+                                        <input type="text" id="mAB-isbn" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Total Count</label>
+                                        <input type="text" id="mAB-total-count" class="form-control" placeholder="">
+                                    </div>
+                                    <!-- <div class="mb-3">
                                             <label class="form-label">Current Count</label>
                                             <input type="text" id="mAB-current-count" class="form-control"  placeholder="">
                                         </div>-->
-                                        <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
-                                    </form>
-                                </div>
-                            
+                                    <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
+                </div>
 
 
 
@@ -329,7 +290,7 @@
 
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
-                        <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search" required>
+                        <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search">
                         <!-- <button class="btn btn-info" type="submit" id="book-search-btn">Search</button> -->
                         <div id="drop-down-search-container" class="row">
                             <select name="book-search-dropdown" id="book-search-dropdown">
@@ -353,12 +314,11 @@
                                 <th class="float-center">Book Name</th>
                                 <th class="float-center">Writer Name</th>
                                 <th class="float-center">Actions</th>
+                                <!-------data will be added in script.js------>
                             </tr>
                         </thead>
-
                     </table>
-
-                    <!--pagination-->
+                    <!----------------- pagination ------------------->
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end" id="pagination">
                             <!--<li class="page-item disabled">
@@ -385,10 +345,8 @@
                             </li>-->
                         </ul>
                     </nav>
-
                 </div>
             </div>
-
 
 
 
@@ -508,14 +466,160 @@
                     </div>
                 </div>
             </div>
-            <!------------------- book issue modal start end----------------->
+
+            
+            <!---------------------history tab design--------------->
+            <div class="container" id="history-tab-body" style="display:none;">
+                <h2 class="p-2 mt-3 mb-3" id="history-header">History</h2>
+                <!----------------history tab search option design--------------->
+                <div class="navbar navbar-light nav justify-content-center" id="history-search-container">
+                    <form class="d-flex flex-row align-middle" id="history-tab-search">
+                        <input class="form-control m-0" type="search" id="history-search-input" placeholder="Enter book title" aria-label="Search">
+                        <div id="drop-down-search-container" class="row">
+                            <select name="book-search-dropdown" id="history-search-dropdown">
+                                <option value="title">by book title</option>
+                                <option value="author_name">by user name</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <table class="table table-dark table-striped" id="history-details-table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Sl. no</th>
+                        <th scope="col" onclick="tableHeader('user_id')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="user_id0"></i>
+                            <i class="bi bi-caret-down no-display" id="user_id1"></i>
+                            <br>
+                            User id
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('name')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="name0"></i>
+                            <i class="bi bi-caret-down no-display" id="name1"></i>
+                            <br>
+                            User Name
+                        </div>
+                        </th>
+                        <th scope="col" onclick="tableHeader('title')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="title0"></i>
+                            <i class="bi bi-caret-down no-display" id="title1"></i>
+                            <br>
+                            Book name
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('status')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="status0"></i>
+                            <i class="bi bi-caret-down no-display" id="status1"></i>
+                            <br>
+                            Status
+                        </div>
+                        
+                        </th>
+                        <th scope="col" onclick="tableHeader('issue_date')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="issue_date0"></i>
+                            <i class="bi bi-caret-down no-display" id="issue_date1"></i>
+                            <br>
+                            Issue date
+                        </div>
+                        </th>
+                        <th scope="col" onclick="tableHeader('due_date')">
+                        <div>
+                            <i class="bi bi-caret-up no-display" id="due_date0"></i>
+                            <i class="bi bi-caret-down no-display" id="due_date1"></i>
+                            <br>
+                            Due date
+                        </div>
+                        </th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="history-tab-table-body">
+                    
+                    </tbody>
+                </table>
+            </div>
 
 
+
+            <!------------------bishal User list TAB start here ----------------------->
+            <div class="p-4" id="user-list-div" style="display:none">
+                <h3 class="text-center text-white bg-dark rounded p-2">User List</h3>
+
+                <table class="table table-hover table-dark" id="user-list-table">
+                    <thead id="table-head">
+                        <tr>
+                            <th class="float-center">SL No.</th>
+                            <th class="float-center">ID</th>
+                            <th class="float-center">User Name</th>
+                            <th class="float-center">email</th>
+                            <th class="float-center">Phone</th>
+                            <th class="float-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-list-table-body">
+                    </tbody>
+                    <!-- jquery will append user table here -->
+                </table>
+
+            </div>
+
+            <!------------------bishal User list end here ----------------------->
+
+
+            <!----------------- bishal user update modal start ------------------------->
+            <div class="modal" id="edit-user-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit User Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+
+                            <script>
+                                $(".btn-close").click(function() {
+                                    $("#edit-user-modal").hide();
+                                })
+                            </script>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" id="edit-user-form">
+                                <div class="mb-3">
+                                    <label class="form-label">User Name</label>
+                                    <input id="user-name" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">phone no.</label>
+                                    <input id="phone-no" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" id="email-id" class="form-control" name="author_name" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="user-edit-form-submit">Update info</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!----------------- bishal user update modal start ------------------------->
 
 
 
         </div>
     </div>
+
+
 
 
 

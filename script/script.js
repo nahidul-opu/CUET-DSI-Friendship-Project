@@ -1,15 +1,66 @@
+var historySortHeader;
+var historyFunction;
+var directoryPath;
+var historySortTrack = {
+  book_id: 0,
+  created_at: 0,
+  due_date: 0,
+  issue_date: 0,
+  name: 0,
+  status: 0,
+  title: 0,
+  updated_at: 0,
+  user_id: 0,
+};
+
+function tableHeader(data) {
+  // alert("table header cliked");
+  // console.log(typeof data);
+  historySortHeader = data;
+  // historyFunction();
+  var fetchSortUrl;
+  var iconSelector;
+  $(".no-display").hide();
+  if (historySortTrack[data] === 0) {
+    iconSelector = "#" + data + "0";
+    $(iconSelector).show();
+    fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=0`;
+    historySortTrack[data] = 1;
+  } else {
+    iconSelector = "#" + data + "1";
+    $(iconSelector).show();
+    fetchSortUrl = directoryPath + `api/borrow?sort=` + data + `&desc=1`;
+    historySortTrack[data] = 0;
+  }
+  // console.log(iconSelector);
+  // console.log(fetchSortUrl);
+  $.ajax({
+    type: "GET",
+    url: fetchSortUrl,
+    dataType: "json",
+    async: true,
+    success: function (data, status) {
+      // console.log(data);
+      historyFunction(data);
+    },
+    error: function (data, status) {},
+  });
+}
+
 $(document).ready(function () {
   //global variable for data cache
   var output;
   var target_category_id;
-  var directoryPath;
+
+  var location = window.location.href;
+  directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
 
   //inventory tab default color
   $("#inventory").css("background-color", "#2f0410");
 
   // bishal starting card append
-  var location = window.location.href;
-  directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+
+  //console.log(directoryPath);
   function loadCategoryCard() {
     $.ajax({
       type: "GET",
@@ -182,32 +233,31 @@ $(document).ready(function () {
     });
   });
 
-  //issue book button action
-  $("#book-issue-btn").on("click", function () {
-    user_id = $("#issue-user-search").val().split(".");
-    let data = {
-      book_id: "",
-      user_id: "",
-    };
-    var url = directoryPath + "api/borrow";
-    data.book_id = book.book_id;
-    data.user_id = user_id[0];
-    if (data.book_id != "" && data.user_id != "") {
-      if (confirm("Confirm book issue?")) {
-        $.post(url, JSON.stringify(data), function (msg) {
-          $("#result").html(msg);
-        });
-        $("#issue-book-modal").hide();
-      }
-    } else {
-      alert("please select a user to issue book.");
-    }
-  });
+  // //issue book button action
+  // $("#book-issue-btn").on("click", function () {
+  //   user_id = $("#issue-user-search").val().split(".");
+  //   let data = {
+  //     book_id: "",
+  //     user_id: "",
+  //   };
+  //   var url = directoryPath + "api/borrow";
+  //   data.book_id = book.book_id;
+  //   data.user_id = user_id[0];
+  //   if (data.book_id != "" && data.user_id != "") {
+  //     if (confirm("Confirm book issue?")) {
+  //       $.post(url, JSON.stringify(data), function (msg) {
+  //         $("#result").html(msg);
+  //       });
+  //       $("#issue-book-modal").hide();
+  //     }
+  //   } else {
+  //     alert("please select a user to issue book.");
+  //   }
+  // });
 
   //issue book button action
   $("#book-issue-btn").on("click", function () {
     user_id = $("#issue-user-search").val().split(".");
-    console.log("-------------print");
     let data = {
       book_id: "",
       user_id: "",
@@ -230,9 +280,9 @@ $(document).ready(function () {
   //update button handle successfully
   $("#book-details-table").on("click", ".update-button", function (e) {
     var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    console.log(output[btn_id].title);
-    console.log("****************************************");
+    // console.log($(this).attr("id"));
+    // console.log(output[btn_id].title);
+    // console.log("****************************************");
 
     $("#edit-book-modal").show();
 
@@ -274,19 +324,11 @@ $(document).ready(function () {
       $("#edit-book-modal").hide();
     });
   });
-
-  //book delete button
+  /*---------------------------book delete button----------------------------------*/
   $("#book-details-table").on("click", ".delete-book-button", function (e) {
     // alert($(this).text());
     var btn_id = $(this).attr("id");
-    console.log($(this).attr("id"));
-    //console.log($(this).attr("id"));
-    //console.log(output[btn_id].title);
-    //console.log("****************************************");
-    var location = window.location.href;
-    directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-    //console.log(directoryPath);
-    //receive book data with ajax get request
+    // console.log($(this).attr("id"));
 
     var createDeleteUrl = directoryPath + "api/books/" + btn_id;
 
@@ -312,7 +354,7 @@ $(document).ready(function () {
           dataType: "json",
           async: true,
           success: function (data, status) {
-            console.log("clicked gggg");
+            // console.log("clicked gggg");
 
             var dataFetch =
               directoryPath +
@@ -342,15 +384,13 @@ $(document).ready(function () {
       }
     });
   });
-  //category card click button
+  /*-------------------------category card click button----------------------------*/
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
     // //console.log($(this));
     target_category_id = $(this).attr("id");
 
     $("#main-body").hide();
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
     //console.log(directoryPath);
     //receive book data with ajax get request
 
@@ -385,18 +425,23 @@ $(document).ready(function () {
 
     $("#book-details").show();
   });
-
-  //toggle button for side bar
+  /*-------------------------toggle button for side bar----------------------------*/
   $("#more").click(function () {
     $("#sidebar").toggle();
   });
 
-  //inventory tab click function
+  /*-----------------------inventory tab click function----------------------------*/
   $("#inventory").click(function () {
     $("#inventory").css("background-color", "#2f0410");
-    $("#bookissue").css("background-color", "");
+    $("#users").css("background-color", "");
+    $("#history").css("background-color", "");
+    $("#dashboard").css("background-color", "");
+
     $("#book-details").hide();
+    $("#history-tab-body").hide();
     $("#issue-book").hide();
+    $("#bookissue").css("background-color", "");
+    $("#user-list-div").hide();
     $("#main-body").show();
     loadCategoryCard();
   });
@@ -413,8 +458,7 @@ $(document).ready(function () {
   // });
   //book search option, search by author and book title
   $("#book-search-input").on("keyup", function () {
-    console.log($(this).val());
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    // console.log($(this).val());
     var bookname = $(this).val();
     var searchBy = $("#book-search-dropdown option:selected").val();
     // $(this).val("");
@@ -454,28 +498,25 @@ $(document).ready(function () {
     });
   });
 
-  $("#issue-user-search").keypress(function (e) {
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
-
-    var key = e.which;
-    if (key == 13) {
-      var s_user = $("#issue-user-search").val();
-      console.log(s_user);
-      result = s_user.split(".");
-      var user_info =
-        `
-      <b>Name: </b>` +
-        result[1] +
-        `<br>
-      <b>User Id : </b>` +
-        result[0] +
-        `<br>
-      `;
-      $("#book-issue-user-info").empty();
-      $("#book-issue-user-info").append(user_info);
-    }
-  });
+  // $("#issue-user-search").keypress(function (e) {
+  //   var key = e.which;
+  //   if (key == 13) {
+  //     var s_user = $("#issue-user-search").val();
+  //     console.log(s_user);
+  //     result = s_user.split(".");
+  //     var user_info =
+  //       `
+  //     <b>Name: </b>` +
+  //       result[1] +
+  //       `<br>
+  //     <b>User Id : </b>` +
+  //       result[0] +
+  //       `<br>
+  //     `;
+  //     $("#book-issue-user-info").empty();
+  //     $("#book-issue-user-info").append(user_info);
+  //   }
+  // });
 
   $("#issue-user-search").keypress(function (e) {
     var location = window.location.href;
@@ -586,4 +627,283 @@ $(document).ready(function () {
     loadPagination(page_id);
   });
 
+  /*---------------------------------history tab design-----------------------*/
+  function historyTableLoad(data) {
+    $("#history-tab-table-body").empty();
+
+    var tableRow;
+    for (let i = 0; i < data.length; i++) {
+      tableRow =
+        `<tr>
+                    <td>` +
+        (i + 1) +
+        `</td>
+                    <td>` +
+        data[i].user_id +
+        `</td>
+                    <td>` +
+        data[i].name +
+        `</td>
+                    <td>` +
+        data[i].title +
+        `</td>
+                    <td class="text-info">` +
+        (data[i].status === "0" ? `Issued` : `Returned`) +
+        `</td>
+                    <td>` +
+        data[i].issue_date +
+        `</td>
+                    <td>` +
+        data[i].due_date +
+        `</td>
+                  </tr>`;
+      $("#history-tab-table-body").append(tableRow);
+    }
+  }
+
+  $("#history").on("click", function () {
+    $("#inventory").css("background-color", "");
+    $("#users").css("background-color", "");
+    $("#bookissue").css("background-color", ""); //#2f0410
+    $("#history").css("background-color", "#2f0410");
+    $("#dashboard").css("background-color", "");
+
+    $("#user-list-div").hide();
+    $("#book-details").hide();
+    $("#main-body").hide();
+    $("#issue-book").hide();
+    $("#history-tab-body").show();
+
+    //history fetch api:
+    var fetchHistoryUrl = directoryPath + "api/borrow";
+    // console.log(fetchHistoryUrl);
+    $.ajax({
+      type: "GET",
+      url: fetchHistoryUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // console.log(data);
+        // console.log(data[0].book_id);
+        historyTableLoad(data);
+      },
+      error: function (data) {
+        //alert("fail");
+      },
+    });
+  });
+
+  $("#history-search-dropdown").change(function () {
+    if ($("#history-search-dropdown option:selected").val() === "title") {
+      $("#history-search-input").attr("placeholder", "Enter book title");
+    } else {
+      $("#history-search-input").attr("placeholder", "Enter user name");
+    }
+  });
+
+  $("#history-search-input").on("keyup", function () {
+    // console.log($(this).val());
+    var searchValue = $(this).val();
+
+    var dataFetchUrl;
+    if ($("#history-search-dropdown option:selected").val() === "title") {
+      dataFetchUrl = directoryPath + "api/borrow?title=" + searchValue;
+    } else {
+      dataFetchUrl = directoryPath + "api/borrow?name=" + searchValue;
+    }
+    // console.log(dataFetchUrl);
+    $.ajax({
+      type: "GET",
+      url: dataFetchUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // console.log(data);
+        historyTableLoad(data);
+      },
+      error: function (data, status) {},
+    });
+  });
+  historyFunction = historyTableLoad;
+
+  $("#loading-animation").hide();
+
+  // show user list start
+  var user_list;
+  $("#users").click(function () {
+    $("#users").css("background-color", "#2f0410");
+    $("#inventory").css("background-color", "");
+    $("#history").css("background-color", "");
+    $("#main-body").hide();
+    $("#book-details").hide();
+    $("#history-tab-body").hide();
+    $("#user-list-div").show();
+
+    //retriving user list from db
+    $.ajax({
+      type: "GET",
+      url: directoryPath + `api/users/`,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        user_list = data["message"];
+        show_user_list(user_list);
+      },
+    });
+  });
+
+  function show_user_list(user_list) {
+    console.log("dhukse.................");
+    $("#user-list-table-body").empty();
+
+    for (let i = 0; i < user_list.length; i++) {
+      var userTableRows =
+        `
+        <tr>
+            <th scope="row">` +
+        (i + 1) +
+        `</th>
+            <td class="text-center">` +
+        user_list[i].user_id +
+        `</td>
+            <td>` +
+        user_list[i].name +
+        `</td>
+            <td>` +
+        user_list[i].email +
+        `</td>
+            <td>` +
+        user_list[i].contact_no +
+        `</td>
+            <td>
+                <div class="float-center">            
+                    <button type="button" class="btn btn-primary badge-pill user-edit-button" style="width: 80px;"id="` +
+        user_list[i].user_id +
+        `">Edit</button>
+                    <button type="button" class="btn btn-danger badge-pill user-remove-button" style="width: 80px;" id="` +
+        user_list[i].user_id +
+        `">Remove</button>
+                </div>
+            </td>
+        </tr>
+      `;
+
+      $("#user-list-table-body").append(userTableRows);
+    }
+  }
+
+  // show user list end
+
+  //update user info start
+  var uid;
+  $("#user-list-table").on("click", ".user-edit-button", function (e) {
+    uid = $(this).attr("id");
+    var uname, phn, email;
+    for (var i = 0; i < user_list.length; i++) {
+      if (user_list[i].user_id == uid) {
+        uname = user_list[i].name;
+        phn = user_list[i].contact_no;
+        email = user_list[i].email;
+        break;
+      }
+    }
+
+    $("#edit-user-modal").show();
+
+    $("#user-name").attr("value", uname);
+    $("#phone-no").attr("value", phn);
+    $("#email-id").attr("value", email);
+  });
+  $("#edit-user-form").submit(function (e) {
+    e.preventDefault();
+    let data = {
+      name: "",
+      email: "",
+      contact_no: "",
+    };
+    var url = directoryPath + "api/users/" + uid;
+    data.name = $("#user-name").val();
+    data.email = $("#email-id").val();
+    data.contact_no = $("#phone-no").val();
+    //console.log(data);
+    // if (confirm("Confirm Edit?")) {
+    //   $.post(url, JSON.stringify(data), function (msg) {
+    //     $("#result").html(msg);
+    //   });
+    //   $("#edit-user-modal").hide();
+    // }
+    //console.log(data);
+    $.ajax({
+      url: url,
+      type: "PUT",
+      dataType: "json",
+      data: JSON.stringify(data),
+      success: function (data, textStatus, xhr) {
+        /////not working
+        //console.log(data);
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Error in Operation");
+        //alert("Failed to update uer info!")
+      },
+    });
+    $("#edit-user-modal").hide();
+  });
+  // update user info end
+
+  //remove user info start
+  $("#user-list-table").on("click", ".user-remove-button", function (e) {
+    uid = $(this).attr("id");
+    var uname, borrowed_books;
+    for (var i = 0; i < user_list.length; i++) {
+      if (user_list[i].user_id == uid) {
+        borrowed_books = user_list[i].borrow_count;
+        uname = user_list[i].name;
+        break;
+      }
+    }
+
+    if (
+      borrowed_books == 0 &&
+      confirm(`Remove ` + uname + ` permenantly from database?`)
+    ) {
+      var url = directoryPath + "api/users/" + uid;
+      var ajxReq = $.ajax(url, {
+        type: "DELETE",
+      });
+      ajxReq.success(function (data, status, jqXhr) {
+        console.log("deleted");
+      });
+      ajxReq.error(function (jqXhr, textStatus, errorMessage) {
+        console.log("delete faild");
+      });
+      //update in realtime after detetion
+      //retriving updated user list from db
+      $.ajax({
+        type: "GET",
+        url: directoryPath + `api/users/`,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          var updated_user_list = data["message"];
+          console.log(updated_user_list);
+          show_user_list(updated_user_list);
+        },
+      });
+    } else if (borrowed_books == 1)
+      alert(
+        uname +
+          ` has ` +
+          borrowed_books +
+          ` borrowed book.\nCan,t remove before returning the book.`
+      );
+    else if (borrowed_books >= 1)
+      alert(
+        uname +
+          ` has ` +
+          borrowed_books +
+          ` borrowed books.\nCan,t remove before returning these books.`
+      );
+  });
+  //remove user info end
 });

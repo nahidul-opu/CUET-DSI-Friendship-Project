@@ -98,11 +98,15 @@
 4. (GET method)Get a borrow history where user id is 'x'
    /api/borrow?user_id=x
    
-5. (GET method)Get a borrow history where book title is 'x'
-   /api/borrow?title=x
+5. (GET method)Get a borrow history where book title is 'x'(x could be a sub string)
+   a./api/borrow?title=x
+   b.with sort(ASC) by y column /api/borrow?title=x&sort=y
+   c.with sort(DESC) by y column /api/borrow?title=x&sort=y&desc=1
 
-6. (GET method)Get a borrow history where user name is 'x'
-   /api/borrow?name=x
+6. (GET method)Get a borrow history where user name is 'x'(x could be a sub string)
+   a./api/borrow?name=x
+   b.with sort(ASC) by y column /api/borrow?name=x&sort=y
+   c.with sort(DESC) by y column /api/borrow?name=x&sort=y&desc=1
 
 7. (GET method)Get a borrow history where book title is 'x' and user name is 'y'
    /api/borrow?title=x&name=y
