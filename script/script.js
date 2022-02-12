@@ -567,8 +567,7 @@ $(document).ready(function () {
     $("#book-details").hide();
     $("#user-list-div").show();
 
-    //retriving user list from db
-    
+    //retriving user list from db    
     $.ajax({
       type: "GET",
       url: directoryPath + `api/users/`,
@@ -581,8 +580,8 @@ $(document).ready(function () {
     });
     
   });
-  function show_user_list(user_list, ) {
-    $("#user-list-table-body").empty(); /// not working ◣_◢, appending every time
+  function show_user_list(user_list ) {
+    $("#user-list-table-body").empty();
     
     for (let i = 0; i < user_list.length; i++) {
       var userTableRows =
@@ -595,8 +594,8 @@ $(document).ready(function () {
             <td>` + user_list[i].contact_no +`</td>
             <td>
                 <div class="float-center">            
-                    <button type="button" class="btn btn-primary badge-pill user-update-button" style="width: 80px;"id="` + user_list[i].user_id  + `">Edit</button>
-                    <button type="button" class="btn btn-danger badge-pill user-delete-book-button" style="width: 80px;" id="` +user_list[i].user_id +`">Rmove</button>
+                    <button type="button" class="btn btn-primary badge-pill user-edit-button" style="width: 80px;"id="` + user_list[i].user_id  + `">Edit</button>
+                    <button type="button" class="btn btn-danger badge-pill user-remove-button" style="width: 80px;" id="` +user_list[i].user_id +`">Remove</button>
                 </div>
             </td>
         </tr>
@@ -610,7 +609,7 @@ $(document).ready(function () {
 
   //update user info start
   var uid;
-  $("#user-list-table").on("click", ".user-update-button", function (e) {
+  $("#user-list-table").on("click", ".user-edit-button", function (e) {
      uid = $(this).attr("id");
     var uname,phn,email;
     for (var i = 0; i < user_list.length; i++){
@@ -643,15 +642,73 @@ $(document).ready(function () {
     data.email = $("#email-id").val();
     data.contact_no = $("#phone-no").val();
     //console.log(data);
-    if (confirm("Confirm Edit?")) {
-      $.post(url, JSON.stringify(data), function (msg) {
-        $("#result").html(msg);
-      });
-      $("#edit-user-modal").hide();
-    }
-    
+    // if (confirm("Confirm Edit?")) {
+    //   $.post(url, JSON.stringify(data), function (msg) {
+    //     $("#result").html(msg);
+    //   });
+    //   $("#edit-user-modal").hide();
+    // }
+    //console.log(data);
+    $.ajax({
+      url: url,
+      type: "PUT",
+      dataType: "json",
+      data: JSON.stringify(data),
+      success: function (data, textStatus, xhr) {/////not working
+        //console.log(data);
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Error in Operation");
+        //alert("Failed to update uer info!")
+      },
+    });
+    $("#edit-user-modal").hide();
   });
   // update user info end
+
+  //remove user info start
+  $("#user-list-table").on("click", ".user-remove-button", function (e) {
+   uid = $(this).attr("id");
+   var uname,borrowed_books;
+   for (var i = 0; i < user_list.length; i++){
+     if (user_list[i].user_id == uid){
+       borrowed_books = user_list[i].borrow_count;    
+       uname = user_list[i].name;
+       break;
+     }
+   }
+
+   if (borrowed_books == 0 && confirm(`Remove `+uname+` permenantly from database?`)){
+    var url = directoryPath + "api/users/"+uid;
+    var ajxReq = $.ajax( url, {
+      type : 'DELETE'
+    });
+    ajxReq.success( function ( data, status, jqXhr ) {
+      console.log("deleted");
+    });
+    ajxReq.error( function ( jqXhr, textStatus, errorMessage ) {
+      console.log("delete fail d");
+    });
+    //update in realtime after detetion
+    //retriving updated user list from db    
+    $.ajax({
+      type: "GET",
+      url: directoryPath + `api/users/`,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        var updated_user_list = data["message"];
+        show_user_list(updated_user_list);
+      },
+    });
+   }
+   else if(borrowed_books == 1)
+    alert(uname+` has `+borrowed_books+` borrowed book.\nCan,t remove before returning the book.`);
+   else if(borrowed_books >= 1)
+    alert(uname+` has `+borrowed_books+` borrowed books.\nCan,t remove before returning these books.`);
+ });
+  //remove user info end
+
 
 
 });
