@@ -29,15 +29,14 @@ class DashboardController
     public function get_data()
     {
         $total_category = $this->readCount();
-        $total_book =  (array)json_decode(file_get_contents("http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . "/api/books/?count"));
-        $total_book = (array)$total_book['message'][0];
+        $total_book = $this->dashboard->countBook()[0]['COUNT(book_id)'];
         $rni = $this->dashboard->totalBorrowedReturned($this->queryParams['start_date'], $this->queryParams['end_date']);
         $tba = $this->dashboard->totalBooksAdded($this->queryParams['start_date'], $this->queryParams['end_date']);
         $tdb = $this->dashboard->totalOverduedBooks($this->queryParams['start_date'], $this->queryParams['end_date']);
         $tua = $this->dashboard->totalUserAdded($this->queryParams['start_date'], $this->queryParams['end_date']);
         $result = array(
             "total_category" => $total_category,
-            "total_book" => $total_book['total_books'],
+            "total_book" => $total_book,
             "total_issued" => $rni[0]['COUNT(status)'],
             "total_returned" => $rni[1]['COUNT(status)'],
             "total_books_added" => $tba[0]['COUNT(book_id)'],

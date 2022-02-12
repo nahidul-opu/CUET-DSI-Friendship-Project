@@ -11,7 +11,7 @@ require_once('Controller/BooksController.php');
 require_once('Controller/CategoryController.php');
 require_once('Controller/BorrowController.php');
 require_once('Controller/UserController.php');
-
+require_once('Controller/DashboardController.php');
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $uri = strtolower($uri);
@@ -44,15 +44,13 @@ if ($uri[1] == 'books') {
         $borrowController->readBorrows($uri[2]);
     }*/
     $borrowController->selectMethod();
-}
-else if ($uri[1] == 'dashboard') {
+} else if ($uri[1] == 'dashboard') {
     $dashboardController = new DashboardController($dbConnection, $requestMethod, $queryString);
     /*if (isset($uri[2])) {
         $borrowController->readBorrows($uri[2]);
     }*/
     $dashboardController->selectMethod();
-}
-else {
+} else {
     header("HTTP/1.1 404 Not Found");
     exit();
 }
