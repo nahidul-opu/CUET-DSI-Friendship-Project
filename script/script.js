@@ -163,6 +163,7 @@ $(document).ready(function () {
   //issue book button click
   //global variable
   var users_list = [];
+  var user_info;//for auto complete
   var book;
   $("#book-details-table").on("click", ".issue-book-button", function (e) {
     var btn_id = $(this).attr("id");
@@ -225,6 +226,7 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         var users = data["message"];
+        user_info=user_info;
         if (users_list.length == 0) {
           for (let i = 0; i < users.length; i++)
             users_list.push(users[i].user_id + ". " + users[i].name);
@@ -525,7 +527,7 @@ $(document).ready(function () {
     var key = e.which;
     if (key == 13) {
       var s_user = $("#issue-user-search").val();
-      console.log(s_user);
+      //console.log(s_user);
       result = s_user.split(".");
       var user_info =
         `
@@ -536,8 +538,45 @@ $(document).ready(function () {
         result[0] +
         `<br>
     `;
-      $("#book-issue-user-info").empty();
-      $("#book-issue-user-info").append(user_info);
+    $("#book-issue-user-info").empty();
+    $("#book-issue-user-info").append(user_info);
+
+
+    //show users borrowed books if have any
+    var uid = result[0];
+    var borrow_count;
+    for(var i=0; i<user_info.length; i++){
+      if(uid==user_info[i].user_id)
+        borrow_count = user_info[i].borrow_count;
+    }
+
+    //if this user have this borrowed book
+    if (borrow_count != 0){
+      // fetch borrowed list to check if the user in that list
+      var url = directoryPath + "api/borrow";      
+      console.log(url);
+      $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          console.log(data);
+          // console.log(data[0].book_id);
+          //historyTableLoad(data);
+        },
+        error: function (data) {
+          alert("fail");
+        },
+      });
+    }
+
+    
+    
+
+
+
+    //end showing borrowed book
     }
   });
 
