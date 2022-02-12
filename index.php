@@ -193,6 +193,8 @@
                                 <button type="submit" class="btn btn-primary" id="book-edit-form-submit">Submit</button>
                             </form>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -205,83 +207,87 @@
                         <i class="bi bi-journal-plus"></i>
                     </h1>
                 </a>
-                
-                <!--------------------------delete book confirmation modal---------------------->
+
+                <!--------------------------delete book confirmation modal---------->
                 <div class="modal" id="delete-confirm">
                     <div class="modal-dialog modal-dialog-centered">
-                       <div class="modal-content">
-                           <div class="modal-body">
-                           <h2>Are you sure you want to delete?</h2>
-                        
-                            <div class="flex-row">
-                                <button class="btn btn-primary" id="cancel">Cancel</button>
-                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h2>Are you sure you want to delete?</h2>
+
+                                <div class="flex-row">
+                                    <button class="btn btn-primary" id="cancel">Cancel</button>
+                                    <button class="btn btn-danger" id="confirm">Confirm</button>
+                                </div>
                             </div>
-                           </div>
-                       
-                       </div>
+
+                        </div>
 
                     </div>
                 </div>
-                
-                
-                <!------------------------------pop up form------------------------------------>
-                    <div class="modal" id="add-book-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Book</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    
-                                    <script>
-                                        $(".btn-close").click(function(){
-                                            $("#add-book-modal").hide();
-                                        })
-                                    </script>
-                                    
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#" method="post" id="add-book-form">
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Name</label>
-                                            <input id="mAB-book-name" type="text" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Book Author</label>
-                                            <input type="text" id="mAB-author-name" class="form-control"  placeholder="">
-                                        </div>
-                                         <div class="mb-3">
-                                            <label class="form-label">Book Category</label>
-                                            <input type="text" id="mAB-category-id" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publisher</label>
-                                            <input type="text" id="mAB-publisher" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Publish Year</label>
-                                            <input type="text" id="mAB-pub-year" class="form-control"  placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ISBN</label>
-                                            <input type="text" id="mAB-isbn" class="form-control" placeholder="">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Total Count</label>
-                                            <input type="text" id="mAB-total-count" class="form-control" placeholder="">
-                                        </div>
-                                       <!-- <div class="mb-3">
+
+
+                <!---------------------------- pop up form ---------------------->
+                <div class="modal" id="add-book-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Book</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                <script>
+                                    $(".btn-close").click(function() {
+                                        $("#add-book-modal").hide();
+                                    })
+                                </script>
+
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" method="post" id="add-book-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Name</label>
+                                        <input id="mAB-book-name" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Author</label>
+                                        <input type="text" id="mAB-author-name" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Book Category</label>
+                                        <input type="text" id="mAB-category-id" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publisher</label>
+                                        <input type="text" id="mAB-publisher" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Publish Year</label>
+                                        <input type="text" id="mAB-pub-year" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">ISBN</label>
+                                        <input type="text" id="mAB-isbn" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Total Count</label>
+                                        <input type="text" id="mAB-total-count" class="form-control" placeholder="">
+                                    </div>
+                                    <!-- <div class="mb-3">
                                             <label class="form-label">Current Count</label>
                                             <input type="text" id="mAB-current-count" class="form-control"  placeholder="">
                                         </div>-->
-                                        <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
-                                    </form>
-                                </div>
-                            
+                                    <button type="submit" class="btn btn-primary" id="book-add-form-submit">Submit</button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
-                <!------------------------------search design----------------------------------->
+                </div>
+
+
+
+
+
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
                         <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search">
@@ -544,8 +550,76 @@
 
 
 
+            <!------------------bishal User list TAB start here ----------------------->
+            <div class="p-4" id="user-list-div" style="display:none">
+                <h3 class="text-center text-white bg-dark rounded p-2">User List</h3>
+
+                <table class="table table-hover table-dark" id="user-list-table">
+                    <thead id="table-head">
+                        <tr>
+                            <th class="float-center">SL No.</th>
+                            <th class="float-center">ID</th>
+                            <th class="float-center">User Name</th>
+                            <th class="float-center">email</th>
+                            <th class="float-center">Phone</th>
+                            <th class="float-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-list-table-body">
+                    </tbody>
+                    <!-- jquery will append user table here -->
+                </table>
+
+            </div>
+
+            <!------------------bishal User list end here ----------------------->
+
+
+            <!----------------- bishal user update modal start ------------------------->
+            <div class="modal" id="edit-user-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit User Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+
+                            <script>
+                                $(".btn-close").click(function() {
+                                    $("#edit-user-modal").hide();
+                                })
+                            </script>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" id="edit-user-form">
+                                <div class="mb-3">
+                                    <label class="form-label">User Name</label>
+                                    <input id="user-name" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">phone no.</label>
+                                    <input id="phone-no" type="text" class="form-control" name="title" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" id="email-id" class="form-control" name="author_name" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="user-edit-form-submit">Update info</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!----------------- bishal user update modal start ------------------------->
+
+
+
         </div>
     </div>
+
+
 
 
 
