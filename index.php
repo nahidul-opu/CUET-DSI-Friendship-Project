@@ -213,7 +213,7 @@
                             <h2>Are you sure you want to delete?</h2>
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-primary m-2" id="cancel">Cancel</button>
-                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                                <button class="btn btn-danger m-2" id="confirm">Confirm</button>
                             </div>
                         </div>
                     </div>

@@ -406,10 +406,7 @@ $(document).ready(function () {
     target_category_id = $(this).attr("id");
 
     $("#main-body").hide();
-    //console.log(directoryPath);
-    //receive book data with ajax get request
 
-    // category book api: /api/books/?column=column_name&value=keyword
     var crateUrl =
       directoryPath +
       `api/books/?column=category_id&value=` +
@@ -454,9 +451,8 @@ $(document).ready(function () {
 
     $("#book-details").hide();
     $("#history-tab-body").hide();
-    $("#issue-book").hide();
-    $("#bookissue").css("background-color", "");
     $("#user-list-div").hide();
+    $("#dashboard-body").hide();
     $("#main-body").show();
     loadCategoryCard();
   });
@@ -568,14 +564,15 @@ $(document).ready(function () {
   });
 
   $("#dashboard").click(function () {
-    $("#dashboard").css("background-color", "#2f0410");
     $("#inventory").css("background-color", "");
-    $("#bookissue").css("background-color", "");
     $("#users").css("background-color", "");
     $("#history").css("background-color", "");
+    $("#dashboard").css("background-color", "#2f0410");
+
     $("#book-details").hide();
     $("#main-body").hide();
-    $("#issue-book").hide();
+    $("#user-list-div").hide();
+    $("#history-tab-body").hide();
     $("#dashboard-body").show();
   });
 
@@ -645,14 +642,13 @@ $(document).ready(function () {
   $("#history").on("click", function () {
     $("#inventory").css("background-color", "");
     $("#users").css("background-color", "");
-    $("#bookissue").css("background-color", ""); //#2f0410
     $("#history").css("background-color", "#2f0410");
     $("#dashboard").css("background-color", "");
 
-    $("#user-list-div").hide();
     $("#book-details").hide();
+    $("#dashboard-body").hide();
     $("#main-body").hide();
-    $("#issue-book").hide();
+    $("#user-list-div").hide();
     $("#history-tab-body").show();
 
     //history fetch api:
@@ -710,12 +706,15 @@ $(document).ready(function () {
   // show user list start
   var user_list;
   $("#users").click(function () {
-    $("#users").css("background-color", "#2f0410");
     $("#inventory").css("background-color", "");
+    $("#users").css("background-color", "#2f0410");
     $("#history").css("background-color", "");
-    $("#main-body").hide();
+    $("#dashboard").css("background-color", "");
+
     $("#book-details").hide();
     $("#history-tab-body").hide();
+    $("#dashboard-body").hide();
+    $("#main-body").hide();
     $("#user-list-div").show();
 
     //retriving user list from db
