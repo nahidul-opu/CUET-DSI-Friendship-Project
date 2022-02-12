@@ -53,8 +53,8 @@ You can also use limit and offset with sorting and use all of these with other G
 9. Get Book Count
    /api/books/?count
 
-10.1 GET book count for a specific category
-/api/books/?count&category_id=x
+   10.1 GET book count for a specific category
+   /api/books/?count&category_id=x
 
 ## Category-API
 
@@ -141,3 +141,8 @@ You can also use limit and offset with sorting and use all of these with other G
     /api/borrow/?renew
     7.2. Update borrow status to returned (default status is borrowed) (status=0 means borrowed and status=1 means returned)
     /api/borrow/?return
+
+## Dashboad
+
+1. GET statistics
+   /api/dashboard/?start_date=2022-01-01&end_date=2022-02-13
