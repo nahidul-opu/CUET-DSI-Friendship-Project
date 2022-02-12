@@ -237,4 +237,17 @@ option {
   color: white;
   text-align: center;
 }
+
+#loading-animation {
+  background: rgba(81, 82, 82, 1) url(../src/loading2.gif) no-repeat center
+    center;
+  background-size: 80px;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  z-index: 99999;
+}
 /* css end for autocomplete issue user name */

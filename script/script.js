@@ -695,4 +695,6 @@ $(document).ready(function () {
     });
   });
   historyFunction = historyTableLoad;
+
+  $("#loading-animation").hide();
 });

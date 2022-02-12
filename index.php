@@ -14,7 +14,10 @@
 </head>
 
 <body>
+    <!-------------------------page loading animation div-------------------------------->
+    <div id="loading-animation"></div>
 
+    <!------------------------------parent div of all the content--------------------------------->
     <div class="d-flex flex-row bg-image" style="min-height: 100vh;" id="parent-div">
         <!--------------Navbar design--------->
         <div class="flex-column sticky-top" style="background-color: rgba(181, 184, 189,0.2);width: 300px;max-height: 100vh;" id="sidebar">
