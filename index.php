@@ -104,6 +104,18 @@
                     <div class="row justify-content-center" id="book-card">
                     </div>
                 </div>
+                <table class="table table-hover table-dark" id="global-search-result-table">
+                        <thead id="table-head">
+                            <tr>
+                                <th class="float-center">SL No.</th>
+                                <th class="float-center">Book Name</th>
+                                <th class="float-center">Writer Name</th>
+                                <th class="float-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <!-------data will be added in script.js------>
+                </table>
+
 
                 <!---------------------------------- The Modal ------------------------------------------>
                 <!----------------------------------edit category popup---------------------------------->
@@ -293,6 +305,9 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
+                        <tbody class="table-content">
+
+                        </tbody>
                         <!-------data will be added in script.js------>
                     </table>
 

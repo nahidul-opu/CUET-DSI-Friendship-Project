@@ -285,4 +285,8 @@ option {
   margin-left: 10px;
   /* background-color: green; */
 }
+
+.table-content {
+  font-family: Arial, Helvetica, sans-serif;
+}
 /* css end for autocomplete issue user name */

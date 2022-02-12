@@ -110,26 +110,16 @@ $(document).ready(function () {
 
   //ending append
 
-  function showBookDetails(data, category_id) {
-    // console.log("show book details function called");
-    $("#book-details-table").empty();
-    var table_header = `<thead id="table-head">
-                              <tr>
-                                  <th class="float-center">SL No.</th>
-                                  <th class="float-center">Book Name</th>
-                                  <th class="float-center">Writer Name</th>
-                                  <th class="float-center">Actions</th>
-                              </tr>
-                            </thead>`;
+  function showBookDetails(data, whichTable) {
+    $(whichTable).empty(); //".table-content"
 
-    $("#book-details-table").append(table_header);
+    // $("#book-details-table").append(table_header);
     for (let i = 0; i < data.length; i++) {
       // if (data[i].category_id !== category_id) {
       //   continue;
       // }
       var content =
-        `<tbody>
-        <tr>
+        `<tr>
             <th scope="row">` +
         (i + 1) +
         `</th>
@@ -152,10 +142,9 @@ $(document).ready(function () {
         `">Delete</button>
                         </div>
             </td>
-        </tr>
-    </tbody>`;
+        </tr>`;
 
-      $("#book-details-table").append(content);
+      $(whichTable).append(content);
     }
     // console.log("function end here");
   }
@@ -313,7 +302,7 @@ $(document).ready(function () {
         dataType: "json",
         data: JSON.stringify(output[btn_id]),
         success: function (data, textStatus, xhr) {
-          showBookDetails(output);
+          showBookDetails(output, ".table-content");
           console.log(data);
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -369,7 +358,7 @@ $(document).ready(function () {
                 // //console.log(data.keys());
 
                 output = data["message"];
-                showBookDetails(output, target_category_id);
+                showBookDetails(output, ".table-content");
               },
               error: function (data) {
                 //alert("fail");
@@ -416,7 +405,7 @@ $(document).ready(function () {
         // //console.log(data.keys());
 
         output = data["message"];
-        showBookDetails(output, target_category_id);
+        showBookDetails(output, ".table-content");
       },
       error: function (data) {
         //alert("fail");
@@ -480,10 +469,10 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         output = data["message"];
-        showBookDetails(output, target_category_id);
+        showBookDetails(output, ".table-content");
       },
       error: function (data, status) {
-        showBookDetails({}, target_category_id);
+        showBookDetails({}, ".table-content");
       },
     });
   });
