@@ -112,10 +112,27 @@ class Borrow
   }
   public function readbyBookName()
   {
+    if(isset($this->column)){
+      if($this->desc==1){
+        $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+        FROM 
+          borrow, book, user
+        WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC";
+      }
+      else{
+        $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." ";
+      }
+
+    }
+    else{
     $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    }
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':title', $this->title);
@@ -124,10 +141,29 @@ class Borrow
   }
   public function readbyUserName()
   {
+    if(isset($this->column)){
+      if($this->desc==1){
+        $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC";
+
+      }
+      else{
+        $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column."";
+  
+      }
+
+    }
+    else{
     $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    }
     $stmt = $this->conn->prepare($query);
 
     //$stmt->bindParam(':name', $this->name);

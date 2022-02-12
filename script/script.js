@@ -637,6 +637,35 @@ $(document).ready(function () {
     });
   });
 
+  //pagination
+  function loadPagination(page){
+    console.log(page);
+    var pageUrl = directoryPath + `api/books/?limit=5&offset=`+((page-1)*5);
+    console.log(pageUrl);
+    $.ajax({
+      url: pageUrl,
+      type: "GET",
+      dataType: "json",
+      async: true,
+      success: function (data) {
+        console.log(data);
+        showBookDetails(data["message"]);
+      },
+      /*error: function (data) {
+        alert("fail");
+      },*/
+    });
+  };
+  loadPagination();
+
+  $("#card-details").on("click", ".page-link", function(ex){
+    ex.preventDefault();
+    //$(this).preventDefault();
+    var page_id = $(this).attr("id");
+    console.log(page_id);
+    loadPagination(page_id);
+  });
+
   /*---------------------------------history tab design-----------------------*/
   function historyTableLoad(data) {
     $("#history-tab-table-body").empty();
