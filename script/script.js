@@ -906,11 +906,13 @@ $(document).ready(function () {
       name: "",
       email: "",
       contact_no: "",
+      image_path:""
     };
     var url = directoryPath + "api/users/" + uid;
     data.name = $("#user-name").val();
     data.email = $("#email-id").val();
     data.contact_no = $("#phone-no").val();
+    data.image_path="";
     //console.log(data);
     // if (confirm("Confirm Edit?")) {
     //   $.post(url, JSON.stringify(data), function (msg) {
@@ -929,7 +931,7 @@ $(document).ready(function () {
         //console.log(data);
       },
       error: function (xhr, textStatus, errorThrown) {
-        console.log("Error in Operation");
+        //console.log(errorThrown);
         //alert("Failed to update uer info!")
       },
     });
