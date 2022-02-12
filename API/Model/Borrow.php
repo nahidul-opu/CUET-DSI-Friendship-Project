@@ -112,26 +112,23 @@ class Borrow
   }
   public function readbyBookName()
   {
-    if(isset($this->column)){
-      if($this->desc==1){
+    if (isset($this->column)) {
+      if ($this->desc == 1) {
         $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
         FROM 
           borrow, book, user
-        WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC";
-      }
-      else{
+        WHERE book.title LIKE '%" . $this->title . "%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " DESC";
+      } else {
         $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." ";
+    WHERE book.title LIKE '%" . $this->title . "%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " ";
       }
-
-    }
-    else{
-    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    } else {
+      $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.title LIKE '%".$this->title."%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    WHERE book.title LIKE '%" . $this->title . "%' AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     }
     $stmt = $this->conn->prepare($query);
 
@@ -141,28 +138,23 @@ class Borrow
   }
   public function readbyUserName()
   {
-    if(isset($this->column)){
-      if($this->desc==1){
+    if (isset($this->column)) {
+      if ($this->desc == 1) {
         $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC";
-
-      }
-      else{
+    WHERE user.name LIKE '%" . $this->name . "%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " DESC";
+      } else {
         $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column."";
-  
+    WHERE user.name LIKE '%" . $this->name . "%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . "";
       }
-
-    }
-    else{
-    $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    } else {
+      $query = "SELECT borrow.book_id, borrow.user_id,borrow.status, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE user.name LIKE '%".$this->name."%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
+    WHERE user.name LIKE '%" . $this->name . "%'  AND book.book_id = borrow.book_id AND user.user_id=borrow.user_id";
     }
     $stmt = $this->conn->prepare($query);
 
@@ -172,70 +164,68 @@ class Borrow
   }
   public function readbyLimit()
   {
-    if(isset($this->offset)){
+    if (isset($this->offset)) {
       $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id LIMIT 
-    ".$this->LIMIT." OFFSET ".$this->offset." ";
-    }
-    else{
-    $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    " . $this->LIMIT . " OFFSET " . $this->offset . " ";
+    } else {
+      $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
     WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id LIMIT 
-    ".$this->LIMIT." ";
+    " . $this->LIMIT . " ";
     }
-    $stmt = $this->conn->prepare($query); 
+    $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt;
   }
   public function sort()
   {
-    if($this->desc==1){
+    if ($this->desc == 1) {
       $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC ";
-    }
-    else{
-    $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " DESC ";
+    } else {
+      $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." ";
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " ";
     }
-    $stmt = $this->conn->prepare($query); 
+    $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt;
   }
   public function sortWithLimit()
   {
-    if($this->desc==1){
-      if(isset($this->offset)){
+    if ($this->desc == 1) {
+      if (isset($this->offset)) {
         $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC  LIMIT  ".$this->LIMIT." OFFSET ".$this->offset."";}
-      else{
-      $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
-    FROM 
-      borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." DESC LIMIT  ".$this->LIMIT."";}
-  }
-    else{
-      if(isset($this->offset)){
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " DESC  LIMIT  " . $this->LIMIT . " OFFSET " . $this->offset . "";
+      } else {
         $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." LIMIT  ".$this->LIMIT." OFFSET ".$this->offset."";}
-    else{
-    $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " DESC LIMIT  " . $this->LIMIT . "";
+      }
+    } else {
+      if (isset($this->offset)) {
+        $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
     FROM 
       borrow, book, user
-    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY ".$this->column." LIMIT  ".$this->LIMIT." ";
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " LIMIT  " . $this->LIMIT . " OFFSET " . $this->offset . "";
+      } else {
+        $query = "SELECT borrow.book_id, borrow.status, borrow.user_id, borrow.issue_date, borrow.due_date, book.title, user.name, borrow.created_at, borrow.updated_at
+    FROM 
+      borrow, book, user
+    WHERE book.book_id = borrow.book_id AND user.user_id=borrow.user_id ORDER BY " . $this->column . " LIMIT  " . $this->LIMIT . " ";
+      }
     }
-  }
-    $stmt = $this->conn->prepare($query); 
+    $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt;
   }

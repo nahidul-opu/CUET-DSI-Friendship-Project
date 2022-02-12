@@ -199,7 +199,7 @@
                 </div>
             </div>
 
-             <!------------------------------ book details main container ------------------->                           
+            <!------------------------------ book details main container ------------------->
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
                 <!---------------------------floating add book button-------------------------->
                 <a href="" id="float-button">
@@ -378,7 +378,7 @@
                                         <div class="row  p-1 rounded-top m-1">
                                             <!-- 1.1 -->
                                             <div class="col-md-6">
-                                                <img class="img-fluid" src="https://qph.fs.quoracdn.net/main-qimg-dbc42d0568904c9577ae8ccbca61099c-lq" alt="c">
+                                                <img class="img-fluid" src="https://api.lorem.space/image/book?w=200&h=250" alt="c">
                                             </div>
                                             <!-- 1.2 -->
                                             <div class="col-md-6 text-black" id="book-issue-book-info">
@@ -454,8 +454,9 @@
 
                                     </div>
                                     <!-- 4 -->
-                                    <div class="col-md-4 text-center p-3 rounded">
+                                    <div class="col-md-4 text-center p-3 rounded" id="issue-return-book">
                                         <button type="button" class="btn btn-success btn-block" id="book-issue-btn">Issue Book</button>
+
                                     </div>
                                 </div>
 
@@ -467,7 +468,7 @@
                 </div>
             </div>
 
-            
+
             <!---------------------history tab design--------------->
             <div class="container" id="history-tab-body" style="display:none;">
                 <h2 class="p-2 mt-3 mb-3" id="history-header">History</h2>
@@ -487,63 +488,63 @@
                 <table class="table table-dark table-striped" id="history-details-table">
                     <thead>
                         <tr>
-                        <th scope="col">Sl. no</th>
-                        <th scope="col" onclick="tableHeader('user_id')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="user_id0"></i>
-                            <i class="bi bi-caret-down no-display" id="user_id1"></i>
-                            <br>
-                            User id
-                        </div>
-                        
-                        </th>
-                        <th scope="col" onclick="tableHeader('name')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="name0"></i>
-                            <i class="bi bi-caret-down no-display" id="name1"></i>
-                            <br>
-                            User Name
-                        </div>
-                        </th>
-                        <th scope="col" onclick="tableHeader('title')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="title0"></i>
-                            <i class="bi bi-caret-down no-display" id="title1"></i>
-                            <br>
-                            Book name
-                        </div>
-                        
-                        </th>
-                        <th scope="col" onclick="tableHeader('status')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="status0"></i>
-                            <i class="bi bi-caret-down no-display" id="status1"></i>
-                            <br>
-                            Status
-                        </div>
-                        
-                        </th>
-                        <th scope="col" onclick="tableHeader('issue_date')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="issue_date0"></i>
-                            <i class="bi bi-caret-down no-display" id="issue_date1"></i>
-                            <br>
-                            Issue date
-                        </div>
-                        </th>
-                        <th scope="col" onclick="tableHeader('due_date')">
-                        <div>
-                            <i class="bi bi-caret-up no-display" id="due_date0"></i>
-                            <i class="bi bi-caret-down no-display" id="due_date1"></i>
-                            <br>
-                            Due date
-                        </div>
-                        </th>
+                            <th scope="col">Sl. no</th>
+                            <th scope="col" onclick="tableHeader('user_id')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="user_id0"></i>
+                                    <i class="bi bi-caret-down no-display" id="user_id1"></i>
+                                    <br>
+                                    User id
+                                </div>
+
+                            </th>
+                            <th scope="col" onclick="tableHeader('name')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="name0"></i>
+                                    <i class="bi bi-caret-down no-display" id="name1"></i>
+                                    <br>
+                                    User Name
+                                </div>
+                            </th>
+                            <th scope="col" onclick="tableHeader('title')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="title0"></i>
+                                    <i class="bi bi-caret-down no-display" id="title1"></i>
+                                    <br>
+                                    Book name
+                                </div>
+
+                            </th>
+                            <th scope="col" onclick="tableHeader('status')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="status0"></i>
+                                    <i class="bi bi-caret-down no-display" id="status1"></i>
+                                    <br>
+                                    Status
+                                </div>
+
+                            </th>
+                            <th scope="col" onclick="tableHeader('issue_date')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="issue_date0"></i>
+                                    <i class="bi bi-caret-down no-display" id="issue_date1"></i>
+                                    <br>
+                                    Issue date
+                                </div>
+                            </th>
+                            <th scope="col" onclick="tableHeader('due_date')">
+                                <div>
+                                    <i class="bi bi-caret-up no-display" id="due_date0"></i>
+                                    <i class="bi bi-caret-down no-display" id="due_date1"></i>
+                                    <br>
+                                    Due date
+                                </div>
+                            </th>
                         </tr>
                     </thead>
 
                     <tbody id="history-tab-table-body">
-                    
+
                     </tbody>
                 </table>
             </div>

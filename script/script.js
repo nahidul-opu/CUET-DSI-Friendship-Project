@@ -160,7 +160,7 @@ $(document).ready(function () {
     // console.log("function end here");
   }
 
-  //issue book button click
+  //issue button click
   //global variable
   var users_list = [];
   var user_info;//for auto complete
@@ -542,7 +542,7 @@ $(document).ready(function () {
     $("#book-issue-user-info").append(user_info);
 
 
-    //show users borrowed books if have any
+    //show users borrowed books, if have any
     var uid = result[0];
     var borrow_count;
     for(var i=0; i<user_info.length; i++){
@@ -551,24 +551,71 @@ $(document).ready(function () {
     }
 
     //if this user have this borrowed book
+    var borrowed_book;
     if (borrow_count != 0){
       // fetch borrowed list to check if the user in that list
       var url = directoryPath + "api/borrow";      
-      console.log(url);
       $.ajax({
         type: "GET",
         url: url,
         dataType: "json",
         async: true,
         success: function (data, status) {
-          console.log(data);
-          // console.log(data[0].book_id);
-          //historyTableLoad(data);
+          borrowed_book = data;
+          
+          for (var i=0;i<borrowed_book.length;i++){            
+            if (uid == borrowed_book[i].user_id && book.book_id == borrowed_book[i].book_id){// book returned action activate
+              //console.log("pasiis------------------")
+              
+              var ret_btn=
+              `
+              <button type="button" class="btn btn-warning btn-block" id="book-return-btn">Return Book</button>
+              `
+              var issu_btn = 
+              `
+              <button type="button" class="btn btn-success btn-block" id="book-issue-btn">Issue Book</button>
+              `
+              $("#issue-return-book").empty();
+              $("#issue-return-book").append(ret_btn);
+              // return book btn click 
+              $("#book-return-btn").on("click",function(){
+                e.preventDefault();
+                  var data = {
+                    book_id:  parseInt(book.book_id),
+                    user_id: parseInt(uid),
+                  };
+                  var url = directoryPath + "api/borrow/?return";
+                  $.ajax({
+                    url: url,
+                    type: "PUT",
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (data, textStatus, xhr) {
+                     alert(textStatus);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                      console.log(textStatus);
+                      console.log(xhr);
+                      console.log(errorThrown);
+                    },
+                  });
+
+                // clearing return btn state
+                $("#issue-return-book").empty();
+                $("#issue-return-book").append(issu_btn);
+                $("#issue-book-modal").hide();
+              });
+              break;
+            }
+          }
         },
         error: function (data) {
           alert("fail");
         },
       });
+      //console.log((borrowed_book),"+++++++++++")
+      
+
     }
 
     
