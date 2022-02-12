@@ -92,11 +92,12 @@
 
             <!----------------------body after header--------------->
             <div class="container-fluid row b-1 justify-content-center" id="main-body">
+                <!---------------------global search design for inventory tab------------------->
                 <div class="flex-row" id="global-search-div">
                     <i class="bi bi-search" id="global-search-icon"></i>
                     <input type="text" class="" placeholder="Search by user,book,id" id="global-search-input">
                 </div>
-                <!-- bishal card design begin -->
+                <!------------------------------ bishal category card design begin ---------------------->
                 <div class="book-category " id="book-category-div">
                     <div class="title text-center md-3">
                         <h2 class="font-wight-bolder text-light text-center">Books Category</h2>
@@ -104,7 +105,8 @@
                     <div class="row justify-content-center" id="book-card">
                     </div>
                 </div>
-                <table class="table table-hover table-dark" id="global-search-result-table">
+                <!---------------------------Global search result table design----------------------------->
+                <table class="table table-hover table-dark" id="global-search-result-table" style="dispaly:none">
                         <thead id="table-head">
                             <tr>
                                 <th class="float-center">SL No.</th>
@@ -113,6 +115,9 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
+                        <tbody id="global-result-tbody">
+
+                        </tbody>
                         <!-------data will be added in script.js------>
                 </table>
 
@@ -144,6 +149,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
 
             <!------------------------------update book----------------->
@@ -207,23 +213,7 @@
                     </h1>
                 </a>
 
-                <!--------------------------delete book confirmation modal---------->
-                <div class="modal" id="delete-confirm">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h2>Are you sure you want to delete?</h2>
-
-                                <div class="flex-row">
-                                    <button class="btn btn-primary" id="cancel">Cancel</button>
-                                    <button class="btn btn-danger" id="confirm">Confirm</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
+                
 
                 <!---------------------------- pop up form ---------------------->
                 <div class="modal" id="add-book-modal">
@@ -305,7 +295,7 @@
                                 <th class="float-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-content">
+                        <tbody id="category-book-result">
 
                         </tbody>
                         <!-------data will be added in script.js------>
@@ -339,6 +329,23 @@
                         </ul>
                     
                     </nav>
+                </div>
+                <!--------------------------delete book confirmation modal---------->
+                <div class="modal" id="delete-confirm">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h2>Are you sure you want to delete?</h2>
+
+                                <div class="flex-row">
+                                    <button class="btn btn-primary" id="cancel">Cancel</button>
+                                    <button class="btn btn-danger" id="confirm">Confirm</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

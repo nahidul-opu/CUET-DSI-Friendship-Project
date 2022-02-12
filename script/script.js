@@ -111,9 +111,9 @@ $(document).ready(function () {
   //ending append
 
   function showBookDetails(data, whichTable) {
-    $(whichTable).empty(); //".table-content"
-
+    $(whichTable).empty(); //"#category-book-result"
     // $("#book-details-table").append(table_header);
+    console.log(data);
     for (let i = 0; i < data.length; i++) {
       // if (data[i].category_id !== category_id) {
       //   continue;
@@ -143,10 +143,8 @@ $(document).ready(function () {
                         </div>
             </td>
         </tr>`;
-
       $(whichTable).append(content);
     }
-    // console.log("function end here");
   }
 
   //issue book button click
@@ -267,112 +265,120 @@ $(document).ready(function () {
   });
 
   //update button handle successfully
-  $("#book-details-table").on("click", ".update-button", function (e) {
-    var btn_id = $(this).attr("id");
-    // console.log($(this).attr("id"));
-    // console.log(output[btn_id].title);
-    // console.log("****************************************");
-
-    $("#edit-book-modal").show();
-
-    $("#book-name").attr("value", output[btn_id].title);
-    $("#auth-name").attr("value", output[btn_id].author_name);
-    $("#pub-year").attr("value", output[btn_id].pub_year);
-    $("#pub").attr("value", output[btn_id].publisher);
-    $("#isbn").attr("value", output[btn_id].isbn);
-    $("#total").attr("value", output[btn_id].total_count);
-
-    $("#edit-book-form").submit(function (e) {
-      //          alert("form submitted");
-      /*alert($("#book-name").val());*/
-      output[btn_id].title = $("#book-name").val();
-      output[btn_id].author_name = $("#auth-name").val();
-      output[btn_id].pub_year = $("#pub-year").val();
-      output[btn_id].publisher = $("#pub-year").val();
-      output[btn_id].isbn = $("#isbn").val();
-      output[btn_id].total_count = $("#total").val();
-
-      var url = "api/books/" + output[btn_id]["book_id"];
-      console.log(url);
-      e.preventDefault();
-
-      $.ajax({
-        url: url,
-        type: "PUT",
-        dataType: "json",
-        data: JSON.stringify(output[btn_id]),
-        success: function (data, textStatus, xhr) {
-          showBookDetails(output, ".table-content");
-          console.log(data);
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          console.log("Error in Operation");
-        },
-      });
-
-      $("#edit-book-modal").hide();
-    });
-  });
-  /*---------------------------book delete button----------------------------------*/
-  $("#book-details-table").on("click", ".delete-book-button", function (e) {
-    // alert($(this).text());
-    var btn_id = $(this).attr("id");
-    // console.log($(this).attr("id"));
-
-    var createDeleteUrl = directoryPath + "api/books/" + btn_id;
-
-    $("#delete-confirm").show();
-
-    $("#delete-confirm").on("click", "button", function () {
-      var deleteStatus = $(this).attr("id");
+  $("#book-details-table,#global-search-result-table").on(
+    "click",
+    ".update-button",
+    function (e) {
+      var btn_id = $(this).attr("id");
       // console.log($(this).attr("id"));
-      if (deleteStatus === "cancel") {
-        $("#delete-confirm").hide();
-      }
+      // console.log(output[btn_id].title);
+      // console.log("****************************************");
 
-      if (deleteStatus === "confirm") {
-        $("#delete-confirm").hide();
+      $("#edit-book-modal").show();
 
-        var dataFetch =
-          directoryPath +
-          `api/books/?column=category_id&value=` +
-          target_category_id;
+      $("#book-name").attr("value", output[btn_id].title);
+      $("#auth-name").attr("value", output[btn_id].author_name);
+      $("#pub-year").attr("value", output[btn_id].pub_year);
+      $("#pub").attr("value", output[btn_id].publisher);
+      $("#isbn").attr("value", output[btn_id].isbn);
+      $("#total").attr("value", output[btn_id].total_count);
+
+      $("#edit-book-form").submit(function (e) {
+        //          alert("form submitted");
+        /*alert($("#book-name").val());*/
+        output[btn_id].title = $("#book-name").val();
+        output[btn_id].author_name = $("#auth-name").val();
+        output[btn_id].pub_year = $("#pub-year").val();
+        output[btn_id].publisher = $("#pub-year").val();
+        output[btn_id].isbn = $("#isbn").val();
+        output[btn_id].total_count = $("#total").val();
+
+        var url = "api/books/" + output[btn_id]["book_id"];
+        console.log(url);
+        e.preventDefault();
+
         $.ajax({
-          type: "DELETE",
-          url: createDeleteUrl,
+          url: url,
+          type: "PUT",
           dataType: "json",
-          async: true,
-          success: function (data, status) {
-            // console.log("clicked gggg");
-
-            var dataFetch =
-              directoryPath +
-              `api/books/?column=category_id&value=` +
-              target_category_id;
-            $.ajax({
-              type: "GET",
-              url: dataFetch,
-              dataType: "json",
-              async: true,
-              success: function (data, status) {
-                // //console.log(data.keys());
-
-                output = data["message"];
-                showBookDetails(output, ".table-content");
-              },
-              error: function (data) {
-                //alert("fail");
-              },
-            });
+          data: JSON.stringify(output[btn_id]),
+          success: function (data, textStatus, xhr) {
+            showBookDetails(output, "#category-book-result");
+            console.log(data);
           },
-          error: function (data) {
-            alert("failed");
-            //alert("fail");
+          error: function (xhr, textStatus, errorThrown) {
+            console.log("Error in Operation");
           },
         });
-      }
-    });
-  });
+
+        $("#edit-book-modal").hide();
+      });
+    }
+  );
+  /*---------------------------book delete button----------------------------------*/
+  $("#book-details-table,#global-search-result-table").on(
+    "click",
+    ".delete-book-button",
+    function (e) {
+      // alert($(this).text());
+      var btn_id = $(this).attr("id");
+      // console.log($(this).attr("id"));
+
+      var createDeleteUrl = directoryPath + "api/books/" + btn_id;
+
+      $("#delete-confirm").show();
+
+      $("#delete-confirm").on("click", "button", function () {
+        var deleteStatus = $(this).attr("id");
+        // console.log($(this).attr("id"));
+        if (deleteStatus === "cancel") {
+          $("#delete-confirm").hide();
+        }
+
+        if (deleteStatus === "confirm") {
+          $("#delete-confirm").hide();
+
+          var dataFetch =
+            directoryPath +
+            `api/books/?column=category_id&value=` +
+            target_category_id;
+          $.ajax({
+            type: "DELETE",
+            url: createDeleteUrl,
+            dataType: "json",
+            async: true,
+            success: function (data, status) {
+              // console.log("clicked gggg");
+
+              var dataFetch =
+                directoryPath +
+                `api/books/?column=category_id&value=` +
+                target_category_id;
+              $.ajax({
+                type: "GET",
+                url: dataFetch,
+                dataType: "json",
+                async: true,
+                success: function (data, status) {
+                  // //console.log(data.keys());
+
+                  output = data["message"];
+                  showBookDetails(output, "#category-book-result");
+                },
+                error: function (data) {
+                  //alert("fail");
+                },
+              });
+            },
+            error: function (data) {
+              alert("failed");
+              //alert("fail");
+            },
+          });
+        }
+      });
+    }
+  );
   /*-------------------------category card click button----------------------------*/
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
@@ -405,7 +411,7 @@ $(document).ready(function () {
         // //console.log(data.keys());
 
         output = data["message"];
-        showBookDetails(output, ".table-content");
+        showBookDetails(output, "#category-book-result");
       },
       error: function (data) {
         //alert("fail");
@@ -469,10 +475,10 @@ $(document).ready(function () {
       async: true,
       success: function (data, status) {
         output = data["message"];
-        showBookDetails(output, ".table-content");
+        showBookDetails(output, "#category-book-result");
       },
       error: function (data, status) {
-        showBookDetails({}, ".table-content");
+        showBookDetails({}, "#category-book-result");
       },
     });
   });
@@ -686,8 +692,6 @@ $(document).ready(function () {
   });
   historyFunction = historyTableLoad;
 
-  $("#loading-animation").hide();
-
   // show user list start
   var user_list;
   $("#users").click(function () {
@@ -866,4 +870,32 @@ $(document).ready(function () {
       );
   });
   //remove user info end
+  $("#global-search-input").on("keyup", function () {
+    console.log($(this).val());
+    var globalSearchValue = $(this).val();
+    if (globalSearchValue.length > 0) {
+      //api: /api/books/?value=keyword
+      var fetchGlobalUrl =
+        directoryPath + "/api/books/?value=" + globalSearchValue;
+      console.log(fetchGlobalUrl);
+      $.ajax({
+        type: "GET",
+        url: fetchGlobalUrl,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          console.log(data);
+          output = data["message"];
+          showBookDetails(data["message"], "#global-result-tbody");
+          $("#book-category-div").hide();
+          $("#global-search-result-table").show();
+        },
+        error: function (data, status) {},
+      });
+    } else {
+      $("#global-search-result-table").hide();
+      $("#book-category-div").show();
+    }
+  });
+  $("#loading-animation").hide();
 });
