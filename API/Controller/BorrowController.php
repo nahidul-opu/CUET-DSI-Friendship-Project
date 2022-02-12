@@ -31,21 +31,19 @@ class BorrowController
                 if (isset($this->queryParams['book_id']) && count($this->queryParams) === 1) {
                     $this->readBorrowbyBook();
                 }
-                if (isset($this->queryParams['title']) && count($this->queryParams) === 1) {
+                if (isset($this->queryParams['title']) && !(isset($this->queryParams['name']))) {
                     $this->readBorrowbyTitle();
                 }
-                if (isset($this->queryParams['name']) && count($this->queryParams) === 1) {
+                if (isset($this->queryParams['name']) && !(isset($this->queryParams['title']))) {
                     $this->readBorrowbyName();
                 }
                 if (isset($this->queryParams['limit'])&&!isset($this->queryParams['sort'])) {
-                    print_r("1");
                     $this->readBorrowbyLimit();
                 }
-                if (isset($this->queryParams['sort'])&&!isset($this->queryParams['limit'])) {
-                    print_r("2");
+                if (isset($this->queryParams['sort'])&&!isset($this->queryParams['limit'])&&!isset($this->queryParams['title'])&&!isset($this->queryParams['name'])) {
                     $this->readSort();
                 }
-                if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])) {
+                if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])&&!isset($this->queryParams['title'])&&!isset($this->queryParams['name'])) {
                     $this->readSortwithLimit();
                 }
             } else $this->readBorrow();
@@ -57,8 +55,7 @@ class BorrowController
             $response = $this->updateBorrow();
         }
     }
-
-    public function readBorrow()
+  public function readBorrow()
     {
         $result = $this->borrow->read();
         if ($result) {
@@ -140,6 +137,12 @@ class BorrowController
     }
     public function readBorrowbyTitle()
     {
+        if(isset($this->queryParams['sort'])){
+            $this->borrow->column=$this->queryParams['sort'];
+        }
+        if(isset($this->queryParams['desc'])){
+            $this->borrow->desc=$this->queryParams['desc'];
+        }else{$this->borrow->desc=0;}
         $this->borrow->title = $this->queryParams['title'];
         $stmt = $this->borrow->readbyBookName();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -154,6 +157,12 @@ class BorrowController
     }
     public function readBorrowbyName()
     {
+        if(isset($this->queryParams['sort'])){
+            $this->borrow->column=$this->queryParams['sort'];
+        }
+        if(isset($this->queryParams['desc'])){
+            $this->borrow->desc=$this->queryParams['desc'];
+        }else{$this->borrow->desc=0;}
         $this->borrow->name = $this->queryParams['name'];
         $stmt = $this->borrow->readbyUserName();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
