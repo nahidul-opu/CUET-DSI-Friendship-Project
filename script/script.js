@@ -403,7 +403,23 @@ $(document).ready(function () {
         }
 
         function loadDashboardHtml() {
-
+            $("#num-1").text();
+            $("#num-2").text();
+            $("#num-3").text();
+            $("#num-4").text();
+            $("#num-5").text();
+            $("#num-6").text();
+            $("#num-7").text();
+            
+            $("label-1").text();
+            $("label-2").text();
+            $("label-3").text();
+            $("label-4").text();
+            $("label-5").text();
+            $("label-6").text();
+            $("label-7").text();
+            
+            
         }
     }
 

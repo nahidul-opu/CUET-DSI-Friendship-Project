@@ -448,17 +448,13 @@
                     <h2 class="font-wight-bolder text-light">Dash Board</h2>
                 </div>
 
-                <div class="container-fluid ">
+                <div class="container-fluid" style="display:grid">
                     <div class="row">
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            
-                                                <div class="align-self-center">
-                                                    <h1><i class="bi bi-book primary font-large-2 float-right"></i></h1>
-                                                </div>
                                                 <div class="media-body text-right">
                                                     <h3 id="num-1">300</h3>
                                                     <span id="label-1">Total Books</span>
@@ -469,13 +465,11 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            <div class="align-self-center">
-                                                <i class="icon-speech warning font-large-2 float-left"></i>
-                                            </div>
+                                            
                                             <div class="media-body text-right">
                                                 <h3 id="num-2">5</h3>
                                                 <span id="label-2">Categories</span>
@@ -486,13 +480,11 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            <div class="align-self-center">
-                                                <i class="icon-graph success font-large-2 float-left"></i>
-                                            </div>
+                                            
                                             <div class="media-body text-right">
                                                 <h3 id="num-3">112</h3>
                                                 <span id="label-3">Books Issued</span>
@@ -503,13 +495,11 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            <div class="align-self-center">
-                                                <i class="icon-pointer danger font-large-2 float-left"></i>
-                                            </div>
+                                            
                                             <div class="media-body text-right">
                                                 <h3 id="num-4">90</h3>
                                                 <span id="label-4">Books Recieved</span>
@@ -521,9 +511,9 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-xl-5">
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -531,16 +521,14 @@
                                                 <h3 id="num-5">10</h3>
                                                 <span id="label-5">Over Due Books</span>
                                             </div>
-                                            <div class="align-self-center">
-                                                <i class="icon-rocket danger font-large-2 float-right"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -548,9 +536,7 @@
                                                 <h3 id="num-6">6</h3>
                                                 <span id="label-6">New Books</span>
                                             </div>
-                                            <div class="align-self-center">
-                                                <i class="icon-user success font-large-2 float-right"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -558,7 +544,7 @@
                         </div>
 
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -566,26 +552,24 @@
                                                 <h3 id="num-7">101</h3>
                                                 <span id="label-7">Users</span>
                                             </div>
-                                            <div class="align-self-center">
-                                                <i class="icon-pie-chart warning font-large-2 float-right"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card">
+                            <div class="card category-card-tarnsparent">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 id="num-8">12/2/2022</h3>
-                                                <span id="label-8">Date</span>
+                                                <input type="date" name="from" placeholder="from" style="background-color: gray">
+                                                <div class="text-center">
+                                                <button type="button" class="btn btn-secondary">Find</button>
+                                                </div>
                                             </div>
-                                            <div class="align-self-center">
-                                                <i class="icon-support primary font-large-2 float-right"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
