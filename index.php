@@ -442,34 +442,37 @@
 
 
             <!----------------- Dashboard page ------------------->
+
             <div class="mx-5 p-5" id="dashboard-body" style="display:none">
 
                 <div class="title text-center md-3">
                     <h2 class="font-wight-bolder text-light">Dash Board</h2>
                 </div>
 
-                <div class="container-fluid" style="display:grid">
+
+
+                <div class="container-fluid mt-5" style="display:grid">
                     <div class="row">
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3" id="card1">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                                <div class="media-body text-right">
-                                                    <h3 id="num-1">300</h3>
-                                                    <span id="label-1">Total Books</span>
-                                                </div>
+                                            <div class="media-body text-right">
+                                                <h3 id="num-1">300</h3>
+                                                <span id="label-1">Total Books</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            
+
                                             <div class="media-body text-right">
                                                 <h3 id="num-2">5</h3>
                                                 <span id="label-2">Categories</span>
@@ -480,11 +483,11 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            
+
                                             <div class="media-body text-right">
                                                 <h3 id="num-3">112</h3>
                                                 <span id="label-3">Books Issued</span>
@@ -495,11 +498,11 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            
+
                                             <div class="media-body text-right">
                                                 <h3 id="num-4">90</h3>
                                                 <span id="label-4">Books Recieved</span>
@@ -513,7 +516,7 @@
 
                     <div class="row mt-xl-5">
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -521,14 +524,14 @@
                                                 <h3 id="num-5">10</h3>
                                                 <span id="label-5">Over Due Books</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -536,7 +539,7 @@
                                                 <h3 id="num-6">6</h3>
                                                 <span id="label-6">New Books</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -544,7 +547,7 @@
                         </div>
 
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
@@ -552,24 +555,25 @@
                                                 <h3 id="num-7">101</h3>
                                                 <span id="label-7">Users</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <div class="card category-card-tarnsparent">
+                            <div class="card category-card-tarnsparent pt-3">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
-                                            <div class="media-body text-left">
+                                            <div class="media-body text-center">
+                                                <input type="date" name="from" placeholder="from" style="background-color: gray">
                                                 <input type="date" name="from" placeholder="from" style="background-color: gray">
                                                 <div class="text-center">
-                                                <button type="button" class="btn btn-secondary">Find</button>
+                                                    <button type="button" class="btn btn-secondary p-0">Find</button>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -592,37 +596,36 @@
 
 
 
-                <!----------------- Users page ------------------->
-                <div class="mx-5 p-5 text-white" id="dashboard-body" style="display:none">
+            <!----------------- Users page ------------------->
+            <div class="mx-5 p-5 text-white" id="dashboard-body" style="display:none">
 
-                    <div class="title text-center md-3">
-                        <h2 class="font-wight-bolder text-light">Dash Board</h2>
-                    </div>
-
-
-
-
+                <div class="title text-center md-3">
+                    <h2 class="font-wight-bolder text-light">Dash Board</h2>
                 </div>
 
-                <!----------------- History page ------------------->
-                <div class="mx-5 p-5 text-white" id="dashboard-body" style="display:none">
 
-                    <div class="title text-center md-3">
-                        <h2 class="font-wight-bolder text-light">Dash Board</h2>
-                    </div>
-
-
-
-
-
-
-                </div>
 
 
             </div>
 
+            <!----------------- History page ------------------->
+            <div class="mx-5 p-5 text-white" id="dashboard-body" style="display:none">
+
+                <div class="title text-center md-3">
+                    <h2 class="font-wight-bolder text-light">Dash Board</h2>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
         </div>
 
+    </div>
 
 
 
@@ -630,8 +633,9 @@
 
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="./script/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="./script/script.js"></script>
 
 </body>
 
