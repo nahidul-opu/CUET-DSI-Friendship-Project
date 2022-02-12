@@ -97,38 +97,19 @@ class Book
 
     public function getBookWithParams($params)
     {
+        $statement = "";
         if (isset($params['category_id']) && isset($params['column']) && isset($params['value'])) {
             $statement = "
             SELECT * 
-            FROM book WHERE category_id=" . $params['category_id'] . " AND " . $params['column'] . " LIKE '%" . $params['value'] . "%';";
-            return $this->executeQuery($statement);
-        } else if (isset($params['sort']) && isset($params['column'])) {
-            $statement = "
-            SELECT * 
-            FROM book ORDER BY " . $params['column'];
-            if (isset($params['desc']) && $params['desc'] = true) {
-                $statement = $statement . " DESC";
-            }
-            if (isset($params['limit'])) {
-                $statement = $statement . " limit " . $params['limit'];
-                if (isset($params['offset'])) $statement = $statement . " offset " . $params['offset'];
-            }
-            return $this->executeQuery($statement);
-        } else if (isset($params['limit'])) {
-            $statement = "
-            SELECT * 
-            FROM book limit " . $params['limit'];
-            if (isset($params['offset'])) $statement = $statement . " offset " . $params['offset'];
-            return $this->executeQuery($statement);
+            FROM book WHERE category_id=" . $params['category_id'] . " AND " . $params['column'] . " LIKE '%" . $params['value'] . "%' ";
         } else if (isset($params['column']) && isset($params['value']) && in_array($params['column'], $this->allowedParams)) {
             $statement = "
                 SELECT * 
                 FROM book
                 WHERE " . $params['column'];
             if (isset($params['like']))
-                $statement = $statement . " LIKE '%" . $params['value'] . "%';";
-            else $statement = $statement . "='" . $params['value'] . "';";
-            return $this->executeQuery($statement);
+                $statement = $statement . " LIKE '%" . $params['value'] . "%' ";
+            else $statement = $statement . "='" . $params['value'] . "' ";
         } else if (isset($params['value']) && !isset($params['column'])) {
             $statement = "
                 SELECT * 
@@ -137,7 +118,22 @@ class Book
             for ($i = 0; $i < count($this->allowedParams) - 1; $i++) {
                 $statement = $statement . $this->allowedParams[$i] . " LIKE '%" . $params['value'] . "%' OR ";
             }
-            $statement = $statement . $this->allowedParams[$i] . " LIKE '%" . $params['value'] . "%';";
+            $statement = $statement . $this->allowedParams[$i] . " LIKE '%" . $params['value'] . "%' ";
+        }
+        if ($statement === "") $statement = "SELECT * FROM book ";
+        if (isset($params['sort_on'])) {
+            $statement = $statement . "ORDER BY " . $params['sort_on'];
+            if (isset($params['desc']) && $params['desc'] === "true") {
+                $statement = $statement . " DESC ";
+            } else {
+                $statement = $statement . " ASC ";
+            }
+        }
+        if (isset($params['limit'])) {
+            $statement = $statement . "limit " . $params['limit'];
+            if (isset($params['offset'])) $statement = $statement . " offset " . $params['offset'];
+        }
+        if ($statement != "") {
             return $this->executeQuery($statement);
         } else {
             print_r("Invalid API or Request Method");

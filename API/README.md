@@ -34,12 +34,12 @@
 6. (GET method) Get sorted data on a specific column
 
 6.1. ascending order
-/api/books/?sort&column=column_name
+/api/books/?sort_on=column_name
 
 6.2. descending order
-/api/books/sort&column=column_name&desc=true
+/api/books/sort_on=column_name&desc=true
 
-6.3. You can also use limit and offset with sorting
+You can also use limit and offset with sorting and use all of these with other GET APIs
 
 6. (POST method)Insert a book
    /api/books (with post request)
@@ -97,7 +97,6 @@
 
 4. (GET method)Get a borrow history where user id is 'x'
    /api/borrow?user_id=x
-   
 5. (GET method)Get a borrow history where book title is 'x'(x could be a sub string)
    a./api/borrow?title=x
    b.with sort(ASC) by y column /api/borrow?title=x&sort=y
@@ -110,33 +109,29 @@
 
 7. (GET method)Get a borrow history where book title is 'x' and user name is 'y'
    /api/borrow?title=x&name=y
-   
 8. (GET method)Get a borrow history with limit 'x'
    /api/borrow?limit=x
 
 9. (GET method)Get a borrow history with limit 'x' and offset 'y'
    /api/borrow?limit=x&offset=y
-   
 10. (GET method)Get a borrow history sorted(ASC) by any column name 'x'
-   a. /api/borrow?sort=x
-   b. with limit 'y' /api/borrow?sort=x&limit=y
-   c. with limit 'y' and offset 'z' /api/borrow?sort=x&limit=y&offset=z
-   
+    a. /api/borrow?sort=x
+    b. with limit 'y' /api/borrow?sort=x&limit=y
+    c. with limit 'y' and offset 'z' /api/borrow?sort=x&limit=y&offset=z
+
 11. (GET method)Get a borrow history sorted(DESC) by any column name 'x'
-   a. /api/borrow?sort=x&desc=1
-   b. with limit 'y' /api/borrow?sort=x&limit=y&desc=1
-   c. with limit 'y' and offset 'z' /api/borrow?sort=x&limit=y&offset=z$desc=1
+    a. /api/borrow?sort=x&desc=1
+    b. with limit 'y' /api/borrow?sort=x&limit=y&desc=1
+    c. with limit 'y' and offset 'z' /api/borrow?sort=x&limit=y&offset=z$desc=1
 
 12. (DELETE method)Delete a borrow history where book id is 'x' and user id is 'y'
-   /api/borrow?book_id=x&user_id=y (with delete request)
+    /api/borrow?book_id=x&user_id=y (with delete request)
 
 13. (POST method) Create a borrow history
-   /api/borrow
+    /api/borrow
 
 14. (PUT method) Send user_id and book_id using put method
-   7.1. Update due date
-   /api/borrow/?renew
-   7.2. Update borrow status to returned (default status is borrowed) (status=0 means borrowed and status=1 means returned)
-   /api/borrow/?return
-
-   
+    7.1. Update due date
+    /api/borrow/?renew
+    7.2. Update borrow status to returned (default status is borrowed) (status=0 means borrowed and status=1 means returned)
+    /api/borrow/?return
