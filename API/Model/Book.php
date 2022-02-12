@@ -98,6 +98,12 @@ class Book
     public function getBookWithParams($params)
     {
         $statement = "";
+        if (isset($params['count'])) {
+            $statement = "SELECT COUNT(book_id) AS total_books FROM book ";
+            if (isset($params['category_id'])) $statement = $statement . "WHERE category_id =" . $params['category_id'];
+            $statement = $statement . ";";
+            return $this->executeQuery($statement);
+        }
         if (isset($params['category_id']) && isset($params['column']) && isset($params['value'])) {
             $statement = "
             SELECT * 

@@ -50,6 +50,12 @@ You can also use limit and offset with sorting and use all of these with other G
 8. (DELETE method)Delete a Book information having id 'x'
    /api/books/x (with delete request)
 
+9. Get Book Count
+   /api/books/?count
+
+10.1 GET book count for a specific category
+/api/books/?count&category_id=x
+
 ## Category-API
 
 1. (GET method)Get All Category information
