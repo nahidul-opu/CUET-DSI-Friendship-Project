@@ -250,4 +250,40 @@ option {
   color: white;
   z-index: 99999;
 }
+
+#global-search-div {
+  background-color: violet;
+  /* height: 50px; */
+  width: fit-content;
+  margin: 20px 0 20px 0;
+  padding: 0;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+#global-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+#global-search-input {
+  margin: 0;
+  padding: 0;
+  color: black;
+  height: 40px;
+  width: 400px;
+  border-radius: 30px;
+  border-width: 0;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#global-search-icon {
+  align-self: center;
+  font-size: 20px;
+  margin-left: 10px;
+  /* background-color: green; */
+}
+
 /* css end for autocomplete issue user name */
