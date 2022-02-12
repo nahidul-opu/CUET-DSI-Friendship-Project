@@ -340,7 +340,7 @@
                     </form>
                 </nav>
 
-                <div class="card-body">
+                <div class="card-body" id="card-details">
 
 
 
@@ -358,31 +358,31 @@
 
                     </table>
 
-
+                    <!--pagination-->
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
+                        <ul class="pagination justify-content-end" id="pagination">
+                            <!--<li class="page-item disabled">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                            </li>
+                            </li>--->
                             <li class="page-item active">
-                                <span class="page-link">1
+                                <a class="page-link" id="1">1
                                     <span class="sr-only">(current)</span>
-                                </span>
+                                </a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
+                            <li class="page-item"><a class="page-link" id="2" href="">2</a></li>
+                            <li class="page-item"><a class="page-link" id="3" href="">3</a></li>
+                            <li class="page-item"><a class="page-link" id="4" href="">4</a></li>
+                            <li class="page-item"><a class="page-link" id="5" href="">5</a></li>
+                            <!--<li class="page-item">
                                 <a class="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
 
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                     </nav>
 
