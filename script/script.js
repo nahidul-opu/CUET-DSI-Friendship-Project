@@ -1015,7 +1015,7 @@ $(document).ready(function () {
     if (globalSearchValue.length > 0) {
       //api: /api/books/?value=keyword
       var fetchGlobalUrl =
-        directoryPath + "/api/books/?value=" + globalSearchValue;
+        directoryPath + "api/books/?value=" + globalSearchValue;
       console.log(fetchGlobalUrl);
       $.ajax({
         type: "GET",
