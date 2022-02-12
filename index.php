@@ -71,7 +71,6 @@
             <div class="d-flex flex-row sticky-top p-3 header-design text-white">
                 <div class="container" style="width: fit-content;">
                     <button type="button" class="btn btn-outline-light" aria-label="Left Align" id="more">
-                        <!-- <i class="bi bi-list" ></i> -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-list" viewBox="4 4 10 10">
                             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                         </svg>
@@ -92,31 +91,19 @@
             </div>
 
             <!----------------------body after header--------------->
-            <div class="container-fluid row b-1" id="main-body">
-
+            <div class="container-fluid row b-1 justify-content-center" id="main-body">
+                <div class="flex-row" id="global-search-div">
+                    <i class="bi bi-search" id="global-search-icon"></i>
+                    <input type="text" class="" placeholder="Search by user,book,id" id="global-search-input">
+                </div>
                 <!-- bishal card design begin -->
                 <div class="book-category " id="book-category-div">
                     <div class="title text-center md-3">
-                        <h2 class="font-wight-bolder text-light">Books Category</h2>
+                        <h2 class="font-wight-bolder text-light text-center">Books Category</h2>
                     </div>
                     <div class="row justify-content-center" id="book-card">
-
                     </div>
                 </div>
-
-                <!-- bishal card design end -->
-
-                <!--add category ---------------------------------------------------------------------------->
-                <!-- <div class="category-card" style="width: 18rem;background-color: rgba(181, 184, 189,0.5); border-radius: 5px;">
-                    <div class="card-body">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category" style="float:right; margin-top:25px; background-color:white; color:black; width:100%; border:0;">
-                            <i class="bi bi-plus-circle"></i>
-                        </button>
-                    </div>
-                </div> -->
-
-
-
 
                 <!---------------------------------- The Modal ------------------------------------------>
                 <!----------------------------------edit category popup---------------------------------->
@@ -147,7 +134,6 @@
                 </div>
             </div>
 
-            <!--------------book details page-------------->
             <!------------------------------update book----------------->
             <!------------------------------------------pop up form---------------------->
             <div class="modal" id="edit-book-modal">
@@ -198,7 +184,8 @@
                     </div>
                 </div>
             </div>
-
+            
+            <!--------------------------------book details page------------------------------>
              <!------------------------------ book details main container ------------------->                           
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
                 <!---------------------------floating add book button-------------------------->
@@ -225,7 +212,6 @@
 
                     </div>
                 </div>
-
 
                 <!---------------------------- pop up form ---------------------->
                 <div class="modal" id="add-book-modal">
@@ -284,10 +270,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <nav class="navbar navbar-light nav justify-content-center">
                     <form class="d-flex flex-row" id="book-search-form">
                         <input class="form-control mr-sm-2" type="search" id="book-search-input" placeholder="Enter book title" aria-label="Search">
@@ -302,11 +284,6 @@
                 </nav>
                 <!-----------------------book details main table--------------------------------->
                 <div class="card-body">
-
-
-
-
-
                     <table class="table table-hover table-dark" id="book-details-table">
                         <thead id="table-head">
                             <tr>
@@ -314,10 +291,11 @@
                                 <th class="float-center">Book Name</th>
                                 <th class="float-center">Writer Name</th>
                                 <th class="float-center">Actions</th>
-                                <!-------data will be added in script.js------>
                             </tr>
                         </thead>
+                        <!-------data will be added in script.js------>
                     </table>
+
                     <!----------------- pagination ------------------->
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -344,6 +322,7 @@
                                 </a>
                             </li>
                         </ul>
+                    
                     </nav>
                 </div>
             </div>
