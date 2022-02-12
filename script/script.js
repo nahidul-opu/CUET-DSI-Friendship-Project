@@ -639,6 +639,7 @@ $(document).ready(function () {
     $("#history").css("background-color", "#2f0410");
     $("#dashboard").css("background-color", "");
 
+    $("#user-list-div").hide();
     $("#book-details").hide();
     $("#main-body").hide();
     $("#issue-book").hide();
@@ -703,8 +704,10 @@ $(document).ready(function () {
   $("#users").click(function () {
     $("#users").css("background-color", "#2f0410");
     $("#inventory").css("background-color", "");
+    $("#history").css("background-color", "");
     $("#main-body").hide();
     $("#book-details").hide();
+    $("#history-tab-body").hide();
     $("#user-list-div").show();
 
     //retriving user list from db
