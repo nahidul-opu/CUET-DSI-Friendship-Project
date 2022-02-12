@@ -82,13 +82,41 @@ $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER after_return_book AFTER DELETE ON borrow FOR EACH ROW BEGIN
+CREATE TRIGGER after_delete_borrow AFTER DELETE ON borrow FOR EACH ROW BEGIN
      UPDATE user
      SET borrow_count = borrow_count - 1
      WHERE user_id=old.user_id;
      UPDATE book
      SET current_count = current_count + 1
      WHERE book_id=old.book_id;
+END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_return_book_1 AFTER UPDATE ON borrow FOR EACH ROW BEGIN
+   IF (NEW.status = 1 AND OLD.status = 0) THEN
+     UPDATE user
+     SET borrow_count = borrow_count - 1
+     WHERE user_id=old.user_id;
+     UPDATE book
+     SET current_count = current_count + 1
+     WHERE book_id=old.book_id;
+   END IF;
+END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_return_book_2 AFTER UPDATE ON borrow FOR EACH ROW BEGIN
+   IF (NEW.status = 0 AND OLD.status = 1) THEN
+     UPDATE user
+     SET borrow_count = borrow_count + 1
+     WHERE user_id=old.user_id;
+     UPDATE book
+     SET current_count = current_count - 1
+     WHERE book_id=old.book_id;
+   END IF;
 END;
 $$
 DELIMITER ;
