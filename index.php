@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Library Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -319,19 +319,15 @@
                     </table>
 
                     <!----------------- pagination ------------------->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end" id="pagination">
+                    <nav aria-label="Page navigation example" id="pagination-div" style="display:none">
+                        <ul class="pagination justify-content-center" id="pagination">
                             <!--<li class="page-item disabled">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>--->
-                            <li class="page-item active">
-                                <a class="page-link" id="1">1
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
+                            <li class="page-item"><a class="page-link" id="1">1</a></li>
                             <li class="page-item"><a class="page-link" id="2" href="">2</a></li>
                             <li class="page-item"><a class="page-link" id="3" href="">3</a></li>
                             <li class="page-item"><a class="page-link" id="4" href="">4</a></li>

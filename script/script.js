@@ -448,6 +448,7 @@ $(document).ready(function () {
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
     // //console.log($(this));
+
     target_category_id = $(this).attr("id");
 
     $("#main-body").hide();
@@ -473,7 +474,9 @@ $(document).ready(function () {
         // //console.log(data.keys());
 
         output = data["message"];
-        showBookDetails(output, "#category-book-result");
+        // showBookDetails(output, "#category-book-result");
+        buildPagination(output.length);
+        loadPagination("1");
       },
       error: function (data) {
         //alert("fail");
@@ -481,6 +484,7 @@ $(document).ready(function () {
     });
 
     $("#book-details").show();
+    $("#pagination-div").show();
   });
   /*-------------------------toggle button for side bar----------------------------*/
   $("#more").click(function () {
@@ -520,28 +524,34 @@ $(document).ready(function () {
     // $(this).val("");
     //apt: /api/books/?column=column_name&value=keyword
     //category wise book search api: /api/books/?category_id=?&column=?&value=?
-    var crateUrl =
-      directoryPath +
-      `api/books/?category_id=` +
-      target_category_id +
-      `&column=` +
-      searchBy +
-      `&value=` +
-      bookname;
+    console.log(bookname.length);
+    if (bookname.length > 0) {
+      var crateUrl =
+        directoryPath +
+        `api/books/?category_id=` +
+        target_category_id +
+        `&column=` +
+        searchBy +
+        `&value=` +
+        bookname;
 
-    $.ajax({
-      type: "GET",
-      url: crateUrl,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        output = data["message"];
-        showBookDetails(output, "#category-book-result");
-      },
-      error: function (data, status) {
-        showBookDetails({}, "#category-book-result");
-      },
-    });
+      $.ajax({
+        type: "GET",
+        url: crateUrl,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          output = data["message"];
+          showBookDetails(output, "#category-book-result");
+        },
+        error: function (data, status) {
+          // showBookDetails({}, "#category-book-result");
+          loadPagination("1");
+        },
+      });
+    } else {
+      loadPagination("1");
+    }
   });
   //   loadCategoryCard();
   // });
@@ -649,9 +659,9 @@ $(document).ready(function () {
                       alert(textStatus);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                      console.log(textStatus);
-                      console.log(xhr);
-                      console.log(errorThrown);
+                      //console.log(textStatus);
+                      //console.log(xhr);
+                      //console.log(errorThrown);
                     },
                   });
 
@@ -700,17 +710,45 @@ $(document).ready(function () {
   });
 
   //pagination
+  function buildPagination(dataLength) {
+    $("#pagination").empty();
+    //console.log(dataLength);
+    var totalPages =
+      dataLength % 5 === 0
+        ? parseInt(dataLength / 5)
+        : parseInt(dataLength / 5 + 1);
+    //console.log(totalPages);
+
+    for (let i = 1; i <= totalPages; i++) {
+      var onePage =
+        `<li class="page-item"><a class="page-link" id="` +
+        i +
+        `">` +
+        i +
+        `</a></li>`;
+      $("#pagination").append(onePage);
+    }
+  }
+
   function loadPagination(page) {
-    console.log(page);
-    var pageUrl = directoryPath + `api/books/?limit=5&offset=` + (page - 1) * 5;
-    console.log(pageUrl);
+    //console.log(typeof page);
+    //console.log(page - 1, page);
+    //api: api/books/?column=category_id&value=1&limit=10&offset=5
+    var pageUrl =
+      directoryPath +
+      "api/books/?column=category_id&value=" +
+      target_category_id +
+      "&limit=5&offset=" +
+      (page - 1) * 5;
+    //console.log(pageUrl);
+    /*`api/books/?limit=5&offset=` + (page - 1) * 5;*/
     $.ajax({
       url: pageUrl,
       type: "GET",
       dataType: "json",
       async: true,
       success: function (data) {
-        console.log(data);
+        //console.log(data);
         showBookDetails(data["message"], "#category-book-result");
       },
       /*error: function (data) {
@@ -723,8 +761,11 @@ $(document).ready(function () {
   $("#card-details").on("click", ".page-link", function (ex) {
     ex.preventDefault();
     //$(this).preventDefault();
+    // $(this).parent().find("a.page-link").removeClass("");
+    // $(this).addClass("active");
+    //console.log($(this).attr("class"));
     var page_id = $(this).attr("id");
-    console.log(page_id);
+    //console.log(page_id);
     loadPagination(page_id);
   });
 
