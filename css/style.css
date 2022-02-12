@@ -1,0 +1,253 @@
+body {
+  font-family: sans-serif;
+}
+.header-design {
+  background-color: #aefeff;
+  background: url("../src/header-4.jpg");
+  background-size: cover;
+  background-color: cadetblue;
+  background-position-y: center;
+  background-position-x: right;
+}
+
+.update-button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-image {
+  background-image: url("../src/bg-4.jpg");
+  background-size: cover;
+}
+
+#history-search-container {
+  margin: 30px;
+}
+
+/*.card-test {
+    border-radius: 5px;
+    box-shadow: 5px;
+    height: 250px;
+    width: 200px;
+    border-width: 2px;
+    border: 2px rgb(0, 0, 0);
+    background-color: rgba(93, 190, 255, 0.5);
+    margin: 30px;
+    box-shadow: 0px 0.5rem 1rem rgba(rgb(0, 0, 0, 0.5));
+    transition: 0.3s;
+    align-items: center;
+     flex-direction: column;
+  flex-wrap: wrap; 
+}*/
+
+/* .card-test:hover {
+  box-shadow: 0px 8px 8px 0px rgba(rgb(0, 0, 0, 0.2));
+} */
+
+.category-card {
+  margin: 30px;
+  box-shadow: 3px 3px 6px gray;
+}
+.category-card:hover {
+  box-shadow: 5px 5px 10px gray;
+}
+
+#edit-card {
+  display: none;
+}
+
+#book-details {
+  display: none;
+}
+
+#book-search-form {
+  /* margin-top: 10pt; */
+  /* display: inline; */
+  /* color: black; */
+  /* flex-direction: column; */
+  margin: 20px;
+}
+
+#book-search-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  margin-bottom: 10pt;
+}
+
+#book-search-dropdown {
+  /* height: 30px; */
+  /* width: 200px; */
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  height: 39px;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+#history-search-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  margin-bottom: 10pt;
+  margin-top: 10pt;
+}
+
+#history-search-dropdown {
+  /* height: 30px; */
+  /* width: 200px; */
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  height: 39px;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+#drop-down-search-container {
+  /* height: 100px; */
+  /* width: 100px; */
+  height: fit-content;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+  margin-left: 8px;
+  border-radius: 5px;
+}
+
+select {
+  padding: 5px;
+  border: 2;
+  border-width: 2;
+  border-color: wheat;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+  border-radius: 5px;
+}
+
+option {
+  color: black;
+  border-radius: 5px;
+}
+
+.category-card-click {
+  width: fit-content;
+  background: transparent;
+  /* border: 0; */
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+.category-card-tarnsparent {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.floating-add-button {
+  color: black;
+  height: 55px;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(131, 247, 208, 0.5);
+  border-radius: 10px;
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  z-index: 1;
+}
+
+.floating-add-button:hover {
+  color: black;
+  height: 60px;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(131, 247, 208, 1);
+  border-radius: 10px;
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  z-index: 1;
+  transform: scale(1.2);
+}
+
+.delete-book-button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-field {
+  font-family: sans-serif;
+}
+
+.input-options {
+  font-family: sans-serif;
+}
+
+/* css start for autocomplete issue user name */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
+
+.ui-autocomplete > li > div {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.ui-state-hover,
+.ui-state-active,
+.ui-state-focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.no-display {
+  display: none;
+  /* color: aqua; */
+}
+
+#history-header {
+  height: fit-content;
+  width: "100%";
+  background-color: rgb(33, 37, 41);
+  color: white;
+  text-align: center;
+}
+
+#loading-animation {
+  background: rgba(81, 82, 82, 1) url(../src/loading2.gif) no-repeat center
+    center;
+  background-size: 80px;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  z-index: 99999;
+}
+/* css end for autocomplete issue user name */
