@@ -402,48 +402,48 @@ $(document).ready(function () {
     }
   );
   /*-----------------------------add new book option----------------------------------*/
-  $("#book-details").on("click", "#float-button", function (ev) {
-    /* alert("float button clicked");*/
-    $("#add-book-modal").show();
-    ev.preventDefault();
+  // $("#book-details").on("click", "#float-button", function (ev) {
+  //   /* alert("float button clicked");*/
+  //   $("#add-book-modal").show();
+  //   ev.preventDefault();
 
-    $("#add-book-form").submit(function (e) {
-      /*alert("submit attempted");*/
-      e.preventDefault();
-      let data = {
-        title: "",
-        author_name: "",
-        pub_year: "",
-        isbn: "",
-        total_count: "",
-        current_count: "",
-        category_id: "",
-        publisher: "",
-      };
+  //   $("#add-book-form").submit(function (e) {
+  //     /*alert("submit attempted");*/
+  //     e.preventDefault();
+  //     let data = {
+  //       title: "",
+  //       author_name: "",
+  //       pub_year: "",
+  //       isbn: "",
+  //       total_count: "",
+  //       current_count: "",
+  //       category_id: "",
+  //       publisher: "",
+  //     };
 
-      var url = directoryPath + "api/books";
+  //     var url = directoryPath + "api/books";
 
-      console.log(data);
+  //     console.log(data);
 
-      data.title = $("#mAB-book-name").val();
-      data.author_name = $("#mAB-author-name").val();
-      data.pub_year = $("#mAB-pub-year").val();
-      data.publisher = $("#mAB-publisher").val();
-      data.isbn = $("#mAB-isbn").val();
-      data.total_count = $("#mAB-total-count").val();
-      data.current_count = $("#mAB-total-count").val();
-      data.category_id = $("#mAB-category-id").val();
+  //     data.title = $("#mAB-book-name").val();
+  //     data.author_name = $("#mAB-author-name").val();
+  //     data.pub_year = $("#mAB-pub-year").val();
+  //     data.publisher = $("#mAB-publisher").val();
+  //     data.isbn = $("#mAB-isbn").val();
+  //     data.total_count = $("#mAB-total-count").val();
+  //     data.current_count = $("#mAB-total-count").val();
+  //     data.category_id = $("#mAB-category-id").val();
 
-      console.log(JSON.stringify(data));
+  //     console.log(JSON.stringify(data));
 
-      $.post(url, JSON.stringify(data), function (msg) {
-        // Display the returned data in browser
-        $("#result").html(msg);
-      });
+  //     $.post(url, JSON.stringify(data), function (msg) {
+  //       // Display the returned data in browser
+  //       $("#result").html(msg);
+  //     });
 
-      $("#add-book-modal").hide();
-    });
-  });
+  //     $("#add-book-modal").hide();
+  //   });
+  // });
   /*-------------------------category card click button----------------------------*/
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
