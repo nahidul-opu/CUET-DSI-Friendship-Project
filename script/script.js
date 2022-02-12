@@ -448,6 +448,88 @@ $(document).ready(function () {
   $("#book-card").on("click", ".category-card-click", function (e) {
     // alert($(this).attr("id"));
     // //console.log($(this));
+    target_category_id = $(this).attr("id");
+
+    $("#main-body").hide();
+
+    var crateUrl =
+      directoryPath +
+      `api/books/?column=category_id&value=` +
+      target_category_id;
+    //   directoryPath +
+    //   `api/books/?category_id=` +
+    //   target_category_id +
+    //   `&column=` +
+    //   searchBy +
+    //   `&value=` +
+    //   bookname;
+
+    $.ajax({
+      type: "GET",
+      url: crateUrl,
+      dataType: "json",
+      async: true,
+      success: function (data, status) {
+        // //console.log(data.keys());
+
+        output = data["message"];
+        showBookDetails(output, "#category-book-result");
+      },
+      error: function (data) {
+        //alert("fail");
+      },
+    });
+  });
+  // });
+  // }
+  // );
+  /*-----------------------------add new book option----------------------------------*/
+  $("#book-details").on("click", "#float-button", function (ev) {
+    /* alert("float button clicked");*/
+    $("#add-book-modal").show();
+    ev.preventDefault();
+
+    $("#add-book-form").submit(function (e) {
+      /*alert("submit attempted");*/
+      e.preventDefault();
+      let data = {
+        title: "",
+        author_name: "",
+        pub_year: "",
+        isbn: "",
+        total_count: "",
+        current_count: "",
+        category_id: "",
+        publisher: "",
+      };
+
+      var url = directoryPath + "api/books";
+
+      console.log(data);
+
+      data.title = $("#mAB-book-name").val();
+      data.author_name = $("#mAB-author-name").val();
+      data.pub_year = $("#mAB-pub-year").val();
+      data.publisher = $("#mAB-publisher").val();
+      data.isbn = $("#mAB-isbn").val();
+      data.total_count = $("#mAB-total-count").val();
+      data.current_count = $("#mAB-total-count").val();
+      data.category_id = $("#mAB-category-id").val();
+
+      console.log(JSON.stringify(data));
+
+      $.post(url, JSON.stringify(data), function (msg) {
+        // Display the returned data in browser
+        $("#result").html(msg);
+      });
+
+      $("#add-book-modal").hide();
+    });
+  });
+  /*-------------------------category card click button----------------------------*/
+  $("#book-card").on("click", ".category-card-click", function (e) {
+    // alert($(this).attr("id"));
+    // //console.log($(this));
 
     target_category_id = $(this).attr("id");
 
@@ -562,137 +644,238 @@ $(document).ready(function () {
     $("#issue-user-search").autocomplete({
       source: availableTags,
     });
-  });
 
-  // $("#issue-user-search").keypress(function (e) {
-  //   var key = e.which;
-  //   if (key == 13) {
-  //     var s_user = $("#issue-user-search").val();
-  //     console.log(s_user);
-  //     result = s_user.split(".");
-  //     var user_info =
-  //       `
-  //     <b>Name: </b>` +
-  //       result[1] +
-  //       `<br>
-  //     <b>User Id : </b>` +
-  //       result[0] +
-  //       `<br>
-  //     `;
-  //     $("#book-issue-user-info").empty();
-  //     $("#book-issue-user-info").append(user_info);
-  //   }
-  // });
+    // $("#issue-user-search").keypress(function (e) {
+    //   var key = e.which;
+    //   if (key == 13) {
+    //     var s_user = $("#issue-user-search").val();
+    //     console.log(s_user);
+    //     result = s_user.split(".");
+    //     var user_info =
+    //       `
+    //     <b>Name: </b>` +
+    //       result[1] +
+    //       `<br>
+    //     <b>User Id : </b>` +
+    //       result[0] +
+    //       `<br>
+    //     `;
+    //     $("#book-issue-user-info").empty();
+    //     $("#book-issue-user-info").append(user_info);
+    //   }
+    // });
 
-  $("#issue-user-search").keypress(function (e) {
-    var location = window.location.href;
-    var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
+    $("#issue-user-search").keypress(function (e) {
+      var location = window.location.href;
+      var directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
 
-    var key = e.which;
-    if (key == 13) {
-      var s_user = $("#issue-user-search").val();
-      //console.log(s_user);
-      result = s_user.split(".");
-      var user_info =
-        `
+      var key = e.which;
+      if (key == 13) {
+        var s_user = $("#issue-user-search").val();
+        //console.log(s_user);
+        result = s_user.split(".");
+        var user_info =
+          `
     <b>Name: </b>` +
-        result[1] +
-        `<br>
+          result[1] +
+          `<br>
     <b>User Id : </b>` +
-        result[0] +
-        `<br>
+          result[0] +
+          `<br>
     `;
-      $("#book-issue-user-info").empty();
-      $("#book-issue-user-info").append(user_info);
+        $("#book-issue-user-info").empty();
+        $("#book-issue-user-info").append(user_info);
 
-      //show users borrowed books, if have any
-      var uid = result[0];
-      var borrow_count;
-      for (var i = 0; i < user_info.length; i++) {
-        if (uid == user_info[i].user_id)
-          borrow_count = user_info[i].borrow_count;
+        //show users borrowed books, if have any
+        var uid = result[0];
+        var borrow_count;
+        for (var i = 0; i < user_info.length; i++) {
+          if (uid == user_info[i].user_id)
+            borrow_count = user_info[i].borrow_count;
+        }
+
+        //if this user have this borrowed book
+        var borrowed_book;
+        if (borrow_count != 0) {
+          // fetch borrowed list to check if the user in that list
+          var url = directoryPath + "api/borrow";
+          $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            async: true,
+            success: function (data, status) {
+              borrowed_book = data;
+
+              for (var i = 0; i < borrowed_book.length; i++) {
+                if (
+                  uid == borrowed_book[i].user_id &&
+                  book.book_id == borrowed_book[i].book_id
+                ) {
+                  // book returned action activate
+                  //console.log("pasiis------------------")
+
+                  var ret_btn = `
+              <button type="button" class="btn btn-warning btn-block" id="book-return-btn">Return Book</button>
+              `;
+                  var issu_btn = `
+              <button type="button" class="btn btn-success btn-block" id="book-issue-btn">Issue Book</button>
+              `;
+                  $("#issue-return-book").empty();
+                  $("#issue-return-book").append(ret_btn);
+                  // return book btn click
+                  $("#book-return-btn").on("click", function () {
+                    e.preventDefault();
+                    var data = {
+                      book_id: parseInt(book.book_id),
+                      user_id: parseInt(uid),
+                    };
+                    var url = directoryPath + "api/borrow/?return";
+                    $.ajax({
+                      url: url,
+                      type: "PUT",
+                      dataType: "json",
+                      data: JSON.stringify(data),
+                      success: function (data, textStatus, xhr) {
+                        alert(textStatus);
+                      },
+                      error: function (xhr, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(xhr);
+                        console.log(errorThrown);
+                      },
+                    });
+
+                    // clearing return btn state
+                    $("#issue-return-book").empty();
+                    $("#issue-return-book").append(issu_btn);
+                    $("#issue-book-modal").hide();
+                  });
+                  break;
+                }
+              }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              //console.log(textStatus);
+              //console.log(xhr);
+              //console.log(errorThrown);
+            },
+          });
+          //console.log((borrowed_book),"+++++++++++")
+        }
+
+        //end showing borrowed book
       }
+    });
 
-      //if this user have this borrowed book
-      var borrowed_book;
-      if (borrow_count != 0) {
-        // fetch borrowed list to check if the user in that list
-        var url = directoryPath + "api/borrow";
+    ////////////////////
+
+    //book dropdown change the placeholder of the input field
+    $("#book-search-dropdown").change(function () {
+      if ($("#book-search-dropdown option:selected").val() === "title") {
+        $("#book-search-input").attr("placeholder", "Enter book title");
+      } else {
+        $("#book-search-input").attr("placeholder", "Enter author name");
+      }
+    });
+
+    $("#dashboard").click(function () {
+      $("#inventory").css("background-color", "");
+      $("#users").css("background-color", "");
+      $("#history").css("background-color", "");
+      $("#dashboard").css("background-color", "#2f0410");
+
+      $("#book-details").hide();
+      $("#main-body").hide();
+      $("#user-list-div").hide();
+      $("#history-tab-body").hide();
+      $("#dashboard-body").show();
+
+      var d = new Date();
+
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+
+      var today =
+        d.getFullYear() +
+        "-" +
+        (month < 10 ? "0" : "") +
+        month +
+        "-" +
+        (day < 10 ? "0" : "") +
+        day;
+      /* console.log(today);*/
+
+      let fromDate = today;
+      let toDate = today;
+      loadDashboard(fromDate, toDate);
+
+      $("#date-filter").submit(function (e) {
+        e.preventDefault();
+
+        fromDate = $("#from").val();
+        toDate = $("#to").val();
+
+        loadDashboard(fromDate, toDate);
+        /*console.log(fromDate);
+            console.log(toDate);*/
+      });
+
+      function loadDashboard(fromDate, toDate) {
+        url =
+          directoryPath +
+          "api/dashboard/?start_date=" +
+          fromDate +
+          "&end_date=" +
+          toDate;
+
+        console.log(url);
+
         $.ajax({
           type: "GET",
           url: url,
           dataType: "json",
           async: true,
-          success: function (data, status) {
-            borrowed_book = data;
+          success: function (info, status) {
+            console.log(info);
 
-            for (var i = 0; i < borrowed_book.length; i++) {
-              if (
-                uid == borrowed_book[i].user_id &&
-                book.book_id == borrowed_book[i].book_id
-              ) {
-                // book returned action activate
-                //console.log("pasiis------------------")
+            $("#num-1").text(info.total_book);
+            $("#num-2").text(info.total_category);
+            $("#num-3").text(info.total_issued);
+            $("#num-4").text(info.total_returned);
+            $("#num-5").text(info.total_overdued_books);
+            $("#num-6").text(info.total_books_added);
+            $("#num-7").text(info.total_user_added);
 
-                var ret_btn = `
-              <button type="button" class="btn btn-warning btn-block" id="book-return-btn">Return Book</button>
-              `;
-                var issu_btn = `
-              <button type="button" class="btn btn-success btn-block" id="book-issue-btn">Issue Book</button>
-              `;
-                $("#issue-return-book").empty();
-                $("#issue-return-book").append(ret_btn);
-                // return book btn click
-                $("#book-return-btn").on("click", function () {
-                  e.preventDefault();
-                  var data = {
-                    book_id: parseInt(book.book_id),
-                    user_id: parseInt(uid),
-                  };
-                  var url = directoryPath + "api/borrow/?return";
-                  $.ajax({
-                    url: url,
-                    type: "PUT",
-                    dataType: "json",
-                    data: JSON.stringify(data),
-                    success: function (data, textStatus, xhr) {
-                      alert(textStatus);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                      //console.log(textStatus);
-                      //console.log(xhr);
-                      //console.log(errorThrown);
-                    },
-                  });
-
-                  // clearing return btn state
-                  $("#issue-return-book").empty();
-                  $("#issue-return-book").append(issu_btn);
-                  $("#issue-book-modal").hide();
-                });
-                break;
-              }
-            }
+            /*total_category":"5","total_book":"48","total_issued":0,"total_returned":0,"total_books_added":"48","total_overdued_books":"50","total_user_added":0*/
           },
-          error: function (data) {
+          error: function (info) {
             alert("fail");
+            console.log(status);
           },
         });
-        //console.log((borrowed_book),"+++++++++++")
       }
+    });
 
-      //end showing borrowed book
-    }
-  });
-
-  ////////////////////
-
-  //book dropdown change the placeholder of the input field
-  $("#book-search-dropdown").change(function () {
-    if ($("#book-search-dropdown option:selected").val() === "title") {
-      $("#book-search-input").attr("placeholder", "Enter book title");
-    } else {
-      $("#book-search-input").attr("placeholder", "Enter author name");
+    //pagination
+    function loadPagination(page) {
+      console.log(page);
+      var pageUrl =
+        directoryPath + `api/books/?limit=5&offset=` + (page - 1) * 5;
+      console.log(pageUrl);
+      $.ajax({
+        url: pageUrl,
+        type: "GET",
+        dataType: "json",
+        async: true,
+        success: function (data) {
+          console.log(data);
+          showBookDetails(data["message"], "#category-book-result");
+        },
+        /*error: function (data) {
+              alert("fail");
+            },*/
+      });
     }
   });
 

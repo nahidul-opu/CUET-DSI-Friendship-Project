@@ -108,19 +108,19 @@
                 </div>
                 <!---------------------------Global search result table design----------------------------->
                 <table class="table table-hover table-dark" id="global-search-result-table" style="display:none;">
-                        <thead id="table-head">
-                            <tr>
-                                <th class="float-center">SL No.</th>
-                                <th class="float-center">Book Name</th>
-                                <th class="float-center">Writer Name</th>
-                                <th class="float-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="global-result-tbody">
+                    <thead id="table-head">
+                        <tr>
+                            <th class="float-center">SL No.</th>
+                            <th class="float-center">Book Name</th>
+                            <th class="float-center">Writer Name</th>
+                            <th class="float-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="global-result-tbody">
 
 
-                        </tbody>
-                        <!-------data will be added in script.js------>
+                    </tbody>
+                    <!-------data will be added in script.js------>
                 </table>
 
 
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
             <!------------------------------update book----------------->
@@ -219,9 +219,9 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--------------------------------book details page------------------------------>
-             <!------------------------------ book details main container ------------------->                           
+            <!------------------------------ book details main container ------------------->
             <div class="container jumbotrom card text-center" id="book-details" style="background-color: rgba(181, 184, 189,0.4);min-height:100vh">
                 <!---------------------------floating add book button-------------------------->
                 <a href="" id="float-button">
@@ -230,7 +230,7 @@
                     </h1>
                 </a>
 
-                
+
 
                 <!---------------------------- pop up form ---------------------->
                 <div class="modal" id="add-book-modal">
@@ -340,7 +340,7 @@
                                 </a>
                             </li>-->
                         </ul>
-                    
+
                     </nav>
                 </div>
             </div>
@@ -726,7 +726,7 @@
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
                                                 <h3 id="num-7">101</h3>
-                                                <span id="label-7">Users</span>
+                                                <span id="label-7">Users Added</span>
                                             </div>
 
                                         </div>
@@ -740,11 +740,16 @@
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-center">
-                                                <input type="date" name="from" placeholder="from" style="background-color: gray">
-                                                <input type="date" name="from" placeholder="from" style="background-color: gray">
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-secondary p-0">Find</button>
-                                                </div>
+                                                <form id="date-filter">
+
+                                                    <input id="from" type="text" placeholder="From" style=" width:83px" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+                                                    <input id="to" type="text" placeholder="To" style=" width:83px" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+                                                    <div class="text-center">
+                                                        <input id="date-submit" value="filter" type="submit" class="btn btn-secondary p-0" style="margin-top:10px">
+                                                    </div>
+                                                </form>
                                             </div>
 
                                         </div>
