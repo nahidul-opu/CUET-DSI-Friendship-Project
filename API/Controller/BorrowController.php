@@ -37,13 +37,13 @@ class BorrowController
                 if (isset($this->queryParams['name']) && !(isset($this->queryParams['title']))) {
                     $this->readBorrowbyName();
                 }
-                if (isset($this->queryParams['limit'])&&!isset($this->queryParams['sort'])) {
+                if (isset($this->queryParams['limit'])&&!(isset($this->queryParams['sort']))) {
                     $this->readBorrowbyLimit();
                 }
-                if (isset($this->queryParams['sort'])&&!isset($this->queryParams['limit'])&&!isset($this->queryParams['title'])&&!isset($this->queryParams['name'])) {
+                if (isset($this->queryParams['sort'])&&!(isset($this->queryParams['limit']))&&!(isset($this->queryParams['title']))&&!(isset($this->queryParams['name']))) {
                     $this->readSort();
                 }
-                if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])&&!isset($this->queryParams['title'])&&!isset($this->queryParams['name'])) {
+                if (isset($this->queryParams['sort'])&&isset($this->queryParams['limit'])&&!(isset($this->queryParams['title']))&&!(isset($this->queryParams['name']))) {
                     $this->readSortwithLimit();
                 }
             } else $this->readBorrow();
