@@ -284,6 +284,7 @@ $(document).ready(function () {
         $("#history").css("background-color", "");
         $("#book-details").hide();
         $("#issue-book").hide();
+        $("#dashboard-body").hide();
         $("#main-body").show();
         loadCategoryCard();
     });
