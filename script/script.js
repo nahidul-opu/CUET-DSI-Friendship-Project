@@ -1,6 +1,7 @@
 var historySortHeader;
 var historyFunction;
 var directoryPath;
+var globalSearchValue;
 var historySortTrack = {
   book_id: 0,
   created_at: 0,
@@ -151,74 +152,78 @@ $(document).ready(function () {
   //global variable
   var users_list = [];
   var book;
-  $("#book-details-table").on("click", ".issue-book-button", function (e) {
-    var btn_id = $(this).attr("id");
+  $("#book-details-table,#global-search-result-table").on(
+    "click",
+    ".issue-book-button",
+    function (e) {
+      var btn_id = $(this).attr("id");
 
-    $.ajax({
-      type: "GET",
-      url: directoryPath + `api/books/` + btn_id,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        // //console.log(data.keys());
+      $.ajax({
+        type: "GET",
+        url: directoryPath + `api/books/` + btn_id,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          // //console.log(data.keys());
 
-        book = data["message"][0];
-        var book_info =
-          `<b>Title:</b> ` +
-          book.title +
-          `<br><br>
+          book = data["message"][0];
+          var book_info =
+            `<b>Title:</b> ` +
+            book.title +
+            `<br><br>
         <b>Author:</b> ` +
-          book.author_name +
-          `<br><br>
+            book.author_name +
+            `<br><br>
         <b>Publisher:</b> ` +
-          book.publisher +
-          `<br><br>        
+            book.publisher +
+            `<br><br>        
         <b>Published:</b>` +
-          book.pub_year +
-          `<br><br>
+            book.pub_year +
+            `<br><br>
         <b>Available copy:</b> ` +
-          book.current_count +
-          `<br><br>
+            book.current_count +
+            `<br><br>
         <b>ISBN:</b> ` +
-          book.isbn +
-          `
+            book.isbn +
+            `
         `;
-        $("#issue-user-search").val("");
-        $("#book-issue-user-info").empty();
+          $("#issue-user-search").val("");
+          $("#book-issue-user-info").empty();
 
-        $("#book-issue-book-info").empty();
-        $("#book-issue-book-info").append(book_info);
-        if (book.current_count > 0) {
-          $("#book-avalability").empty();
-          $("#book-avalability").append(
-            `<h5 class="bg-success mx-5 p-2 rounded">Available</h5>`
-          );
-        } else {
-          $("#book-avalability").empty();
-          $("#book-avalability").append(
-            `<h5 class="bg-danger mx-5 p-2 rounded">Not available</h5>`
-          );
-        }
+          $("#book-issue-book-info").empty();
+          $("#book-issue-book-info").append(book_info);
+          if (book.current_count > 0) {
+            $("#book-avalability").empty();
+            $("#book-avalability").append(
+              `<h5 class="bg-success mx-5 p-2 rounded">Available</h5>`
+            );
+          } else {
+            $("#book-avalability").empty();
+            $("#book-avalability").append(
+              `<h5 class="bg-danger mx-5 p-2 rounded">Not available</h5>`
+            );
+          }
 
-        $("#issue-book-modal").show();
-      },
-    });
+          $("#issue-book-modal").show();
+        },
+      });
 
-    //retrive userlist to use auto complete issue-user search
-    $.ajax({
-      type: "GET",
-      url: directoryPath + `api/users/`,
-      dataType: "json",
-      async: true,
-      success: function (data, status) {
-        var users = data["message"];
-        if (users_list.length == 0) {
-          for (let i = 0; i < users.length; i++)
-            users_list.push(users[i].user_id + ". " + users[i].name);
-        }
-      },
-    });
-  });
+      //retrive userlist to use auto complete issue-user search
+      $.ajax({
+        type: "GET",
+        url: directoryPath + `api/users/`,
+        dataType: "json",
+        async: true,
+        success: function (data, status) {
+          var users = data["message"];
+          if (users_list.length == 0) {
+            for (let i = 0; i < users.length; i++)
+              users_list.push(users[i].user_id + ". " + users[i].name);
+          }
+        },
+      });
+    }
+  );
 
   // //issue book button action
   // $("#book-issue-btn").on("click", function () {
@@ -321,6 +326,12 @@ $(document).ready(function () {
     ".delete-book-button",
     function (e) {
       // alert($(this).text());
+      // console.log(typeof $(this).parent());
+      // console.log($(this).parent().prop("tagName"));
+
+      console.log($(this).closest("tbody").attr("id"));
+      var targetTable = "#" + $(this).closest("tbody").attr("id");
+      console.log(targetTable);
       var btn_id = $(this).attr("id");
       // console.log($(this).attr("id"));
 
@@ -337,11 +348,8 @@ $(document).ready(function () {
 
         if (deleteStatus === "confirm") {
           $("#delete-confirm").hide();
+          var dataFetch;
 
-          var dataFetch =
-            directoryPath +
-            `api/books/?column=category_id&value=` +
-            target_category_id;
           $.ajax({
             type: "DELETE",
             url: createDeleteUrl,
@@ -350,10 +358,20 @@ $(document).ready(function () {
             success: function (data, status) {
               // console.log("clicked gggg");
 
-              var dataFetch =
-                directoryPath +
-                `api/books/?column=category_id&value=` +
-                target_category_id;
+              if (targetTable === "#global-result-tbody") {
+                dataFetch =
+                  directoryPath + "/api/books/?value=" + globalSearchValue;
+              } else {
+                dataFetch =
+                  directoryPath +
+                  `api/books/?column=category_id&value=` +
+                  target_category_id;
+              }
+
+              // var dataFetch =
+              //   directoryPath +
+              //   `api/books/?column=category_id&value=` +
+              //   target_category_id;
               $.ajax({
                 type: "GET",
                 url: dataFetch,
@@ -363,7 +381,9 @@ $(document).ready(function () {
                   // //console.log(data.keys());
 
                   output = data["message"];
-                  showBookDetails(output, "#category-book-result");
+                  console.log("dddddddddddddddddddd");
+                  console.log(targetTable);
+                  showBookDetails(output, targetTable);
                 },
                 error: function (data) {
                   //alert("fail");
@@ -872,7 +892,7 @@ $(document).ready(function () {
   //remove user info end
   $("#global-search-input").on("keyup", function () {
     console.log($(this).val());
-    var globalSearchValue = $(this).val();
+    globalSearchValue = $(this).val();
     if (globalSearchValue.length > 0) {
       //api: /api/books/?value=keyword
       var fetchGlobalUrl =

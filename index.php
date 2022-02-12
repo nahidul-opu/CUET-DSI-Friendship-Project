@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <!---------------------------Global search result table design----------------------------->
-                <table class="table table-hover table-dark" id="global-search-result-table" style="dispaly:none">
+                <table class="table table-hover table-dark" id="global-search-result-table" style="display:none;">
                         <thead id="table-head">
                             <tr>
                                 <th class="float-center">SL No.</th>
@@ -199,6 +199,21 @@
                         </div>
 
 
+                    </div>
+                </div>
+            </div>
+
+            <!--------------------------delete book confirmation modal---------->
+            <div class="modal" id="delete-confirm">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2>Are you sure you want to delete?</h2>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-primary m-2" id="cancel">Cancel</button>
+                                <button class="btn btn-danger" id="confirm">Confirm</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,23 +344,6 @@
                         </ul>
                     
                     </nav>
-                </div>
-                <!--------------------------delete book confirmation modal---------->
-                <div class="modal" id="delete-confirm">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h2>Are you sure you want to delete?</h2>
-
-                                <div class="flex-row">
-                                    <button class="btn btn-primary" id="cancel">Cancel</button>
-                                    <button class="btn btn-danger" id="confirm">Confirm</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
