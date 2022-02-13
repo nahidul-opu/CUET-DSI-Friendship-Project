@@ -10,9 +10,12 @@ class BooksController
     private $book;
     function __construct($dbConnector, $method, $queryString)
     {
+        print("here\n");
+        print_r($queryString);
         $this->db = $dbConnector;
         $this->requestMethod = $method;
         parse_str($queryString, $this->queryParams);
+        // print_r($queryParams);
         //$this->queryParams = var_dump($this->queryParams);
         $this->book = new Book($this->db);
         $this->queryParams['book_id'] = null;
