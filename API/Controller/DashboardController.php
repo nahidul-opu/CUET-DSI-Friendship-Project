@@ -35,19 +35,19 @@ class DashboardController
         if (isset($rni[0]['COUNT(status)'])) $ti = $rni[0]['COUNT(status)'];
         $tr = 0;
         if (isset($rni[0]['COUNT(status)'])) $tr = $rni[1]['COUNT(status)'];
-        
+
         $tba = $this->dashboard->totalBooksAdded($this->queryParams['start_date'], $this->queryParams['end_date']);
         $tb = 0;
         if (isset($tba[0]['COUNT(book_id)'])) $tb = $tba[0]['COUNT(book_id)'];
-        
+
         $tdb = $this->dashboard->totalOverduedBooks($this->queryParams['start_date'], $this->queryParams['end_date']);
         $td = 0;
-        if (isset($tdb[0]['COUNT(due_date)'])) $td =$tdb[0]['COUNT(due_date)'];
-        
+        if (isset($tdb[0]['COUNT(due_date)'])) $td = $tdb[0]['COUNT(due_date)'];
+
         $tua = $this->dashboard->totalUserAdded($this->queryParams['start_date'], $this->queryParams['end_date']);
         $tu = 0;
-        if (isset($tua[0]['COUNT(user_id)'])) $td =$tua[0]['COUNT(user_id)'];
-        
+        if (isset($tua[0]['COUNT(user_id)'])) $tu = $tua[0]['COUNT(user_id)'];
+
         $result = array(
             "total_category" => $total_category,
             "total_book" => $total_book,
