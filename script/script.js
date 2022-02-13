@@ -620,6 +620,8 @@ $(document).ready(function () {
         (day < 10 ? "0" : "") +
         day;
       /* console.log(today);*/
+        
+    $("#today").text(today);
 
       let fromDate = today;
       let toDate = today;
@@ -630,6 +632,7 @@ $(document).ready(function () {
 
         fromDate = $("#from").val();
         toDate = $("#to").val();
+          $("#today").text(fromDate+" to "+toDate);
 
         loadDashboard(fromDate, toDate);
         /*console.log(fromDate);
