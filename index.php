@@ -620,6 +620,7 @@
 
                 <div class="title text-center md-3">
                     <h2 class="font-wight-bolder text-light">Dash Board</h2>
+                    <h4 class="font-wight-bolder text-light" id="today"></h4>
                 </div>
 
 
