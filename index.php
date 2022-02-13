@@ -743,9 +743,9 @@
                                             <div class="media-body text-center">
                                                 <form id="date-filter">
 
-                                                    <input id="from" type="text" placeholder="From" style=" width:83px" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                                    <input id="from" type="text" placeholder="From" style=" width:81px" onfocus="(this.type='date')" onblur="(this.type='text')">
 
-                                                    <input id="to" type="text" placeholder="To" style=" width:83px" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                                    <input id="to" type="text" placeholder="To" style=" width:81px" onfocus="(this.type='date')" onblur="(this.type='text')">
 
                                                     <div class="text-center">
                                                         <input id="date-submit" value="filter" type="submit" class="btn btn-secondary p-0" style="margin-top:10px">
