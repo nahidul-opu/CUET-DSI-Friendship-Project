@@ -37,7 +37,6 @@ This is an automated system for managing a library. A librarian can manage libra
 
 <!-- prettier-ignore -->
 <table>
-    <h3>Frontend Team</h3>
     <tr>
         <td align="center"><a href="https://github.com/Bishal16"><img src="https://avatars.githubusercontent.com/u/38830643" width="100px"><br><h5>Mahathir Bishal</h5></a></td>
         <td align="center"><a href="https://github.com/a541k"><img src="https://avatars.githubusercontent.com/u/83023907" width="100px"><br><h5>Ashik Mahmud</h5></a></td>
@@ -47,7 +46,6 @@ This is an automated system for managing a library. A librarian can manage libra
     </tr>
 </table>
 <table>
-    <h3>Backend Team</h3>
     <tr>
         <td align="center"><a href="https://github.com/1604078-MEHEDI"><img src="https://avatars.githubusercontent.com/u/31961808" width="100px"><br><h5>Mehedi Hasan</h5></a></td>
         <td align="center"><a href="https://github.com/Muzahid037"><img src="https://avatars.githubusercontent.com/u/48602232" width="100px"><br><h5>Md. Muzahidul Islam</h5></a></td>
