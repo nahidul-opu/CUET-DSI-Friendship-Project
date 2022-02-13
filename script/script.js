@@ -264,8 +264,7 @@ $(document).ready(function () {
           dataType: "json",
           data: JSON.stringify(output[btn_id]),
           success: function (data, textStatus, xhr) {
-            showBookDetails(output, "#category-book-result");
-            console.log(data);
+            loadPagination(pageNo);
           },
           error: function (xhr, textStatus, errorThrown) {
             console.log("Error in Operation");
