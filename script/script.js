@@ -47,7 +47,7 @@ function tableHeader(data) {
 $(document).ready(function () {
   var output;
   var target_category_id;
-
+  var pageNo = "1";
   var location = window.location.href;
   directoryPath = location.substring(0, location.lastIndexOf("/") + 1);
 
@@ -101,13 +101,13 @@ $(document).ready(function () {
   /*----------------------------------------show book details in inventory tab-------------------------------*/
   function showBookDetails(data, whichTable) {
     $(whichTable).empty();
-
+    console.log(pageNo);
     console.log(data);
     for (let i = 0; i < data.length; i++) {
       var content =
         `<tr>
             <th scope="row">` +
-        (i + 1) +
+        (i + 1 + (pageNo - 1) * 5) +
         `</th>
                                     <td>` +
         data[i].title +
@@ -426,6 +426,7 @@ $(document).ready(function () {
         output = data["message"];
 
         buildPagination(output.length);
+        pageNo = "1";
         loadPagination("1");
       },
       error: function (data) {},
@@ -480,10 +481,12 @@ $(document).ready(function () {
           showBookDetails(output, "#category-book-result");
         },
         error: function (data, status) {
+          pageNo = "1";
           loadPagination("1");
         },
       });
     } else {
+      pageNo = "1";
       loadPagination("1");
     }
   });
@@ -674,6 +677,7 @@ $(document).ready(function () {
     });
 
     function loadPagination(page) {
+      pageNo = page;
       console.log(page);
       var pageUrl =
         directoryPath + `api/books/?limit=5&offset=` + (page - 1) * 5;
@@ -728,6 +732,7 @@ $(document).ready(function () {
 
   /*----------------------------------load page wise book data-------------------------------------*/
   function loadPagination(page) {
+    pageNo = page;
     var pageUrl =
       directoryPath +
       "api/books/?column=category_id&value=" +
