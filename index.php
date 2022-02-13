@@ -354,10 +354,10 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Issue Book Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="book-issue-close"></button>
 
                             <script>
-                                $(".btn-close").click(function() {
+                                $("#book-issue-close").click(function() {
                                     $("#issue-book-modal").hide();
                                 });
                             </script>
