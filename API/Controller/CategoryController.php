@@ -22,7 +22,6 @@ class CategoryController
 
     public function setCategoryId($id)
     {
-        // print_r($id);
         $this->queryParams['category_id'] = $id;
     }
 
@@ -34,7 +33,6 @@ class CategoryController
                 $response = $this->createCategory();
                 break;
             case 'GET':
-                // print_r("Get a dhukse");
                 $response = $this->handleGETRequests();
                 break;
             case 'PUT':
@@ -74,7 +72,6 @@ class CategoryController
 
     private function handleGETRequests()
     {
-        // print_r($category);
         if ($this->queryParams['category_id'] && count($this->queryParams) === 1) $response =  $this->readCategoryData($this->queryParams['category_id']);
         else if (count($this->queryParams) === 1)  $response =  $this->readCategoryData();
         else if ($this->queryParams['category_id'] && count($this->queryParams) === 2) $response = $this->readCategoryDataSpecificColumns();
